@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+
+    <TextView
+        android:padding="@dimen/mm5"
+        android:onClick="toA"
+        android:background="#e4dada"
+        android:textSize="@dimen/mm30"
+        android:text="跳转到登录"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:gravity="center"
+        android:textSize="@dimen/mm36"
+        android:onClick="toB"
+        android:layout_marginTop="@dimen/mm20"
+        android:background="#e4dada"
+        android:padding="@dimen/mm20"
+        android:text="to b跳转到下一个2页面"
+        android:layout_width="@dimen/mm700"
+        android:layout_height="@dimen/mm200" />
+</LinearLayout>

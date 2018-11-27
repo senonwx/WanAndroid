@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.senon.lib_common">
+
+    <application
+        android:allowBackup="true"
+        >
+
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="750"/>
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="1334"/>
+
+        <activity android:name=".login.Common_LoginActivity"/>
+
+    </application>
+
+</manifest>

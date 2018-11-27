@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.senon.xfhmoudel"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation rootProject.ext.dependencies["junit"]
+
+
+
+    if (isBuildModule.toBoolean()) {
+        releaseCompile project(path: ':lib_common', configuration: 'release')
+        debugCompile project(path: ':lib_common', configuration: 'debug')
+        implementation project(':lib_common')
+
+    } else {
+        releaseCompile project(path: ':module_home', configuration: 'release')
+        releaseCompile project(path: ':module_life', configuration: 'release')
+        releaseCompile project(path: ':module_art', configuration: 'release')
+        releaseCompile project(path: ':module_talent', configuration: 'release')
+        releaseCompile project(path: ':module_group', configuration: 'release')
+        releaseCompile project(path: ':module_im', configuration: 'release')
+        debugCompile project(path: ':module_home', configuration: 'debug')
+        debugCompile project(path: ':module_life', configuration: 'debug')
+        debugCompile project(path: ':module_art', configuration: 'debug')
+        debugCompile project(path: ':module_talent', configuration: 'debug')
+        debugCompile project(path: ':module_group', configuration: 'debug')
+        debugCompile project(path: ':module_im', configuration: 'debug')
+
+        implementation project(':module_home')
+        implementation project(':module_life')
+        implementation project(':module_art')
+        implementation project(':module_talent')
+        implementation project(':module_group')
+        implementation project(':module_im')
+    }
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+    annotationProcessor rootProject.ext.dependencies["router-compiler"]
+}

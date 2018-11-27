@@ -1,0 +1,1 @@
+include ':app', ':module_home', ':module_life', ':module_art', ':module_talent', ':module_group', ':module_im', ':lib_opensource', ':lib_common'

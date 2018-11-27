@@ -1,0 +1,63 @@
+if(isBuildModule.toBoolean()){
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
+
+android {
+    compileSdkVersion 27
+
+    sourceSets {
+        main {
+            if (isBuildModule.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+                java{
+                    exclude '**/**/debug/**'
+                }
+            }
+        }
+    }
+    //解决依赖的moduleBuildConfig.DEBUG总是未false的问题
+    //https://www.cnblogs.com/dongweiq/p/9075531.html
+    publishNonDefault true
+
+    defaultConfig {
+        if(isBuildModule.toBoolean()){
+            applicationId "com.senon.module_art"
+        }
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+configurations {
+    debug
+    release
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation rootProject.ext.dependencies["junit"]
+
+    api project(':lib_common')
+    annotationProcessor rootProject.ext.dependencies["router-compiler"]
+}
