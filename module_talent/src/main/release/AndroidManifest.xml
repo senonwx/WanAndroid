@@ -14,7 +14,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <action android:name="android.intent.action.VIEW" />
-                <data android:host="com.senon.module_home"
+                <data android:host="com.senon.module_talent"
                     android:scheme="router" />
             </intent-filter>
         </activity>
