@@ -14,6 +14,7 @@ android {
             } else {
                 manifest.srcFile 'src/main/release/AndroidManifest.xml'
                 java{
+                    //全部Module一起编译的时候剔除debug目录
                     exclude '**/**/debug/**'
                 }
             }
