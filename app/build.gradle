@@ -1,13 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+
     defaultConfig {
         applicationId "com.senon.xfhmoudel"
-        minSdkVersion 19
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
@@ -35,24 +38,8 @@ dependencies {
 
 
     if (isBuildModule.toBoolean()) {
-        releaseCompile project(path: ':lib_common', configuration: 'release')
-        debugCompile project(path: ':lib_common', configuration: 'debug')
         implementation project(':lib_common')
-
     } else {
-        releaseCompile project(path: ':module_home', configuration: 'release')
-        releaseCompile project(path: ':module_life', configuration: 'release')
-        releaseCompile project(path: ':module_art', configuration: 'release')
-        releaseCompile project(path: ':module_talent', configuration: 'release')
-        releaseCompile project(path: ':module_group', configuration: 'release')
-        releaseCompile project(path: ':module_im', configuration: 'release')
-        debugCompile project(path: ':module_home', configuration: 'debug')
-        debugCompile project(path: ':module_life', configuration: 'debug')
-        debugCompile project(path: ':module_art', configuration: 'debug')
-        debugCompile project(path: ':module_talent', configuration: 'debug')
-        debugCompile project(path: ':module_group', configuration: 'debug')
-        debugCompile project(path: ':module_im', configuration: 'debug')
-
         implementation project(':module_home')
         implementation project(':module_life')
         implementation project(':module_art')

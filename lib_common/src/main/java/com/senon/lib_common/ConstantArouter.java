@@ -10,17 +10,13 @@ public class ConstantArouter {
     /**
      * App
      */
-    public static final String PATH_FIRST_FIRSTMAINACTVIITY = "/firstmoduel/firstmainactivity";
+    public static final String PATH_APP_MAINACTIVITY = "/app/MainActivity";
+    public static final String PATH_APP_FRAGMENTHOMEACTIVITY = "/app/FragmentHomeActivity";
 
 
     /**
      * home
      */
-    public static final String PATH_APP_LOGINACTIVITY = "/app/loginactivity";
-
-
-
-
-    public static final String PATH_APP_FRAGMENTHOMEACTIVITY = "/app/FragmentHomeActivity";
+    public static final String PATH_HOME_MAINACTIVITY = "/app/MainActivity";
 
 }

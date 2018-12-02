@@ -5,7 +5,7 @@ if(isBuildModule.toBoolean()){
 }
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
     sourceSets {
         main {
@@ -20,18 +20,15 @@ android {
             }
         }
     }
-    //解决依赖的moduleBuildConfig.DEBUG总是未false的问题
-    //https://www.cnblogs.com/dongweiq/p/9075531.html
-    publishNonDefault true
 
     defaultConfig {
         if(isBuildModule.toBoolean()){
             applicationId "com.senon.module_art"
         }
-        minSdkVersion 19
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
@@ -49,10 +46,7 @@ android {
     }
 
 }
-configurations {
-    debug
-    release
-}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
