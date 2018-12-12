@@ -23,7 +23,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class ServerUtils {
     private static final int TIME_OUT = 5 * 1000;//链接超时时间
     private static BaseApi mBaseApi;
-//    private static final String baseUrl = "http://www.kuaidi100.com/";
 
 
     public static BaseApi getCommonApi() {

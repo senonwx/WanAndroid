@@ -15,18 +15,15 @@ public class ConstantLoginArouter {
 
     //home主页
     public static final String PATH_HOME_MAINACTIVITY = "/home/HomeMainActivity";
-    //修生活首页
+    //Life首页
     public static final String PATH_LIFE_MAINACTIVITY = "/life/LifeMainActivity";
-    //秀才艺首页
+    //Art首页
     public static final String PATH_ART_MAINACTIVITY = "/art/ArtMainActivity";
-    //秀文采首页
+    //Talent首页
     public static final String PATH_TALENT_MAINACTIVITY = "/talent/TalentMainActivity";
-    //秀圈子首页
-    public static final String PATH_GROUP_MAINACTIVITY = "/group/GroupMainActivity";
-    //IM首页
-    public static final String PATH_IM_MAINACTIVITY = "/im/IMMainActivity";
 
-    //登录
+
+    //登录 注册
     public static final String PATH_COMMON_LOGINACTIVITY = "/lib_common/CommonLoginActivity";
 
     static {
@@ -35,8 +32,7 @@ public class ConstantLoginArouter {
         activityRouterMap.put(getActivityName(PATH_LIFE_MAINACTIVITY), PATH_LIFE_MAINACTIVITY);
         activityRouterMap.put(getActivityName(PATH_ART_MAINACTIVITY), PATH_ART_MAINACTIVITY);
         activityRouterMap.put(getActivityName(PATH_TALENT_MAINACTIVITY), PATH_TALENT_MAINACTIVITY);
-        activityRouterMap.put(getActivityName(PATH_GROUP_MAINACTIVITY), PATH_GROUP_MAINACTIVITY);
-        activityRouterMap.put(getActivityName(PATH_IM_MAINACTIVITY), PATH_IM_MAINACTIVITY);
+
         activityRouterMap.put(getActivityName(PATH_COMMON_LOGINACTIVITY), PATH_COMMON_LOGINACTIVITY);
     }
 

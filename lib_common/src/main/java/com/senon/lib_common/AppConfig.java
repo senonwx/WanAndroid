@@ -1,6 +1,6 @@
 package com.senon.lib_common;
 
-import com.senon.lib_common.login.Login;
+import com.senon.lib_common.common.login.Login;
 import com.senon.lib_common.net.bean.BaseResponse;
 
 /**
@@ -9,12 +9,7 @@ import com.senon.lib_common.net.bean.BaseResponse;
 public class AppConfig {
 
 
-    public static final String BASE_URL = "http://xfhapi.xiufanghua.com/";
-    public static final String SECRET = "xfh";
-
-
-    //开闭Klog debug日志
-    public static final boolean LOG_DEBUG = true;
+    public static final String BASE_URL = "http://www.wanandroid.com/";
 
 
     public static String UID;
@@ -38,49 +33,5 @@ public class AppConfig {
     public static String DES;//新版加密
 
 
-    public static void saveLoginInfo(BaseResponse data) {
-        if(data.getData() instanceof Login){
-            AppConfig.UID = ((Login)data.getData()).getUid() + "";
-            AppConfig.USERNAME =((Login)data.getData()).getNickname();
-            AppConfig.MOBILE = ((Login)data.getData()).getMobile();
-            AppConfig.MONEY =((Login)data.getData()).getBalance();
-            AppConfig.SIGN = ((Login)data.getData()).getSignature();
-            AppConfig.POINT = ((Login)data.getData()).getScore1() + "";
-            AppConfig.TOKEN = ((Login)data.getData()).getToken() + "";
-            AppConfig.PASSWORD = ((Login)data.getData()).getPassword() + "";
-            AppConfig.PAY_PASSWORD = ((Login)data.getData()).getPay_password() + "";
-            AppConfig.HEADIMGURL = ((Login)data.getData()).getPortrait() + "";
-            AppConfig.JOIN_TIME = ((Login)data.getData()).getReg_time() + "";
-            AppConfig.SIG = ((Login)data.getData()).getSig() + "";
-            AppConfig.FANS_COUNT = ((Login)data.getData()).getFans_count() + "";
-            AppConfig.FOCUS_COUNT = ((Login)data.getData()).getFocus_count() + "";
-            AppConfig.BALANCE = ((Login)data.getData()).getBalance() + "";
-            AppConfig.INVITE = ((Login)data.getData()).getInvite() + "";
-            AppConfig.REG_TIME = ((Login)data.getData()).getReg_time() + "";
-            AppConfig.LAST_LOGIN_TIME = ((Login)data.getData()).getLast_login_time() + "";
-            AppConfig.DES = ((Login)data.getData()).getDes() + "";
-        }
-//        else if(data.getData() instanceof Register){
-//            AppConfig.UID = ((Register)data.getData()).getUid() + "";
-//            AppConfig.USERNAME =((Register)data.getData()).getNickname();
-//            AppConfig.MOBILE = ((Register)data.getData()).getMobile();
-//            AppConfig.MONEY =((Register)data.getData()).getBalance();
-//            AppConfig.SIGN = (String) ((Register)data.getData()).getSignature();
-//            AppConfig.POINT = ((Register)data.getData()).getScore1() + "";
-//            AppConfig.TOKEN = ((Register)data.getData()).getToken() + "";
-//            AppConfig.PASSWORD = ((Register)data.getData()).getPassword() + "";
-//            AppConfig.PAY_PASSWORD = ((Register)data.getData()).getPay_password() + "";
-//            AppConfig.HEADIMGURL = ((Register)data.getData()).getPortrait() + "";
-//            AppConfig.JOIN_TIME = ((Register)data.getData()).getReg_time() + "";
-//            AppConfig.SIG = ((Register)data.getData()).getSig() + "";
-//            AppConfig.FANS_COUNT = ((Register)data.getData()).getFans_count() + "";
-//            AppConfig.FOCUS_COUNT = ((Register)data.getData()).getFocus_count() + "";
-//            AppConfig.BALANCE = ((Register)data.getData()).getBalance() + "";
-//            AppConfig.Invite = ((Register)data.getData()).getInvite() + "";
-//            AppConfig.reg_time = ((Register)data.getData()).getReg_time() + "";
-//            AppConfig.last_login_time = ((Register)data.getData()).getLast_login_time() + "";
-//            AppConfig.des = ((Register)data.getData()).getDes() + "";
-//        }
-    }
 
 }

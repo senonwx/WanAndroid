@@ -1,4 +1,4 @@
-package com.senon.lib_common.login;
+package com.senon.lib_common.common.login;
 
 import android.content.Context;
 import com.senon.lib_common.net.ServerUtils;
@@ -32,8 +32,8 @@ public class LoginPresenter extends LoginContract.Presenter {
                     public void onNext(BaseResponse<Login> baseResponse) {
                         super.onNext(baseResponse);
                         BaseResponse<Login> response = baseResponse;
-                        if(response.isSuccess()){
-                            getView().resultLogin(response);
+                        if(response.getCode() == 0){
+                            getView().getLoginResult(response);
                         }else{
                             ToastUtil.initToast(response.getMsg());
                         }
@@ -43,22 +43,21 @@ public class LoginPresenter extends LoginContract.Presenter {
                         super.onError(e);
                     }
                 });
-
     }
 
     @Override
-    public void getVerifyPhoneIsRsg(HashMap<String, String> map, boolean isDialog, boolean cancelable) {
-        ServerUtils.getCommonApi().verifyPhoneIsRsg(map)
+    public void getRegister(HashMap<String, String> map, boolean isDialog, boolean cancelable) {
+        ServerUtils.getCommonApi().register(map)
                 .retryWhen(new RetryWithDelay(3,2))
-                .compose(RxUtils.<BaseResponse>bindToLifecycle(getView()))
-                .compose(RxUtils.<BaseResponse>getSchedulerTransformer())
-                .subscribe(new RequestCallback<BaseResponse>(context, RxErrorHandler.getInstance(),true) {
+                .compose(RxUtils.<BaseResponse<Login>>bindToLifecycle(getView()))
+                .compose(RxUtils.<BaseResponse<Login>>getSchedulerTransformer())
+                .subscribe(new RequestCallback<BaseResponse<Login>>(context, RxErrorHandler.getInstance(),true) {
                     @Override
-                    public void onNext(BaseResponse baseResponse) {
+                    public void onNext(BaseResponse<Login> baseResponse) {
                         super.onNext(baseResponse);
-                        BaseResponse response = baseResponse;
-                        if(response.isSuccess()){
-                            getView().resultVerifyPhoneIsRsg(response);
+                        BaseResponse<Login> response = baseResponse;
+                        if(response.getCode() == 0){
+                            getView().getRegisterResult(response);
                         }else{
                             ToastUtil.initToast(response.getMsg());
                         }

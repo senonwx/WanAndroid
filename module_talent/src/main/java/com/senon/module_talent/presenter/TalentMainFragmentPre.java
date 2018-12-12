@@ -1,7 +1,7 @@
 package com.senon.module_talent.presenter;
 
 import android.content.Context;
-import com.senon.lib_common.login.Login;
+import com.senon.lib_common.common.login.Login;
 import com.senon.lib_common.net.ServerUtils;
 import com.senon.lib_common.net.bean.BaseResponse;
 import com.senon.lib_common.net.callback.RequestCallback;
@@ -34,7 +34,7 @@ public class TalentMainFragmentPre extends TalentMainFragmentCon.Presenter{
                     public void onNext(BaseResponse<Login> baseResponse) {
                         super.onNext(baseResponse);
                         BaseResponse<Login> response = baseResponse;
-                        if(response.isSuccess()){
+                        if(response.getCode()==0){
 //                            getView().resultLogin(response);
                         }else{
                             ToastUtil.initToast(response.getMsg());

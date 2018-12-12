@@ -1,4 +1,4 @@
-package com.senon.lib_common.login;
+package com.senon.lib_common.common.login;
 
 
 import com.senon.lib_common.base.BasePresenter;
@@ -11,12 +11,12 @@ import java.util.HashMap;
  */
 public interface LoginContract {
 
-    //方法命名以 result+方法  命名
+    //方法命名以 请求方法+Result  命名
     interface View extends BaseViewImp {
 
-        void resultLogin(BaseResponse<Login> data);
+        void getLoginResult(BaseResponse<Login> data);
 
-        void resultVerifyPhoneIsRsg(BaseResponse<Login> data);
+        void getRegisterResult(BaseResponse<Login> data);
 
     }
 
@@ -25,7 +25,7 @@ public interface LoginContract {
 
         public abstract void getLogin(HashMap<String, String> map, boolean isDialog, boolean cancelable);
 
-        public abstract void getVerifyPhoneIsRsg(HashMap<String, String> map, boolean isDialog, boolean cancelable);
+        public abstract void getRegister(HashMap<String, String> map, boolean isDialog, boolean cancelable);
 
     }
 }

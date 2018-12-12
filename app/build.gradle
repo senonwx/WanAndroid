@@ -44,8 +44,6 @@ dependencies {
         implementation project(':module_life')
         implementation project(':module_art')
         implementation project(':module_talent')
-        implementation project(':module_group')
-        implementation project(':module_im')
     }
     annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
     annotationProcessor rootProject.ext.dependencies["router-compiler"]

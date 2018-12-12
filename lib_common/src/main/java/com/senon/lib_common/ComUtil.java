@@ -84,7 +84,7 @@ public class ComUtil {
             Map.Entry entry = (Map.Entry) iterator.next();
             sb.append(entry.getValue().toString());
         }
-        return MD5Utils.getMd5(sb.toString() + AppConfig.SECRET);
+        return MD5Utils.getMd5(sb.toString() );
     }
 
     public static HashMap<String, String> getMd5Str(String[] keyArray, String[] valueArray) {
@@ -99,7 +99,7 @@ public class ComUtil {
             for (int i = 0; i < valueArray.length; i++) {
                 sb.append(valueArray[i]);
             }
-            map.put("secret", MD5Utils.getMd5(sb.toString() + AppConfig.SECRET));
+            map.put("secret", MD5Utils.getMd5(sb.toString()));
             return map;
         }
         return null;

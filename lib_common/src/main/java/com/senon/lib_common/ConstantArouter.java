@@ -19,4 +19,9 @@ public class ConstantArouter {
      */
     public static final String PATH_HOME_MAINACTIVITY = "/app/MainActivity";
 
+    /**
+     * common
+     */
+    public static final String PATH_COMMON_REGISTERACTIVITY = "/lib_common/CommonRegisterActivity";
+
 }

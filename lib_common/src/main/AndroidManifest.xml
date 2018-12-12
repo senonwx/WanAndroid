@@ -13,7 +13,8 @@
             android:name="design_height_in_dp"
             android:value="1334"/>
 
-        <activity android:name=".login.Common_LoginActivity"/>
+        <activity android:name=".common.login.Common_LoginActivity"/>
+        <activity android:name=".common.login.Common_RegisterActivity"/>
 
     </application>
 

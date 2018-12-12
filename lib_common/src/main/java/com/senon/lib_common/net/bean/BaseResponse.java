@@ -1,27 +1,22 @@
 package com.senon.lib_common.net.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * BaseResponse<T>
  */
 public class BaseResponse<T> {
 
+    @SerializedName("errorMsg")
     private String msg;
-    private boolean success;
+    @SerializedName("errorCode")
     private int code;
     private T data;
-    private int status;
 
 
-    public int getStatus() {
-        return status;
-    }
 
     public String getMsg() {
         return msg;
-    }
-
-    public boolean isSuccess() {
-        return success;
     }
 
     public int getCode() {
@@ -32,12 +27,5 @@ public class BaseResponse<T> {
         return data;
     }
 
-    @Override
-    public String toString() {
-        return "BaseResponse{" +
-                "msg='" + msg + '\'' +
-                ", code=" + code +
-                ", data=" + data +
-                '}';
-    }
+
 }
