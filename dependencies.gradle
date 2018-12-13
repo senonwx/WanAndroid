@@ -80,6 +80,8 @@ project.ext {
             "autosize"                    : "me.jessyan:autosize:1.0.6",
 
             "lrecyclerview"               : "com.github.jdsjlzx:LRecyclerView:1.4.3",
+            "glide"                       : "com.github.bumptech.glide:glide:3.7.0",
+            "bannerview"                  : "com.github.pinguo-zhouwei:MZBannerView:v2.0.2",
 
     ]
 }

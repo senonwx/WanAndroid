@@ -31,7 +31,7 @@
             android:textStyle=""
             android:layout_marginRight="@dimen/mm85"
             android:layout_marginTop="@dimen/mm85"
-            android:textColor="@color/white"
+            android:textColor="@color/common_white"
             android:textSize="@dimen/mm30"
             android:text="游客登录"
             android:padding="@dimen/mm5"
@@ -70,8 +70,8 @@
                     android:background="@drawable/register_bg_border_1"
                     android:hint="请输入账号"
                     android:paddingLeft="@dimen/mm119"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/common_white"
+                    android:textColorHint="@color/common_white"
                     android:textSize="@dimen/mm32" />
             </RelativeLayout>
 
@@ -103,8 +103,8 @@
                     android:hint="请输入密码"
                     android:paddingLeft="@dimen/mm119"
                     android:password="true"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/common_white"
+                    android:textColorHint="@color/common_white"
                     android:textSize="@dimen/mm32" />
             </RelativeLayout>
 
@@ -127,7 +127,7 @@
                 android:layout_marginRight="@dimen/mm85"
                 android:layout_marginTop="@dimen/mm40"
                 android:layout_gravity="right"
-                android:textColor="@color/white"
+                android:textColor="@color/common_white"
                 android:textSize="@dimen/mm30"
                 android:text="还没有账号？去注册！"
                 android:padding="@dimen/mm5"

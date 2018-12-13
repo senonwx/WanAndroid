@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
 
     <RelativeLayout
         android:visibility="gone"
@@ -19,15 +20,16 @@
             android:layout_marginLeft="@dimen/mm20"
             android:textColor="@color/color_232323"
             android:text="最新博文"
-            android:textSize="@dimen/mm42"
+            android:textSize="@dimen/mm40"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/more_tv"
             android:layout_marginRight="@dimen/mm20"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="@dimen/mm20"
-            android:textColor="@color/color_232323"
+            android:textColor="@color/common_black_999"
             android:text="查看全部"
             android:textSize="@dimen/mm28"
             android:layout_width="wrap_content"
@@ -35,6 +37,8 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:layout_marginTop="@dimen/mm15"
+        android:layout_below="@+id/top_layout"
         android:background="@drawable/home_shape_white_con30"
         android:layout_marginLeft="@dimen/mm20"
         android:layout_marginRight="@dimen/mm20"
@@ -42,10 +46,10 @@
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/type_tv"
-            android:layout_marginTop="@dimen/mm20"
+            android:layout_marginTop="@dimen/mm15"
             android:layout_marginLeft="@dimen/mm20"
             android:layout_marginRight="@dimen/mm20"
-            android:textColor="@color/life_content_tv"
+            android:textColor="@color/common_black_777"
             android:text="分类"
             android:textSize="@dimen/mm28"
             android:layout_width="wrap_content"
@@ -54,7 +58,7 @@
             android:id="@+id/content_tv"
             android:singleLine="true"
             android:layout_below="@+id/type_tv"
-            android:layout_marginTop="@dimen/mm20"
+            android:layout_marginTop="@dimen/mm10"
             android:layout_marginLeft="@dimen/mm20"
             android:layout_marginRight="@dimen/mm20"
             android:textColor="@color/color_232323"
@@ -65,8 +69,11 @@
         <TextView
             android:layout_below="@+id/content_tv"
             android:id="@+id/user_tv"
-            android:layout_margin="@dimen/mm20"
-            android:textColor="@color/life_content_tv"
+            android:layout_marginTop="@dimen/mm10"
+            android:layout_marginLeft="@dimen/mm20"
+            android:layout_marginRight="@dimen/mm30"
+            android:layout_marginBottom="@dimen/mm15"
+            android:textColor="@color/common_black_999"
             android:text="姓名"
             android:textSize="@dimen/mm26"
             android:layout_width="wrap_content"
@@ -75,9 +82,9 @@
             android:layout_toRightOf="@+id/user_tv"
             android:layout_below="@+id/content_tv"
             android:id="@+id/time_tv"
-            android:layout_marginTop="@dimen/mm20"
+            android:layout_marginTop="@dimen/mm10"
             android:layout_marginRight="@dimen/mm20"
-            android:textColor="@color/life_content_tv"
+            android:textColor="@color/common_black_999"
             android:text="时间"
             android:textSize="@dimen/mm26"
             android:layout_width="wrap_content"
@@ -85,8 +92,8 @@
         <TextView
             android:layout_alignParentRight="true"
             android:id="@+id/new_tv"
-            android:layout_marginTop="@dimen/mm20"
-            android:layout_marginRight="@dimen/mm20"
+            android:layout_marginTop="@dimen/mm10"
+            android:layout_marginRight="@dimen/mm30"
             android:textColor="@color/group_red_bg"
             android:text="新"
             android:textSize="@dimen/mm26"
@@ -96,9 +103,9 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/content_tv"
             android:id="@+id/like_tv"
-            android:layout_marginTop="@dimen/mm20"
-            android:layout_marginRight="@dimen/mm20"
-            android:textColor="@color/life_content_tv"
+            android:layout_marginTop="@dimen/mm10"
+            android:layout_marginRight="@dimen/mm30"
+            android:textColor="@color/common_black_999"
             android:text="收藏"
             android:textSize="@dimen/mm26"
             android:layout_width="wrap_content"

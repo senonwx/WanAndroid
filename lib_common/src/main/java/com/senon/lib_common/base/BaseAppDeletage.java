@@ -32,9 +32,9 @@ public class BaseAppDeletage {
     private void initAutoSizeUnits() {
         AutoSizeConfig.getInstance().getUnitsManager()
                 //支持dp适配 默认true
-                .setSupportDP(false)
+                .setSupportDP(true)
                 //支持sp适配 默认true
-                .setSupportSP(false)
+                .setSupportSP(true)
                 .setSupportSubunits(Subunits.MM);
         AutoSizeConfig.getInstance()
                 //按照宽度适配 默认true

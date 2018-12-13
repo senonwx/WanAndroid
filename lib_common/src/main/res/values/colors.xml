@@ -10,7 +10,7 @@
     <color name="deep_black">#282828</color>
     <!--浅黑-->
     <color name="shallow_black">#666666</color>
-    <color name="white">#FFFFFF</color>
+    <color name="common_white">#FFFFFF</color>
     <color name="login_btn_text">#FF7219</color>
     <color name="transport">#80000000</color>
     <color name="transport_2">#99000000</color>
@@ -44,7 +44,9 @@
     <color name="elegant_bg">#F5F5F5</color>
     <color name="elegant_dialog_description_tv">#444444</color>
     <color name="elegant_dialog_user_tv">#666666</color>
-    <color name="person_system_tv">#777777</color>
+    <color name="common_black_777">#777777</color>
+    <color name="common_black_999">#999999</color>
+    <color name="common_black_aaa">#aaaaaa</color>
     <color name="person_system_gray_tv">#808080</color>
     <color name="elegant_dialog_time_tv">#999999</color>
     <color name="elegant_dialog_job_tv">#1086C2</color>

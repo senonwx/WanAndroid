@@ -53,5 +53,6 @@ dependencies {
     api (rootProject.ext.dependencies["lrecyclerview"]) {
         exclude group: 'com.android.support'
     }
+    api rootProject.ext.dependencies["glide"]
 
 }

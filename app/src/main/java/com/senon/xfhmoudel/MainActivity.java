@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 //        ARouter.getInstance().build(ConstantLoginArouter.PATH_FIRST_MAINACTIVITY).navigation();
 
 //        String curUrl = ConstantLoginArouter.getCurRouter(this.getClass().getSimpleName());
-        String curUrl = ConstantLoginArouter.getCurRouter("HomeMainActivity");
+        String curUrl = ConstantLoginArouter.getCurRouter(ConstantLoginArouter.PATH_HOME_MAINACTIVITY);
         ARouter.getInstance().build(ConstantLoginArouter.PATH_COMMON_LOGINACTIVITY)//指定跳到那个页面
                 .withString("targetUrl",ConstantArouter.PATH_APP_FRAGMENTHOMEACTIVITY)//传入目标页面路由地址  可以在指定页面跳入到目标页面
                 .navigation();

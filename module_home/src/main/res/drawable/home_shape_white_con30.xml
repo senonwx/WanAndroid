@@ -2,9 +2,10 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <!-- view背景色 -->
-    <solid android:color="@color/white" />
+    <solid android:color="@color/common_white" />
+    <!--<solid android:color="#000" />-->
     <!-- 边框圆角 -->
     <corners
-        android:radius="@dimen/mm30" />
+        android:radius="@dimen/mm15" />
 
 </shape>

@@ -38,7 +38,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text=""
-            android:textColor="@color/white"
+            android:textColor="@color/common_white"
             android:textSize="@dimen/mm38" />
 
         <ImageView

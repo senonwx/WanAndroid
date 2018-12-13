@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
+        android:textStyle="bold"
+        android:id="@+id/textview"
+        android:layout_marginTop="@dimen/mm40"
+        android:layout_marginLeft="@dimen/mm20"
         android:text="首页"
-        android:textSize="@dimen/mm50"
+        android:textSize="@dimen/mm52"
         android:textColor="@color/transport_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <com.zhouwei.mzbanner.MZBannerView
+        android:layout_marginLeft="@dimen/mm20"
+        android:layout_marginRight="@dimen/mm20"
+        android:layout_below="@+id/textview"
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mm320"
+        android:layout_marginTop="@dimen/mm30"
+        app:open_mz_mode="true"
+        app:canLoop="true"
+        app:indicatorAlign="center"
+        app:indicatorPaddingLeft="@dimen/mm20"
+        />
 </RelativeLayout>
