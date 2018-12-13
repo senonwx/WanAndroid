@@ -1,8 +1,10 @@
 package com.senon.lib_common.common.login;
 
 import android.content.Context;
+
+import com.senon.lib_common.bean.Login;
 import com.senon.lib_common.net.ServerUtils;
-import com.senon.lib_common.net.bean.BaseResponse;
+import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.net.callback.RequestCallback;
 import com.senon.lib_common.net.callback.RxErrorHandler;
 import com.senon.lib_common.utils.RetryWithDelay;
@@ -31,11 +33,10 @@ public class LoginPresenter extends LoginContract.Presenter {
                     @Override
                     public void onNext(BaseResponse<Login> baseResponse) {
                         super.onNext(baseResponse);
-                        BaseResponse<Login> response = baseResponse;
-                        if(response.getCode() == 0){
-                            getView().getLoginResult(response);
+                        if(baseResponse.getCode() == 0){
+                            getView().getLoginResult(baseResponse);
                         }else{
-                            ToastUtil.initToast(response.getMsg());
+                            ToastUtil.initToast(baseResponse.getMsg());
                         }
                     }
                     @Override
@@ -55,11 +56,10 @@ public class LoginPresenter extends LoginContract.Presenter {
                     @Override
                     public void onNext(BaseResponse<Login> baseResponse) {
                         super.onNext(baseResponse);
-                        BaseResponse<Login> response = baseResponse;
-                        if(response.getCode() == 0){
-                            getView().getRegisterResult(response);
+                        if(baseResponse.getCode() == 0){
+                            getView().getRegisterResult(baseResponse);
                         }else{
-                            ToastUtil.initToast(response.getMsg());
+                            ToastUtil.initToast(baseResponse.getMsg());
                         }
                     }
                     @Override

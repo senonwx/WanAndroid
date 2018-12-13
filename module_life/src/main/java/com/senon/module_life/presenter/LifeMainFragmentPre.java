@@ -1,9 +1,9 @@
 package com.senon.module_life.presenter;
 
 import android.content.Context;
-import com.senon.lib_common.common.login.Login;
+import com.senon.lib_common.bean.Login;
 import com.senon.lib_common.net.ServerUtils;
-import com.senon.lib_common.net.bean.BaseResponse;
+import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.net.callback.RequestCallback;
 import com.senon.lib_common.net.callback.RxErrorHandler;
 import com.senon.lib_common.utils.RetryWithDelay;

@@ -2,7 +2,7 @@ package com.senon.module_life.contract;
 
 import com.senon.lib_common.base.BasePresenter;
 import com.senon.lib_common.base.BaseViewImp;
-import com.senon.lib_common.net.bean.BaseResponse;
+import com.senon.lib_common.base.BaseResponse;
 import java.util.HashMap;
 
 /**

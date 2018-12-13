@@ -3,7 +3,9 @@ package com.senon.lib_common.common.login;
 
 import com.senon.lib_common.base.BasePresenter;
 import com.senon.lib_common.base.BaseViewImp;
-import com.senon.lib_common.net.bean.BaseResponse;
+import com.senon.lib_common.base.BaseResponse;
+import com.senon.lib_common.bean.Login;
+
 import java.util.HashMap;
 
 /**

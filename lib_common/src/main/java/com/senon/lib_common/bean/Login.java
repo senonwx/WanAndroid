@@ -1,4 +1,4 @@
-package com.senon.lib_common.common.login;
+package com.senon.lib_common.bean;
 
 import java.util.List;
 

@@ -1,8 +1,5 @@
 package com.senon.lib_common;
 
-import com.senon.lib_common.common.login.Login;
-import com.senon.lib_common.net.bean.BaseResponse;
-
 /**
  * APP配置参数
  */

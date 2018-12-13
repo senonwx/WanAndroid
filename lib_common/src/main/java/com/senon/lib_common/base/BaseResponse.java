@@ -1,4 +1,4 @@
-package com.senon.lib_common.net.bean;
+package com.senon.lib_common.base;
 
 import com.google.gson.annotations.SerializedName;
 

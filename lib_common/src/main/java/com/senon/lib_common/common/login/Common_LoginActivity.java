@@ -1,24 +1,20 @@
 package com.senon.lib_common.common.login;
 
 import android.graphics.Paint;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.senon.lib_common.AppConfig;
 import com.senon.lib_common.ConstantArouter;
 import com.senon.lib_common.ConstantLoginArouter;
 import com.senon.lib_common.R;
 import com.senon.lib_common.base.BaseActivity;
-import com.senon.lib_common.net.bean.BaseResponse;
+import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.ComUtil;
+import com.senon.lib_common.bean.Login;
 import com.senon.lib_common.utils.ToastUtil;
 
 /**

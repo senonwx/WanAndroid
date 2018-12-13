@@ -13,7 +13,8 @@ import com.senon.lib_common.ConstantArouter;
 import com.senon.lib_common.ConstantLoginArouter;
 import com.senon.lib_common.R;
 import com.senon.lib_common.base.BaseActivity;
-import com.senon.lib_common.net.bean.BaseResponse;
+import com.senon.lib_common.base.BaseResponse;
+import com.senon.lib_common.bean.Login;
 import com.senon.lib_common.utils.ToastUtil;
 
 /**

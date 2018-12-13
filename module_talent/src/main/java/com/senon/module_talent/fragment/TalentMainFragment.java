@@ -3,7 +3,7 @@ package com.senon.module_talent.fragment;
 import android.view.View;
 import android.widget.TextView;
 import com.senon.lib_common.base.BaseLazyFragment;
-import com.senon.lib_common.net.bean.BaseResponse;
+import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.utils.LogUtils;
 import com.senon.module_talent.R;
 import com.senon.module_talent.contract.TalentMainFragmentCon;

@@ -14,6 +14,7 @@
     <color name="login_btn_text">#FF7219</color>
     <color name="transport">#80000000</color>
     <color name="transport_2">#99000000</color>
+    <color name="transport_3">#dd000000</color>
     <color name="black">#ff000000</color>
 
     <color name="line_color">#BDBDBD</color>
@@ -82,28 +83,7 @@
     <color name="wallet_red_tv">#e95757</color>
     <color name="shadow_bg">#88cccccc</color>
 
-    //头条标签
-    <item name="subscribe_item_text_color_normal" type="color">@color/default_text</item>
-    <color name="default_text">#ff454545</color>
-    <color name="subscribe_item_text_color_pressed_night">#ff303030</color>
-    <color name="subscribe_item_focused_stroke">#ffd9d9d9</color>
-    <color name="subscribe_item_drag_stroke">#ffd2d2d2</color>
-    <color name="subscribe_item_drag_bg">#fff5f5f5</color>
-    <color name="subscribe_item_drag_stroke_night">#ff464646</color>
-    <color name="subscribe_item_drag_bg_night">#ff252525</color>
-    <color name="subscribe_item_selected_bg">#ffffffff</color>
     <color name="subscribe_item_selected_stroke">#ffcc3131</color>
-    <color name="subscribe_item_disabled_bg">#ffefefef</color>
-    <color name="subscribe_item_disabled_stroke">#ffd9d9d9</color>
-    <color name="subscribe_item_pressed_bg">#fff9f9f9</color>
-    <color name="subscribe_item_pressed_stroke">#ffcdcdcd</color>
-    <color name="subscribe_item_normal_bg">#fff5f5f5</color>
-    <color name="subscribe_item_normal_stroke">#ffcdcdcd</color>
-    <color name="subscribe_item_focused_bg_night">#ff252525</color>
-    <color name="subscribe_item_focused_stroke_night">#ff464646</color>
-    <color name="subscribe_item_selected_bg_night">#ff252525</color>
-    <color name="subscribe_item_selected_stroke_night">#ffbc494d</color>
-    <color name="subscribe_item_disabled_bg_night">#ff2b2b2b</color>
 
     //黑色半透明
     <color name="guide_translucent">#a0000000</color>
