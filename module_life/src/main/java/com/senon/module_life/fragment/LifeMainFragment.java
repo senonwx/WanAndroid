@@ -1,15 +1,30 @@
 package com.senon.module_life.fragment;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
+import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
+import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
+import com.github.jdsjlzx.recyclerview.ProgressStyle;
+import com.senon.lib_common.adapter.RecycleHolder;
+import com.senon.lib_common.adapter.RecyclerAdapter;
 import com.senon.lib_common.base.BaseLazyFragment;
 import com.senon.lib_common.base.BaseResponse;
+import com.senon.lib_common.bean.Banner;
+import com.senon.lib_common.bean.KnowledgeSystem;
 import com.senon.lib_common.utils.LogUtils;
 import com.senon.module_life.R;
 import com.senon.module_life.contract.LifeMainFragmentCon;
 import com.senon.module_life.presenter.LifeMainFragmentPre;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 生命周期执行的方法 如下：
@@ -43,10 +58,12 @@ import com.senon.module_life.presenter.LifeMainFragmentPre;
 public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View, LifeMainFragmentCon.Presenter> implements
         LifeMainFragmentCon.View {
 
-    private View node_v;
-    private TextView title_tv;
-    private ImageView head_igv,plus_tv,empty_igv;
-    private LRecyclerView life_lrv;
+    private LRecyclerView lrv;
+    private TextView life_homefragment_title_tv;
+    private List<KnowledgeSystem> knowledges = new ArrayList<>();
+    private LRecyclerViewAdapter mLRecyclerViewAdapter;//Lrecyclerview的包装适配器
+    private LinearLayoutManager layoutManager;
+    private RecyclerAdapter<KnowledgeSystem> adapter;
 
     @Override
     public int getLayoutId() {
@@ -62,7 +79,8 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
     }
     @Override
     public void init(View rootView) {
-        title_tv = rootView.findViewById(R.id.title_tv);
+        lrv = rootView.findViewById(R.id.life_homefragment_lrv);
+        life_homefragment_title_tv = rootView.findViewById(R.id.life_homefragment_title_tv);
     }
 
     @Override
@@ -71,7 +89,72 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
         //第一次可见时，自动加载页面
         LogUtils.e("-----> 子fragment进行初始化操作");
 
-        title_tv.setText("生活");
+        //初始化adapter 设置适配器
+        initAdapter();
+        //请求网络数据
+        getFirstData();
+        //添加滑动位置监听
+        addLrvListener();
+    }
+
+    private void addLrvListener() {
+        lrv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                //在此做处理
+                if (null != layoutManager) {
+                    //当前条目索引
+                    int position = layoutManager.findFirstVisibleItemPosition();
+                    if(position > 1){
+                        life_homefragment_title_tv.setVisibility(View.VISIBLE);
+                    }else{
+                        //根据view的高度来做显示隐藏判断
+                        //根据索引来获取对应的itemView
+                        View firstVisiableChildView = layoutManager.findViewByPosition(position);
+                        //获取当前显示条目的高度
+                        int itemHeight = firstVisiableChildView.getHeight();
+                        //获取当前Recyclerview 偏移量
+                        int offset = - firstVisiableChildView.getTop();
+                        if (offset > itemHeight / 4) {
+                            //做显示布局操作
+                            life_homefragment_title_tv.setVisibility(View.VISIBLE);
+                        } else {
+                            //做隐藏布局操作
+                            life_homefragment_title_tv.setVisibility(View.GONE);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private void getFirstData() {
+        getPresenter().getKnowledgeList(true,true);
+    }
+
+    private void initAdapter() {
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        lrv.setLayoutManager(manager);
+        lrv.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader); //设置下拉刷新Progress的样式
+        lrv.setArrowImageView(R.drawable.news_renovate);  //设置下拉刷新箭头
+        lrv.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
+        adapter = new RecyclerAdapter<KnowledgeSystem>(getContext(), knowledges, R.layout.life_adapter_lifemain_fragment) {
+            @Override
+            public void convert(final RecycleHolder helper, final KnowledgeSystem item, final int position) {
+                
+            }
+        };
+        mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
+        lrv.setAdapter(mLRecyclerViewAdapter);
+        lrv.setLoadMoreEnabled(false);
+        lrv.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getFirstData();
+            }
+        });
+
     }
 
     @Override
@@ -83,7 +166,7 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
     }
 
     @Override
-    public void result(BaseResponse data) {
+    public void getKnowledgeListResult(BaseResponse<List<KnowledgeSystem>> data) {
 
     }
 

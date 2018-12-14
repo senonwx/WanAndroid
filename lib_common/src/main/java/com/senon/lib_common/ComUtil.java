@@ -2,9 +2,11 @@ package com.senon.lib_common;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.EditText;
 import com.senon.lib_common.utils.MD5Utils;
 import com.senon.lib_common.utils.ToastUtil;
@@ -19,6 +21,20 @@ import java.util.regex.Pattern;
  * ComUtil
  */
 public class ComUtil {
+
+
+    public static void changeStatusBarTextColor(Context context,boolean isBlack) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (isBlack) {
+                //设置状态栏黑色字体
+                ((Activity)context).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            } else {
+                //恢复状态栏白色字体
+                ((Activity)context).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+            }
+        }
+    }
+
 
     public static boolean isNumeric(String str) {
         Pattern pattern = Pattern.compile("^1[3|4|5|7|8|9][0-9]{9}$");

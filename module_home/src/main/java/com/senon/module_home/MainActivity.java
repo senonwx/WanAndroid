@@ -8,9 +8,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.senon.lib_common.ComUtil;
 import com.senon.lib_common.ConstantLoginArouter;
 import com.senon.lib_common.utils.ConstantUtils;
 import com.senon.lib_common.utils.LogUtils;
+import com.senon.lib_common.utils.StatusBarUtils;
 import com.senon.module_home.fragment.HomeMainFragment;
 
 /**
@@ -26,10 +28,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtils.with(this).init();
         setContentView(R.layout.home_activity_main);
+        ComUtil.changeStatusBarTextColor(this,true);
+
         ARouter.getInstance().inject(this);
         LogUtils.e("------->isAppDebug=====  "+ ConstantUtils.isAppDebug());
         findView();
+
     }
 
     private void findView() {

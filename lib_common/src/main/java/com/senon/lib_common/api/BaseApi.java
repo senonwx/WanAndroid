@@ -2,6 +2,7 @@ package com.senon.lib_common.api;
 
 import com.senon.lib_common.bean.Banner;
 import com.senon.lib_common.bean.HomeArticle;
+import com.senon.lib_common.bean.KnowledgeSystem;
 import com.senon.lib_common.bean.Login;
 import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.bean.ProjectArticle;
@@ -28,21 +29,17 @@ public interface BaseApi {
     @POST("user/login")
     @FormUrlEncoded
     Observable<BaseResponse<Login>> login(@FieldMap Map<String, String> map);
-
     //登出
     @GET("user/logout/json")
     Observable<BaseResponse> logout();
-
     //注册
     @POST("user/register")
     @FormUrlEncoded
     Observable<BaseResponse<Login>> register(@FieldMap Map<String, String> map);
 
-
     //首页banner
     @GET("banner/json")
     Observable<BaseResponse<List<Banner>>> banner();
-
     //首页文章列表
     @GET("article/list/{page}/json")
     Observable<BaseResponse<HomeArticle>> getHomeArticle(@Path("page") int page);
@@ -50,5 +47,8 @@ public interface BaseApi {
     @GET("project/list/{page}/json")
     Observable<BaseResponse<ProjectArticle>> getProjectList(@Path("page") int page, @Query("cid") int cid);
 
+    //体系数据
+    @GET("tree/json")
+    Observable<BaseResponse<List<KnowledgeSystem>>> getKnowledgeList();
 
 }

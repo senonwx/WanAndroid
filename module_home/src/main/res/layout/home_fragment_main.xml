@@ -20,6 +20,16 @@
             android:layout_width="@dimen/mm350"
             android:layout_height="@dimen/mm350" />
 
+        <TextView
+            android:visibility="gone"
+            android:background="@color/common_white"
+            android:id="@+id/home_homefragment_title_tv"
+            android:gravity="center"
+            android:textColor="@color/color_232323"
+            android:text="首页"
+            android:textSize="@dimen/mm42"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mm100" />
     </RelativeLayout>
 
 </RelativeLayout>

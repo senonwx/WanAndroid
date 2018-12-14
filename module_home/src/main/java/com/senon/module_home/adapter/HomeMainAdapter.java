@@ -144,7 +144,6 @@ public class HomeMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
             });
 
-
         } else if (holder instanceof TwoViewHolder) {
             //注意除去头布局
             final int position = mPosition - 1 - articles.size();
@@ -158,6 +157,8 @@ public class HomeMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((TwoViewHolder) holder).user_tv.setText(data.getAuthor());
             ((TwoViewHolder) holder).time_tv.setText(data.getNiceDate());
             ((TwoViewHolder) holder).top_layout.setVisibility(position == 0 ? View.VISIBLE : View.GONE);
+            ((TwoViewHolder) holder).home_placeholder_tv.setVisibility(position == projects.size()-1 ? View.VISIBLE : View.GONE);
+
             ((TwoViewHolder) holder).more_tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -249,7 +250,7 @@ public class HomeMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private RelativeLayout top_layout;
         private ImageView content_igv;
         private TextView more_tv, title_tv, content_tv, user_tv, time_tv;
-        private TextView like_tv;
+        private View home_placeholder_tv;
 
         public TwoViewHolder(View itemView) {
             super(itemView);
@@ -260,7 +261,7 @@ public class HomeMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             content_tv = itemView.findViewById(R.id.content_tv);
             user_tv = itemView.findViewById(R.id.user_tv);
             time_tv = itemView.findViewById(R.id.time_tv);
-//            like_tv = itemView.findViewById(R.id.like_tv);
+            home_placeholder_tv = itemView.findViewById(R.id.home_placeholder_tv);
         }
     }
 

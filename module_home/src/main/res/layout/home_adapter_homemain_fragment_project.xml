@@ -7,7 +7,7 @@
     <RelativeLayout
         android:visibility="gone"
         android:id="@+id/top_layout"
-        android:layout_marginTop="@dimen/mm30"
+        android:layout_marginTop="@dimen/mm40"
         android:paddingLeft="@dimen/mm20"
         android:layout_width="match_parent"
         android:layout_height="@dimen/mm80">
@@ -15,12 +15,13 @@
             android:background="@drawable/shape_gradient"
             android:layout_centerVertical="true"
             android:layout_width="@dimen/mm5"
-            android:layout_height="@dimen/mm50" />
+            android:layout_height="@dimen/mm40" />
         <TextView
+            android:textStyle="bold"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/mm20"
             android:textColor="@color/color_232323"
-            android:text="最新博文"
+            android:text="最新项目"
             android:textSize="@dimen/mm40"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -38,6 +39,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/relativelay"
         android:background="@drawable/home_shape_white_con30"
         android:layout_marginTop="@dimen/mm15"
         android:layout_marginLeft="@dimen/mm20"
@@ -51,7 +53,7 @@
             android:id="@+id/cardview"
             android:layout_width="@dimen/mm250"
             android:layout_height="@dimen/mm220"
-            app:cardCornerRadius="@dimen/mm12"
+            app:cardCornerRadius="@dimen/mm8"
             app:cardElevation="0px">
             <ImageView
                 android:scaleType="centerCrop"
@@ -64,7 +66,7 @@
             android:id="@+id/title_tv"
             android:singleLine="true"
             android:layout_toRightOf="@+id/cardview"
-            android:layout_marginTop="@dimen/mm5"
+            android:layout_marginTop="@dimen/mm3"
             android:layout_marginLeft="@dimen/mm20"
             android:layout_marginRight="@dimen/mm20"
             android:textColor="@color/color_232323"
@@ -78,7 +80,7 @@
             android:maxLines="3"
             android:layout_toRightOf="@+id/cardview"
             android:layout_below="@+id/title_tv"
-            android:layout_marginTop="@dimen/mm15"
+            android:layout_marginTop="@dimen/mm18"
             android:layout_marginLeft="@dimen/mm20"
             android:layout_marginRight="@dimen/mm20"
             android:text="分类分类分分类分类分类类分类分类分类分类分类分类分类分类分类分类"
@@ -92,7 +94,7 @@
             android:layout_toRightOf="@+id/cardview"
             android:layout_marginLeft="@dimen/mm20"
             android:layout_marginRight="@dimen/mm30"
-            android:layout_marginBottom="@dimen/mm10"
+            android:layout_marginBottom="@dimen/mm5"
             android:textColor="@color/common_black_999"
             android:text="姓名"
             android:textSize="@dimen/mm26"
@@ -102,7 +104,7 @@
         <TextView
             android:layout_toRightOf="@+id/user_tv"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/mm10"
+            android:layout_marginBottom="@dimen/mm5"
             android:id="@+id/time_tv"
             android:layout_marginTop="@dimen/mm10"
             android:layout_marginRight="@dimen/mm20"
@@ -114,4 +116,9 @@
 
     </RelativeLayout>
 
+    <View
+        android:layout_below="@+id/relativelay"
+        android:id="@+id/home_placeholder_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mm50"/>
 </RelativeLayout>

@@ -1,7 +1,9 @@
 package com.senon.module_home.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
@@ -29,7 +31,8 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         HomeMainFragmentCon.View {
 
     private LRecyclerView lrv;
-    private List<Banner> banners;
+    private TextView home_homefragment_title_tv;
+    private List<Banner> banners = new ArrayList<>();
     private HomeArticle articles;
     private ProjectArticle projects;
     private int articlePage = 0;//首页文章页码
@@ -37,6 +40,7 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
     private int cid = 294;//项目id294
     private HomeMainAdapter adapter;
     private LRecyclerViewAdapter mLRecyclerViewAdapter;//Lrecyclerview的包装适配器
+    private LinearLayoutManager layoutManager;
 
 
     @Override
@@ -54,6 +58,7 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
     @Override
     public void init(View rootView) {
         lrv = rootView.findViewById(R.id.home_homefragment_lrv);
+        home_homefragment_title_tv = rootView.findViewById(R.id.home_homefragment_title_tv);
     }
 
     @Override
@@ -62,15 +67,55 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         //第一次可见时，自动加载页面
         LogUtils.e("-----> 子fragment进行初始化操作");
 
+        //初始化adapter 设置适配器
+        initAdapter();
+        //请求网络数据
+        getFirstData();
+        //添加滑动位置监听
+        addLrvListener();
+
+    }
+
+    private void addLrvListener() {
+        lrv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                //在此做处理
+                if (null != layoutManager) {
+                    //当前条目索引
+                    int position = layoutManager.findFirstVisibleItemPosition();
+                    if(position > 1){
+                        home_homefragment_title_tv.setVisibility(View.VISIBLE);
+                    }else{
+                        //根据view的高度来做显示隐藏判断
+                        //根据索引来获取对应的itemView
+                        View firstVisiableChildView = layoutManager.findViewByPosition(position);
+                        //获取当前显示条目的高度
+                        int itemHeight = firstVisiableChildView.getHeight();
+                        //获取当前Recyclerview 偏移量
+                        int offset = - firstVisiableChildView.getTop();
+                        if (offset > itemHeight / 4) {
+                            //做显示布局操作
+                            home_homefragment_title_tv.setVisibility(View.VISIBLE);
+                        } else {
+                            //做隐藏布局操作
+                            home_homefragment_title_tv.setVisibility(View.GONE);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private void initAdapter() {
         adapter = new HomeMainAdapter(mContext);
-        lrv.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        lrv.setLayoutManager(layoutManager);
         lrv.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader); //设置下拉刷新Progress的样式
-        lrv.setArrowImageView(R.mipmap.news_renovate);  //设置下拉刷新箭头
+        lrv.setArrowImageView(R.drawable.news_renovate);  //设置下拉刷新箭头
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
         lrv.setAdapter(mLRecyclerViewAdapter);
-        lrv.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        lrv.setFooterViewColor(R.color.color_blue, R.color.text_gray, R.color.elegant_bg);
-        lrv.setHeaderViewColor(R.color.common_white, R.color.common_white, R.color.tablayout_tv);
         lrv.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -78,9 +123,6 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
             }
         });
         lrv.setLoadMoreEnabled(false);
-
-        getFirstData();
-
     }
 
     private void getFirstData(){
@@ -97,8 +139,6 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         super.onFragmentVisble();
         //之后每次可见的操作
         LogUtils.e("-----> 子fragment每次可见时的操作");
-
-
     }
 
     @Override
@@ -142,14 +182,14 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
     @Override
     public void onResume() {
         super.onResume();
-        if(adapter != null){
+        if(adapter != null){//banner生命周期需要调用的方法start
             adapter.setBannerStatus(1);
         }
     }
     @Override
     public void onPause() {
         super.onPause();
-        if(adapter != null){
+        if(adapter != null){//banner生命周期需要调用的方法pause
             adapter.setBannerStatus(2);
         }
     }

@@ -1,6 +1,8 @@
 package com.senon.module_life.presenter;
 
 import android.content.Context;
+
+import com.senon.lib_common.bean.KnowledgeSystem;
 import com.senon.lib_common.bean.Login;
 import com.senon.lib_common.net.ServerUtils;
 import com.senon.lib_common.base.BaseResponse;
@@ -12,6 +14,7 @@ import com.senon.lib_common.utils.ToastUtil;
 import com.senon.module_life.contract.LifeMainFragmentCon;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * LifeMainFragmentCon  P
@@ -24,21 +27,21 @@ public class LifeMainFragmentPre extends LifeMainFragmentCon.Presenter{
         this.context = context;
     }
 
+
     @Override
-    public void getData(HashMap<String, String> map, boolean isDialog, boolean cancelable) {
-        ServerUtils.getCommonApi().login(map)
+    public void getKnowledgeList(boolean isDialog, boolean cancelable) {
+        ServerUtils.getCommonApi().getKnowledgeList()
                 .retryWhen(new RetryWithDelay(3,2))
-                .compose(RxUtils.<BaseResponse<Login>>bindToLifecycle(getView()))
-                .compose(RxUtils.<BaseResponse<Login>>getSchedulerTransformer())
-                .subscribe(new RequestCallback<BaseResponse<Login>>(context, RxErrorHandler.getInstance(),true) {
+                .compose(RxUtils.<BaseResponse<List<KnowledgeSystem>>>bindToLifecycle(getView()))
+                .compose(RxUtils.<BaseResponse<List<KnowledgeSystem>>>getSchedulerTransformer())
+                .subscribe(new RequestCallback<BaseResponse<List<KnowledgeSystem>>>(context, RxErrorHandler.getInstance(),true) {
                     @Override
-                    public void onNext(BaseResponse<Login> baseResponse) {
+                    public void onNext(BaseResponse<List<KnowledgeSystem>> baseResponse) {
                         super.onNext(baseResponse);
-                        BaseResponse<Login> response = baseResponse;
-                        if(response.getCode() == 0){
-//                            getView().resultLogin(response);
+                        if(baseResponse.getCode() == 0){
+                            getView().getKnowledgeListResult(baseResponse);
                         }else{
-                            ToastUtil.initToast(response.getMsg());
+                            ToastUtil.initToast(baseResponse.getMsg());
                         }
                     }
                     @Override
