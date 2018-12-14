@@ -108,7 +108,7 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
                     int position = layoutManager.findFirstVisibleItemPosition();
                     if(position > 1){
                         life_homefragment_title_tv.setVisibility(View.VISIBLE);
-                    }else{
+                    }else if(position >= 0){
                         //根据view的高度来做显示隐藏判断
                         //根据索引来获取对应的itemView
                         View firstVisiableChildView = layoutManager.findViewByPosition(position);
