@@ -134,8 +134,8 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
     }
 
     private void initAdapter() {
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        lrv.setLayoutManager(manager);
+        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        lrv.setLayoutManager(layoutManager);
         lrv.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader); //设置下拉刷新Progress的样式
         lrv.setArrowImageView(R.drawable.news_renovate);  //设置下拉刷新箭头
         lrv.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
@@ -167,7 +167,9 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
 
     @Override
     public void getKnowledgeListResult(BaseResponse<List<KnowledgeSystem>> data) {
-
+        knowledges = data.getData();
+        mLRecyclerViewAdapter.notifyDataSetChanged();
+        lrv.refreshComplete(0);
     }
 
 
