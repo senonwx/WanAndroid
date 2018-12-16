@@ -75,8 +75,8 @@ public class HomeMainFragmentPre extends HomeMainFragmentCon.Presenter{
     }
 
     @Override
-    public void getProjectList(int page, int cid, boolean isDialog, boolean cancelable) {
-        ServerUtils.getCommonApi().getProjectList(page,cid)
+    public void getHomeProject(int page, boolean isDialog, boolean cancelable) {
+        ServerUtils.getCommonApi().getHomeProject(page)
                 .retryWhen(new RetryWithDelay(3,2))
                 .compose(RxUtils.<BaseResponse<ProjectArticle>>bindToLifecycle(getView()))
                 .compose(RxUtils.<BaseResponse<ProjectArticle>>getSchedulerTransformer())
@@ -85,7 +85,7 @@ public class HomeMainFragmentPre extends HomeMainFragmentCon.Presenter{
                     public void onNext(BaseResponse<ProjectArticle> baseResponse) {
                         super.onNext(baseResponse);
                         if(baseResponse.getCode() == 0){
-                            getView().getProjectListResult(baseResponse);
+                            getView().getHomeProjectResult(baseResponse);
                         }else{
                             ToastUtil.initToast(baseResponse.getMsg());
                         }

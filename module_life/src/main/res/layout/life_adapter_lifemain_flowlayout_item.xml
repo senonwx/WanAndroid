@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:layout_marginRight="@dimen/mm15"
+    android:layout_marginBottom="@dimen/mm15"
+    android:paddingLeft="@dimen/mm12"
+    android:paddingRight="@dimen/mm12"
+    android:paddingTop="@dimen/mm7"
+    android:paddingBottom="@dimen/mm7"
+    android:background="@drawable/life_shape_gray_10"
+    android:textSize="@dimen/mm30"
+    android:id="@+id/flowlayout_item_tv"
+    android:text="标签"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

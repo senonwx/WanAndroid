@@ -2,6 +2,7 @@ package com.senon.module_life.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,9 +19,13 @@ import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.bean.Banner;
 import com.senon.lib_common.bean.KnowledgeSystem;
 import com.senon.lib_common.utils.LogUtils;
+import com.senon.lib_common.utils.ToastUtil;
 import com.senon.module_life.R;
 import com.senon.module_life.contract.LifeMainFragmentCon;
 import com.senon.module_life.presenter.LifeMainFragmentPre;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -127,6 +132,8 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
                 }
             }
         });
+
+
     }
 
     private void getFirstData() {
@@ -142,7 +149,28 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
         adapter = new RecyclerAdapter<KnowledgeSystem>(getContext(), knowledges, R.layout.life_adapter_lifemain_fragment) {
             @Override
             public void convert(final RecycleHolder helper, final KnowledgeSystem item, final int position) {
-                
+                helper.setVisible(R.id.textview,position == 0?true:false);
+                helper.setVisible(R.id.home_placeholder_tv,position == knowledges.size() - 1?true:false);
+                helper.setText(R.id.content_tv,item.getName());
+
+                final TagFlowLayout flowLayout = helper.findView(R.id.flowlayout);
+                flowLayout.setAdapter(new TagAdapter<KnowledgeSystem.ChildrenBean>(item.getChildren()){
+                    @Override
+                    public View getView(FlowLayout parent, int position, KnowledgeSystem.ChildrenBean bean){
+                        TextView tv = (TextView) LayoutInflater.from(mContext).inflate(
+                                R.layout.life_adapter_lifemain_flowlayout_item, flowLayout, false);
+                        tv.setText(item.getChildren().get(position).getName());
+                        return tv;
+                    }
+                });
+                flowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener(){
+                    @Override
+                    public boolean onTagClick(View view, int position, FlowLayout parent){
+                        ToastUtil.initToast("点击了 "+item.getChildren().get(position).getName());
+                        return true;
+                    }
+                });
+
             }
         };
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
@@ -167,7 +195,8 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
 
     @Override
     public void getKnowledgeListResult(BaseResponse<List<KnowledgeSystem>> data) {
-        knowledges = data.getData();
+        knowledges.clear();
+        knowledges.addAll(data.getData());
         mLRecyclerViewAdapter.notifyDataSetChanged();
         lrv.refreshComplete(0);
     }

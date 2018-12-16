@@ -29,7 +29,7 @@
             android:text="首页"
             android:textSize="@dimen/mm42"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/mm100" />
+            android:layout_height="@dimen/mm90" />
     </RelativeLayout>
 
 </RelativeLayout>

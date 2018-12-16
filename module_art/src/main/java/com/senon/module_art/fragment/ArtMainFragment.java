@@ -1,11 +1,9 @@
-package com.senon.module_home.fragment;
+package com.senon.module_art.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
-import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
@@ -15,43 +13,43 @@ import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.bean.Banner;
 import com.senon.lib_common.bean.HomeArticle;
 import com.senon.lib_common.bean.ProjectArticle;
+import com.senon.lib_common.bean.WXarticle;
+import com.senon.lib_common.bean.WXchapters;
 import com.senon.lib_common.utils.LogUtils;
-import com.senon.module_home.R;
-import com.senon.module_home.adapter.HomeMainAdapter;
-import com.senon.module_home.contract.HomeMainFragmentCon;
-import com.senon.module_home.presenter.HomeMainFragmentPre;
+import com.senon.module_art.R;
+import com.senon.module_art.adapter.ArtMainAdapter;
+import com.senon.module_art.contract.ArtMainFragmentCon;
+import com.senon.module_art.presenter.ArtMainFragmentPre;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * home mian fragment
+ * art mian fragment
  */
-public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View, HomeMainFragmentCon.Presenter> implements
-        HomeMainFragmentCon.View {
+public class ArtMainFragment extends BaseLazyFragment<ArtMainFragmentCon.View, ArtMainFragmentCon.Presenter> implements
+        ArtMainFragmentCon.View {
 
     private LRecyclerView lrv;
     private TextView home_homefragment_title_tv;
-    private List<Banner> banners = new ArrayList<>();
-    private HomeArticle articles;
-    private ProjectArticle projects;
-    private int articlePage = 0;//首页文章页码
-    private int projectPage = 1;//首页最新项目
-    private HomeMainAdapter adapter;
+    private List<WXchapters> chapters = new ArrayList<>();
+    private WXarticle articles;
+    private int page = 1;//公众号页码
+    private ArtMainAdapter adapter;
     private LRecyclerViewAdapter mLRecyclerViewAdapter;//Lrecyclerview的包装适配器
     private LinearLayoutManager layoutManager;
 
 
     @Override
     public int getLayoutId() {
-        return R.layout.home_fragment_main;
+        return R.layout.art_fragment_main;
     }
     @Override
-    public HomeMainFragmentCon.Presenter createPresenter() {
-        return new HomeMainFragmentPre(mContext);
+    public ArtMainFragmentCon.Presenter createPresenter() {
+        return new ArtMainFragmentPre(mContext);
     }
     @Override
-    public HomeMainFragmentCon.View createView() {
+    public ArtMainFragmentCon.View createView() {
         return this;
     }
     @Override
@@ -69,7 +67,8 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         //初始化adapter 设置适配器
         initAdapter();
         //请求网络数据
-        getFirstData();
+//        getWXarticleChapters();
+        getWXarticleList(408,1);
         //添加滑动位置监听
         addLrvListener();
 
@@ -108,7 +107,7 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
     }
 
     private void initAdapter() {
-        adapter = new HomeMainAdapter(mContext);
+        adapter = new ArtMainAdapter(mContext);
         layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         lrv.setLayoutManager(layoutManager);
         lrv.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader); //设置下拉刷新Progress的样式
@@ -118,19 +117,21 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         lrv.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getFirstData();
+                getWXarticleChapters();
             }
         });
         lrv.setLoadMoreEnabled(false);
     }
 
-    private void getFirstData(){
-        //加载banner
-        getPresenter().getBanner(true, true);
-        //加载首页最新文章
-        getPresenter().getHomeArticle(articlePage,true, true);
-        //加载项目列表数据-完整项目模块
-        getPresenter().getHomeProject(projectPage,true, true);
+    private void getWXarticleChapters(){
+        //获取公众号列表
+        getPresenter().getWXarticleChapters(true, true);
+
+    }
+
+    private void getWXarticleList(int id,int page){
+        //查看某个公众号历史数据
+        getPresenter().getWXarticleList(id,page,true, true);
     }
 
     @Override
@@ -140,56 +141,37 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         LogUtils.e("-----> 子fragment每次可见时的操作");
     }
 
+
     @Override
-    public void getBannerResult(BaseResponse<List<Banner>> data) {
-        banners = data.getData();
-        adapter.setBannerDatas(banners);
+    public void getWXartChapResult(BaseResponse<List<WXchapters>> data) {
+//        List<WXchapters> list = new ArrayList<>();
+//        if(data.getData() != null){
+//            for (int i = 0; i < data.getData().getDatas().size(); i++) {
+//                if(i < 5){
+//                    list.add(data.getData().getDatas().get(i));
+//                }
+//            }
+//        }
+//        data.getData().setDatas(list);
+//
+//        chapters = data.getData();
+//        adapter.setProjectDatas(projects.getDatas());
     }
 
     @Override
-    public void getHomeArticleResult(BaseResponse<HomeArticle> data) {
-        List<HomeArticle.DatasBean> list = new ArrayList<>();
-        if(data.getData() != null){
-            for (int i = 0; i < data.getData().getDatas().size(); i++) {
-                if(i < 5){
-                    list.add(data.getData().getDatas().get(i));
-                }
-            }
-        }
-        data.getData().setDatas(list);
-
-        articles = data.getData();
-        adapter.setArticleDatas(articles.getDatas());
-    }
-
-    @Override
-    public void getHomeProjectResult(BaseResponse<ProjectArticle> data) {
-        List<ProjectArticle.DatasBean> list = new ArrayList<>();
-        if(data.getData() != null){
-            for (int i = 0; i < data.getData().getDatas().size(); i++) {
-                if(i < 5){
-                    list.add(data.getData().getDatas().get(i));
-                }
-            }
-        }
-        data.getData().setDatas(list);
-
-        projects = data.getData();
-        adapter.setProjectDatas(projects.getDatas());
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(adapter != null){//banner生命周期需要调用的方法start
-            adapter.setBannerStatus(1);
-        }
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-        if(adapter != null){//banner生命周期需要调用的方法pause
-            adapter.setBannerStatus(2);
-        }
+    public void getWXartListResult(BaseResponse<WXarticle> data) {
+//        List<HomeArticle.DatasBean> list = new ArrayList<>();
+//        if(data.getData() != null){
+//            for (int i = 0; i < data.getData().getDatas().size(); i++) {
+//                if(i < 5){
+//                    list.add(data.getData().getDatas().get(i));
+//                }
+//            }
+//        }
+//        data.getData().setDatas(list);
+//
+//        articles = data.getData();
+//        adapter.setArticleDatas(articles.getDatas());
+        adapter.setArticleDatas(data.getData().getDatas());
     }
 }

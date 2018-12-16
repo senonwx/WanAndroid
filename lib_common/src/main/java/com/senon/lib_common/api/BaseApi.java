@@ -6,6 +6,8 @@ import com.senon.lib_common.bean.KnowledgeSystem;
 import com.senon.lib_common.bean.Login;
 import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.bean.ProjectArticle;
+import com.senon.lib_common.bean.WXarticle;
+import com.senon.lib_common.bean.WXchapters;
 
 import java.util.List;
 import java.util.Map;
@@ -43,6 +45,10 @@ public interface BaseApi {
     //首页文章列表
     @GET("article/list/{page}/json")
     Observable<BaseResponse<HomeArticle>> getHomeArticle(@Path("page") int page);
+    //首页最新项目
+    @GET("article/listproject/{page}/json")
+    Observable<BaseResponse<ProjectArticle>> getHomeProject(@Path("page") int page);
+
     //项目列表数据
     @GET("project/list/{page}/json")
     Observable<BaseResponse<ProjectArticle>> getProjectList(@Path("page") int page, @Query("cid") int cid);
@@ -50,5 +56,12 @@ public interface BaseApi {
     //体系数据
     @GET("tree/json")
     Observable<BaseResponse<List<KnowledgeSystem>>> getKnowledgeList();
+
+    //获取公众号列表
+    @GET("wxarticle/chapters/json")
+    Observable<BaseResponse<List<WXchapters>>> getWXarticleChapters();
+    //查看某个公众号历史数据
+    @GET("wxarticle/list/{id}/{page}/json")
+    Observable<BaseResponse<WXarticle>> getWXarticleList(@Path("id") int id, @Path("page") int page);
 
 }

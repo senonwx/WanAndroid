@@ -8,7 +8,7 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         >
-        <activity android:name="com.senon.module_art.ArtMainActivity">
+        <activity android:name="com.senon.module_art.MainActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />

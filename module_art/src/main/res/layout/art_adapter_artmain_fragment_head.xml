@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:textStyle="bold"
+        android:id="@+id/textview"
+        android:layout_marginTop="@dimen/mm40"
+        android:layout_marginLeft="@dimen/mm20"
+        android:text="公众号"
+        android:textSize="@dimen/mm56"
+        android:textColor="@color/transport_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="@dimen/mm30"
+        android:layout_marginBottom="@dimen/mm25"
+        android:layout_below="@+id/textview"
+        android:id="@+id/art_main_fragment_head_lrv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

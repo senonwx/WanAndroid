@@ -4,13 +4,12 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.github.jdsjlzx.recyclerview.LRecyclerView
-            android:id="@+id/life_homefragment_lrv"
+            android:id="@+id/home_homefragment_lrv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
@@ -24,10 +23,10 @@
         <TextView
             android:visibility="gone"
             android:background="@color/common_white"
-            android:id="@+id/life_homefragment_title_tv"
+            android:id="@+id/home_homefragment_title_tv"
             android:gravity="center"
             android:textColor="@color/color_232323"
-            android:text="体系"
+            android:text="公众号"
             android:textSize="@dimen/mm42"
             android:layout_width="match_parent"
             android:layout_height="@dimen/mm90" />

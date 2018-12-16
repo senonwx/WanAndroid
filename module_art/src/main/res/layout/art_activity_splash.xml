@@ -4,12 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.senon.module_art.ArtMainActivity">
+    tools:context="com.senon.module_art.MainActivity">
 
     <TextView
+        android:id="@+id/art_main_login_tv"
+        android:background="#d4cccc"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/mm10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-         />
+        android:text="跳转到登录"
+        android:textSize="@dimen/mm30"
+        />
 
 </RelativeLayout>

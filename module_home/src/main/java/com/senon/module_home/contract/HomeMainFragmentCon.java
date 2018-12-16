@@ -20,7 +20,7 @@ public interface HomeMainFragmentCon {
 
         void getHomeArticleResult(BaseResponse<HomeArticle> data);
 
-        void getProjectListResult(BaseResponse<ProjectArticle> data);
+        void getHomeProjectResult(BaseResponse<ProjectArticle> data);
 
     }
 
@@ -30,7 +30,7 @@ public interface HomeMainFragmentCon {
 
         public abstract void getHomeArticle(int page,boolean isDialog, boolean cancelable);
 
-        public abstract void getProjectList(int page,int cid,boolean isDialog, boolean cancelable);
+        public abstract void getHomeProject(int page,boolean isDialog, boolean cancelable);
 
     }
 }
