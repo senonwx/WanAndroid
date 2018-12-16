@@ -2,6 +2,7 @@ package com.senon.module_art.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +83,7 @@ public class ArtMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((OneViewHolder) holder).itemView.setTag(position);
 
             ((OneViewHolder) holder).type_tv.setText(data.getSuperChapterName() + "/" + data.getChapterName());
-            ((OneViewHolder) holder).content_tv.setText(data.getTitle());
+            ((OneViewHolder) holder).content_tv.setText(Html.fromHtml(data.getTitle()));
             ((OneViewHolder) holder).user_tv.setText(data.getAuthor());
             ((OneViewHolder) holder).time_tv.setText(data.getNiceDate());
             ((OneViewHolder) holder).author_tv.setVisibility(position == 0 ? View.VISIBLE : View.GONE);
