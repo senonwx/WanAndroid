@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
+import com.senon.lib_common.ConstantArouter;
 import com.senon.lib_common.bean.Banner;
 import com.senon.lib_common.bean.HomeArticle;
 import com.senon.lib_common.bean.ProjectArticle;
@@ -134,13 +137,9 @@ public class HomeMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((OneViewHolder) holder).more_tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                }
-            });
-            ((OneViewHolder) holder).like_tv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
+                    ARouter.getInstance()
+                            .build(ConstantArouter.PATH_HOME_HOMEARTICLEACTIVITY)
+                            .navigation();
                 }
             });
 
@@ -230,7 +229,7 @@ public class HomeMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     class OneViewHolder extends RecyclerView.ViewHolder {
         private RelativeLayout top_layout;
         private TextView more_tv, type_tv, content_tv, user_tv, time_tv;
-        private TextView new_tv, like_tv;
+        private TextView new_tv;
 
         public OneViewHolder(View itemView) {
             super(itemView);
@@ -241,7 +240,6 @@ public class HomeMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             user_tv = itemView.findViewById(R.id.user_tv);
             time_tv = itemView.findViewById(R.id.time_tv);
             new_tv = itemView.findViewById(R.id.new_tv);
-            like_tv = itemView.findViewById(R.id.like_tv);
         }
     }
 

@@ -8,6 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.senon.lib_common.ConstantArouter;
 import com.senon.lib_common.ConstantLoginArouter;
+import com.senon.lib_common.utils.StatusBarUtils;
 
 /**
  * app 模块主页面
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtils.with(this).init();
         setContentView(R.layout.activity_main);
 
     }

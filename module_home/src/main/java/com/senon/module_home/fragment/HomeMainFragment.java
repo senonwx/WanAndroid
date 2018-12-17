@@ -35,8 +35,8 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
     private List<Banner> banners = new ArrayList<>();
     private HomeArticle articles;
     private ProjectArticle projects;
-    private int articlePage = 0;//首页文章页码
-    private int projectPage = 1;//首页最新项目
+    private final int articlePage = 0;//首页文章页码
+    private final int projectPage = 1;//首页最新项目
     private HomeMainAdapter adapter;
     private LRecyclerViewAdapter mLRecyclerViewAdapter;//Lrecyclerview的包装适配器
     private LinearLayoutManager layoutManager;
@@ -58,6 +58,14 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
     public void init(View rootView) {
         lrv = rootView.findViewById(R.id.home_homefragment_lrv);
         home_homefragment_title_tv = rootView.findViewById(R.id.home_homefragment_title_tv);
+        home_homefragment_title_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lrv != null && adapter!= null){
+                    lrv.smoothScrollToPosition(0);
+                }
+            }
+        });
     }
 
     @Override
@@ -112,7 +120,7 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         lrv.setLayoutManager(layoutManager);
         lrv.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader); //设置下拉刷新Progress的样式
-        lrv.setArrowImageView(R.drawable.news_renovate);  //设置下拉刷新箭头
+        lrv.setArrowImageView(R.mipmap.news_renovate);  //设置下拉刷新箭头
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
         lrv.setAdapter(mLRecyclerViewAdapter);
         lrv.setOnRefreshListener(new OnRefreshListener() {
@@ -126,11 +134,11 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
 
     private void getFirstData(){
         //加载banner
-        getPresenter().getBanner(true, true);
+        getPresenter().getBanner(false, true);
         //加载首页最新文章
-        getPresenter().getHomeArticle(articlePage,true, true);
+        getPresenter().getHomeArticle(articlePage,false, true);
         //加载项目列表数据-完整项目模块
-        getPresenter().getHomeProject(projectPage,true, true);
+        getPresenter().getHomeProject(projectPage,false, true);
     }
 
     @Override
@@ -144,6 +152,8 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
     public void getBannerResult(BaseResponse<List<Banner>> data) {
         banners = data.getData();
         adapter.setBannerDatas(banners);
+        refreshData();
+
     }
 
     @Override
@@ -160,6 +170,8 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
 
         articles = data.getData();
         adapter.setArticleDatas(articles.getDatas());
+        refreshData();
+
     }
 
     @Override
@@ -176,6 +188,7 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
 
         projects = data.getData();
         adapter.setProjectDatas(projects.getDatas());
+        refreshData();
     }
 
     @Override
@@ -191,5 +204,11 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         if(adapter != null){//banner生命周期需要调用的方法pause
             adapter.setBannerStatus(2);
         }
+    }
+
+    //完成数据加载
+    private void refreshData(){
+        lrv.refreshComplete(0);
+        mLRecyclerViewAdapter.notifyDataSetChanged();
     }
 }

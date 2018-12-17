@@ -9,7 +9,7 @@
         android:id="@+id/textview"
         android:layout_marginTop="@dimen/mm40"
         android:layout_marginLeft="@dimen/mm20"
-        android:layout_marginBottom="@dimen/mm30"
+        android:layout_marginBottom="@dimen/mm40"
         android:text="体系"
         android:textSize="@dimen/mm56"
         android:textColor="@color/transport_3"

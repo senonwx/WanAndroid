@@ -1,6 +1,7 @@
 package com.senon.module_art.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -10,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
+import com.senon.lib_common.adapter.RecycleHolder;
+import com.senon.lib_common.adapter.RecyclerAdapter;
 import com.senon.lib_common.bean.Banner;
 import com.senon.lib_common.bean.HomeArticle;
 import com.senon.lib_common.bean.ProjectArticle;
@@ -17,6 +21,8 @@ import com.senon.lib_common.bean.WXarticle;
 import com.senon.lib_common.bean.WXchapters;
 import com.senon.lib_common.utils.ToastUtil;
 import com.senon.module_art.R;
+import com.senon.module_art.fragment.ArtMainFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +39,8 @@ public class ArtMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Context mContext;
     private List<WXchapters> chapters = new ArrayList<>();//公众号列表
     private List<WXarticle.DatasBean> articles = new ArrayList<>();//公众号文章
+    private int id = ArtMainFragment.ID;
+    private boolean refreshHead = true;
 
     public void notifyDataChanged() {
         notifyDataSetChanged();
@@ -48,10 +56,11 @@ public class ArtMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
     //设置公众号列表
-    public void setChaptersDatas(List<WXchapters> datas) {
+    public void setChaptersDatas(List<WXchapters> datas,int id) {
         if (datas != null) {
             this.chapters.clear();
             this.chapters.addAll(datas);
+            this.id = id;
             notifyDataChanged();
         }
     }
@@ -75,6 +84,39 @@ public class ArtMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int mPosition) {
         if (holder instanceof HeaderViewHolder) {
+            if(chapters.size() > 0 && refreshHead){
+                refreshHead = false;
+                ((HeaderViewHolder) holder).lrv.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+                ((HeaderViewHolder) holder).adapter = new RecyclerAdapter<WXchapters>(mContext, chapters, R.layout.art_adapter_artmain_fragment_head_item) {
+                    @Override
+                    public void convert(final RecycleHolder helper, final WXchapters item, final int position) {
+                        helper.setText(R.id.tv,item.getName());
+                        if(item.getId() == id){
+                            helper.setBackgroundRes(R.id.tv,R.drawable.art_shape_yellow_con20);
+                        }else{
+                            helper.setBackgroundRes(R.id.tv,R.drawable.art_shape_transp_con20);
+                        }
+                        helper.setTextColor(R.id.tv,item.getId() == id ? R.color.login_bg_start_1 :R.color.shallow_black);
+                        helper.setOnClickListener(R.id.tv, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                id = item.getId();
+                                if(onItemClickListener != null){
+                                    onItemClickListener.onHeadItemClick(v,position,item.getId());
+                                }
+                                ((HeaderViewHolder) holder).adapter.notifyDataSetChanged();
+                                for (int i = 0; i < chapters.size(); i++) {
+                                    if(id == chapters.get(i).getId()){
+                                        ((HeaderViewHolder) holder).lrv.smoothScrollToPosition(i);
+                                    }
+                                }
+                            }
+                        });
+                    }
+                };
+                ((HeaderViewHolder) holder).lrv.setAdapter(((HeaderViewHolder) holder).adapter);
+            }
+
 
         } else if (holder instanceof OneViewHolder) {
             //注意除去头布局
@@ -89,12 +131,7 @@ public class ArtMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((OneViewHolder) holder).author_tv.setVisibility(position == 0 ? View.VISIBLE : View.GONE);
             ((OneViewHolder) holder).art_placeholder_tv.setVisibility(position == articles.size()-1 ? View.VISIBLE : View.GONE);
             ((OneViewHolder) holder).author_tv.setText(data.getAuthor());
-            ((OneViewHolder) holder).like_tv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
 
-                }
-            });
         }
     }
 
@@ -125,6 +162,7 @@ public class ArtMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     //公众号列表
     class HeaderViewHolder extends RecyclerView.ViewHolder {
         private RecyclerView lrv;
+        private RecyclerAdapter<WXchapters> adapter;
         public HeaderViewHolder(View itemView) {
             super(itemView);
             lrv = itemView.findViewById(R.id.art_main_fragment_head_lrv);
@@ -135,7 +173,6 @@ public class ArtMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     class OneViewHolder extends RecyclerView.ViewHolder {
         private TextView author_tv;
         private TextView type_tv, content_tv, user_tv, time_tv;
-        private TextView like_tv;
         private View art_placeholder_tv;
 
         public OneViewHolder(View itemView) {
@@ -145,7 +182,6 @@ public class ArtMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             content_tv = itemView.findViewById(R.id.content_tv);
             user_tv = itemView.findViewById(R.id.user_tv);
             time_tv = itemView.findViewById(R.id.time_tv);
-            like_tv = itemView.findViewById(R.id.like_tv);
             art_placeholder_tv = itemView.findViewById(R.id.art_placeholder_tv);
         }
     }
@@ -155,10 +191,9 @@ public class ArtMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.onItemClickListener = onItemClickListener;
     }
     public interface OnItemClickListener {
-        void onHeadItemClick(View view, int position);
+        void onHeadItemClick(View view, int position,int mId);
         void onItemClick(View view, int position);
     }
-
 
 
 }

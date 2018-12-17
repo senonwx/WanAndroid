@@ -18,6 +18,7 @@ public class ConstantArouter {
      * home
      */
     public static final String PATH_HOME_MAINACTIVITY = "/app/MainActivity";
+    public static final String PATH_HOME_HOMEARTICLEACTIVITY = "/app/HomeArticleActivity";
 
     /**
      * common

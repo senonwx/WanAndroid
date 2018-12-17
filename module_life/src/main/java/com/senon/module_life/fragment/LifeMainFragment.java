@@ -86,6 +86,14 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
     public void init(View rootView) {
         lrv = rootView.findViewById(R.id.life_homefragment_lrv);
         life_homefragment_title_tv = rootView.findViewById(R.id.life_homefragment_title_tv);
+        life_homefragment_title_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lrv != null && adapter!= null){
+                    lrv.smoothScrollToPosition(0);
+                }
+            }
+        });
     }
 
     @Override
@@ -96,8 +104,6 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
 
         //初始化adapter 设置适配器
         initAdapter();
-        //请求网络数据
-        getFirstData();
         //添加滑动位置监听
         addLrvListener();
     }
@@ -137,14 +143,14 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
     }
 
     private void getFirstData() {
-        getPresenter().getKnowledgeList(true,true);
+        getPresenter().getKnowledgeList(false,true);
     }
 
     private void initAdapter() {
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         lrv.setLayoutManager(layoutManager);
         lrv.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader); //设置下拉刷新Progress的样式
-        lrv.setArrowImageView(R.drawable.news_renovate);  //设置下拉刷新箭头
+        lrv.setArrowImageView(R.mipmap.news_renovate);  //设置下拉刷新箭头
         lrv.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
         adapter = new RecyclerAdapter<KnowledgeSystem>(getContext(), knowledges, R.layout.life_adapter_lifemain_fragment) {
             @Override
@@ -182,7 +188,7 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
                 getFirstData();
             }
         });
-
+        lrv.forceToRefresh();
     }
 
     @Override
@@ -197,6 +203,7 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
     public void getKnowledgeListResult(BaseResponse<List<KnowledgeSystem>> data) {
         knowledges.clear();
         knowledges.addAll(data.getData());
+
         mLRecyclerViewAdapter.notifyDataSetChanged();
         lrv.refreshComplete(0);
     }

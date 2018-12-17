@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- view背景色 -->
+    <solid android:color="@color/common_yellow" />
+    <!--<solid android:color="#000" />-->
+    <!-- 边框圆角 -->
+    <corners
+        android:radius="@dimen/mm30" />
+    <stroke android:width="@dimen/mm2"
+        android:color="@color/login_bg_start_1"/>
+</shape>

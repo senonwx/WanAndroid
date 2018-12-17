@@ -97,20 +97,10 @@
             android:layout_marginRight="@dimen/mm30"
             android:textColor="@color/group_red_bg"
             android:text="新"
-            android:textSize="@dimen/mm26"
+            android:textSize="@dimen/mm28"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <TextView
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/content_tv"
-            android:id="@+id/like_tv"
-            android:layout_marginTop="@dimen/mm5"
-            android:layout_marginRight="@dimen/mm30"
-            android:textColor="@color/common_black_999"
-            android:text="收藏"
-            android:textSize="@dimen/mm26"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
     </RelativeLayout>
 
 </RelativeLayout>

@@ -32,7 +32,7 @@ public class ArtMainFragmentPre extends ArtMainFragmentCon.Presenter{
                 .retryWhen(new RetryWithDelay(3,2))
                 .compose(RxUtils.<BaseResponse<List<WXchapters>>>bindToLifecycle(getView()))
                 .compose(RxUtils.<BaseResponse<List<WXchapters>>>getSchedulerTransformer())
-                .subscribe(new RequestCallback<BaseResponse<List<WXchapters>>>(context, RxErrorHandler.getInstance(),true) {
+                .subscribe(new RequestCallback<BaseResponse<List<WXchapters>>>(context, RxErrorHandler.getInstance(),isDialog,cancelable) {
                     @Override
                     public void onNext(BaseResponse<List<WXchapters>> baseResponse) {
                         super.onNext(baseResponse);
@@ -55,7 +55,7 @@ public class ArtMainFragmentPre extends ArtMainFragmentCon.Presenter{
                 .retryWhen(new RetryWithDelay(3,2))
                 .compose(RxUtils.<BaseResponse<WXarticle>>bindToLifecycle(getView()))
                 .compose(RxUtils.<BaseResponse<WXarticle>>getSchedulerTransformer())
-                .subscribe(new RequestCallback<BaseResponse<WXarticle>>(context, RxErrorHandler.getInstance(),true) {
+                .subscribe(new RequestCallback<BaseResponse<WXarticle>>(context, RxErrorHandler.getInstance(),isDialog,cancelable) {
                     @Override
                     public void onNext(BaseResponse<WXarticle> baseResponse) {
                         super.onNext(baseResponse);

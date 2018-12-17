@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_margin="@dimen/mm10"
+        android:id="@+id/tv"
+        android:paddingLeft="@dimen/mm25"
+        android:paddingRight="@dimen/mm25"
+        android:paddingTop="@dimen/mm10"
+        android:paddingBottom="@dimen/mm10"
+        android:text="公众号"
+        android:textSize="@dimen/mm36"
+        android:textColor="@color/shallow_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

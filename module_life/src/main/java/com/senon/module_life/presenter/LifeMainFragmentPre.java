@@ -34,7 +34,7 @@ public class LifeMainFragmentPre extends LifeMainFragmentCon.Presenter{
                 .retryWhen(new RetryWithDelay(3,2))
                 .compose(RxUtils.<BaseResponse<List<KnowledgeSystem>>>bindToLifecycle(getView()))
                 .compose(RxUtils.<BaseResponse<List<KnowledgeSystem>>>getSchedulerTransformer())
-                .subscribe(new RequestCallback<BaseResponse<List<KnowledgeSystem>>>(context, RxErrorHandler.getInstance(),true) {
+                .subscribe(new RequestCallback<BaseResponse<List<KnowledgeSystem>>>(context, RxErrorHandler.getInstance(),isDialog,cancelable) {
                     @Override
                     public void onNext(BaseResponse<List<KnowledgeSystem>> baseResponse) {
                         super.onNext(baseResponse);

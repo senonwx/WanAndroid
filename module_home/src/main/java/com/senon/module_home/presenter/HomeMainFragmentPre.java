@@ -34,7 +34,7 @@ public class HomeMainFragmentPre extends HomeMainFragmentCon.Presenter{
                 .retryWhen(new RetryWithDelay(3,2))
                 .compose(RxUtils.<BaseResponse<List<Banner>>>bindToLifecycle(getView()))
                 .compose(RxUtils.<BaseResponse<List<Banner>>>getSchedulerTransformer())
-                .subscribe(new RequestCallback<BaseResponse<List<Banner>>>(context, RxErrorHandler.getInstance(),true) {
+                .subscribe(new RequestCallback<BaseResponse<List<Banner>>>(context, RxErrorHandler.getInstance(),isDialog,cancelable) {
                     @Override
                     public void onNext(BaseResponse<List<Banner>> baseResponse) {
                         super.onNext(baseResponse);
@@ -57,7 +57,7 @@ public class HomeMainFragmentPre extends HomeMainFragmentCon.Presenter{
                 .retryWhen(new RetryWithDelay(3,2))
                 .compose(RxUtils.<BaseResponse<HomeArticle>>bindToLifecycle(getView()))
                 .compose(RxUtils.<BaseResponse<HomeArticle>>getSchedulerTransformer())
-                .subscribe(new RequestCallback<BaseResponse<HomeArticle>>(context, RxErrorHandler.getInstance(),true) {
+                .subscribe(new RequestCallback<BaseResponse<HomeArticle>>(context, RxErrorHandler.getInstance(),isDialog,cancelable) {
                     @Override
                     public void onNext(BaseResponse<HomeArticle> baseResponse) {
                         super.onNext(baseResponse);
@@ -80,7 +80,7 @@ public class HomeMainFragmentPre extends HomeMainFragmentCon.Presenter{
                 .retryWhen(new RetryWithDelay(3,2))
                 .compose(RxUtils.<BaseResponse<ProjectArticle>>bindToLifecycle(getView()))
                 .compose(RxUtils.<BaseResponse<ProjectArticle>>getSchedulerTransformer())
-                .subscribe(new RequestCallback<BaseResponse<ProjectArticle>>(context, RxErrorHandler.getInstance(),true) {
+                .subscribe(new RequestCallback<BaseResponse<ProjectArticle>>(context, RxErrorHandler.getInstance(),isDialog,cancelable) {
                     @Override
                     public void onNext(BaseResponse<ProjectArticle> baseResponse) {
                         super.onNext(baseResponse);

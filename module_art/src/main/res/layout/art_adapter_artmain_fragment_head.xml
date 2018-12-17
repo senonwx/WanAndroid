@@ -16,8 +16,9 @@
         android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="@dimen/mm30"
-        android:layout_marginBottom="@dimen/mm25"
+        android:layout_marginLeft="@dimen/mm20"
+        android:layout_marginRight="@dimen/mm20"
+        android:layout_marginTop="@dimen/mm50"
         android:layout_below="@+id/textview"
         android:id="@+id/art_main_fragment_head_lrv"
         android:layout_width="match_parent"

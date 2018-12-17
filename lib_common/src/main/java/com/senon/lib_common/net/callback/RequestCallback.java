@@ -28,10 +28,14 @@ public abstract class RequestCallback<T> implements Observer<T>,ProgressCancelLi
      * @param cancelable 该dialog如果开启 则可以设置是否能够返回键取消请求
      */
     public RequestCallback(Context context,ErrorListener errorListener,boolean cancelable) {
+        this(context,errorListener,true,cancelable);
+    }
+
+    public RequestCallback(Context context,ErrorListener errorListener,boolean showDialog,boolean cancelable) {
         this.mContext = context;
         this.errorListener = errorListener;
         this.cancelable = cancelable;
-        if(cancelable){
+        if(showDialog){
             this.mProgressDialogHandler = new ProgressDialogHandler(context, this, cancelable);
         }
     }
