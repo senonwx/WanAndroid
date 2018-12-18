@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.senon.module_home.activity.HomeArticleActivity">
+    >
 
     <include
         android:id="@+id/toolbar"
@@ -12,10 +12,18 @@
         android:layout_height="@dimen/mm90"
         android:layout_width="match_parent" />
 
-    <com.github.jdsjlzx.recyclerview.LRecyclerView
+    <WebView
         android:layout_below="@+id/toolbar"
-        android:id="@+id/lrv"
+        android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <ProgressBar
+        android:layout_below="@+id/toolbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mm4"
+        android:id="@+id/progressBar"
+        android:progressDrawable="@drawable/style_progress_bar"
+        android:layout_gravity="center_horizontal|bottom" />
 </RelativeLayout>

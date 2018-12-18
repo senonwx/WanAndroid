@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
 
     <RelativeLayout
@@ -38,6 +39,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/content_lay"
         android:layout_marginTop="@dimen/mm15"
         android:layout_below="@+id/top_layout"
         android:background="@drawable/home_shape_white_con30"
@@ -84,23 +86,39 @@
             android:layout_below="@+id/content_tv"
             android:id="@+id/time_tv"
             android:layout_marginTop="@dimen/mm7"
-            android:layout_marginRight="@dimen/mm20"
+            android:layout_marginRight="@dimen/mm30"
             android:textColor="@color/common_black_999"
             android:text="时间"
-            android:textSize="@dimen/mm26"
+            android:textSize="@dimen/mm24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:background="@drawable/home_shape_stro_red_con30"
             android:layout_alignParentRight="true"
             android:id="@+id/new_tv"
             android:layout_marginTop="@dimen/mm15"
             android:layout_marginRight="@dimen/mm30"
             android:textColor="@color/group_red_bg"
+            android:paddingTop="@dimen/mm2"
+            android:paddingBottom="@dimen/mm2"
+            android:paddingLeft="@dimen/mm10"
+            android:paddingRight="@dimen/mm10"
             android:text="新"
             android:textSize="@dimen/mm28"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:padding="@dimen/mm5"
+            android:layout_below="@+id/content_tv"
+            android:layout_alignParentRight="true"
+            android:id="@+id/collection_tv"
+            android:layout_marginRight="@dimen/mm25"
+            android:textColor="@color/common_black_999"
+            android:text="收藏"
+            android:textSize="@dimen/mm26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".SplashActivity"></activity>
         <activity android:name=".activity.HomeArticleActivity"></activity>
+        <activity android:name=".activity.HomeProjectActivity"></activity>
     </application>
 
 </manifest>

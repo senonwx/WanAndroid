@@ -1,4 +1,4 @@
-package com.senon.lib_common.common.login;
+package com.senon.lib_common.common.ui;
 
 import android.graphics.Paint;
 import android.view.View;
@@ -15,6 +15,8 @@ import com.senon.lib_common.R;
 import com.senon.lib_common.base.BaseActivity;
 import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.bean.Login;
+import com.senon.lib_common.common.contract.LoginContract;
+import com.senon.lib_common.common.presenter.LoginPresenter;
 import com.senon.lib_common.utils.ToastUtil;
 
 /**

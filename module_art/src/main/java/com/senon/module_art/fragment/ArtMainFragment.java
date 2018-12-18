@@ -17,11 +17,17 @@ import com.senon.lib_common.bean.HomeArticle;
 import com.senon.lib_common.bean.ProjectArticle;
 import com.senon.lib_common.bean.WXarticle;
 import com.senon.lib_common.bean.WXchapters;
+import com.senon.lib_common.utils.BaseEvent;
 import com.senon.lib_common.utils.LogUtils;
+import com.senon.lib_common.utils.ToastUtil;
 import com.senon.module_art.R;
 import com.senon.module_art.adapter.ArtMainAdapter;
 import com.senon.module_art.contract.ArtMainFragmentCon;
 import com.senon.module_art.presenter.ArtMainFragmentPre;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +82,8 @@ public class ArtMainFragment extends BaseLazyFragment<ArtMainFragmentCon.View, A
         super.onFragmentFirst();
         //第一次可见时，自动加载页面
         LogUtils.e("-----> 子fragment进行初始化操作");
+
+        EventBus.getDefault().register(this);
 
         //初始化adapter 设置适配器
         initAdapter();
@@ -207,6 +215,27 @@ public class ArtMainFragment extends BaseLazyFragment<ArtMainFragmentCon.View, A
         }
 
         refreshData();
+    }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
+    public void onEventReceived(BaseEvent event) {
+        if (event.getCode() == 101) {
+            int id = event.getId();
+            boolean isCollect = event.isCollect();
+            for (WXarticle.DatasBean bean : articles.getDatas()) {
+                if(bean.getId() == id){
+                    bean.setCollect(isCollect);
+
+                    mLRecyclerViewAdapter.notifyDataSetChanged();
+                    return;
+                }
+            }
+        }
     }
 }

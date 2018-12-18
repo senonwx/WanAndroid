@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.senon.module_home.activity.HomeArticleActivity">
+    tools:context="com.senon.module_home.activity.HomeProjectActivity">
 
     <include
         android:id="@+id/toolbar"
+        android:layout_below="@+id/textview"
         layout="@layout/layout_toolbar"
         android:layout_height="@dimen/mm90"
         android:layout_width="match_parent" />

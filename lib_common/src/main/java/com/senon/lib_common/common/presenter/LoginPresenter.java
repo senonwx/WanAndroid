@@ -1,8 +1,9 @@
-package com.senon.lib_common.common.login;
+package com.senon.lib_common.common.presenter;
 
 import android.content.Context;
 
 import com.senon.lib_common.bean.Login;
+import com.senon.lib_common.common.contract.LoginContract;
 import com.senon.lib_common.net.ServerUtils;
 import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.net.callback.RequestCallback;

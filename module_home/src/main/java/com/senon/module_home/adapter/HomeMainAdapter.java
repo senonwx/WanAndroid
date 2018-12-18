@@ -134,11 +134,24 @@ public class HomeMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((OneViewHolder) holder).time_tv.setText(data.getNiceDate());
             ((OneViewHolder) holder).new_tv.setVisibility(data.isFresh() ? View.VISIBLE : View.GONE);
             ((OneViewHolder) holder).top_layout.setVisibility(position == 0 ? View.VISIBLE : View.GONE);
+            ((OneViewHolder) holder).collection_tv.setVisibility(View.GONE);
+
             ((OneViewHolder) holder).more_tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     ARouter.getInstance()
                             .build(ConstantArouter.PATH_HOME_HOMEARTICLEACTIVITY)
+                            .navigation();
+                }
+            });
+            ((OneViewHolder) holder).content_lay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ARouter.getInstance().build(ConstantArouter.PATH_COMMON_WEBVIEWCTIVITY)
+                            .withInt("id",data.getId())
+                            .withString("url",data.getLink())
+                            .withString("title",data.getTitle())
+                            .withBoolean("isCollection",data.isCollect())
                             .navigation();
                 }
             });
@@ -161,10 +174,22 @@ public class HomeMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((TwoViewHolder) holder).more_tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    ARouter.getInstance()
+                            .build(ConstantArouter.PATH_HOME_HOMEPROJECTACTIVITY)
+                            .navigation();
                 }
             });
-
+            ((TwoViewHolder) holder).content_lay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ARouter.getInstance().build(ConstantArouter.PATH_COMMON_WEBVIEWCTIVITY)
+                            .withInt("id",data.getId())
+                            .withString("url",data.getLink())
+                            .withString("title",data.getTitle())
+                            .withBoolean("isCollection",data.isCollect())
+                            .navigation();
+                }
+            });
         }
     }
 
@@ -227,25 +252,27 @@ public class HomeMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     //最新博文
     class OneViewHolder extends RecyclerView.ViewHolder {
-        private RelativeLayout top_layout;
+        private RelativeLayout top_layout,content_lay;
         private TextView more_tv, type_tv, content_tv, user_tv, time_tv;
-        private TextView new_tv;
+        private TextView new_tv,collection_tv;
 
         public OneViewHolder(View itemView) {
             super(itemView);
             top_layout = itemView.findViewById(R.id.top_layout);
+            content_lay = itemView.findViewById(R.id.content_lay);
             more_tv = itemView.findViewById(R.id.more_tv);
             type_tv = itemView.findViewById(R.id.type_tv);
             content_tv = itemView.findViewById(R.id.content_tv);
             user_tv = itemView.findViewById(R.id.user_tv);
             time_tv = itemView.findViewById(R.id.time_tv);
             new_tv = itemView.findViewById(R.id.new_tv);
+            collection_tv = itemView.findViewById(R.id.collection_tv);
         }
     }
 
     //最新项目
     class TwoViewHolder extends RecyclerView.ViewHolder {
-        private RelativeLayout top_layout;
+        private RelativeLayout top_layout,content_lay;
         private ImageView content_igv;
         private TextView more_tv, title_tv, content_tv, user_tv, time_tv;
         private View home_placeholder_tv;
@@ -253,6 +280,7 @@ public class HomeMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public TwoViewHolder(View itemView) {
             super(itemView);
             top_layout = itemView.findViewById(R.id.top_layout);
+            content_lay = itemView.findViewById(R.id.content_lay);
             content_igv = itemView.findViewById(R.id.content_igv);
             more_tv = itemView.findViewById(R.id.more_tv);
             title_tv = itemView.findViewById(R.id.title_tv);

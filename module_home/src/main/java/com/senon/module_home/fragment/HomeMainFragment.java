@@ -15,11 +15,16 @@ import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.bean.Banner;
 import com.senon.lib_common.bean.HomeArticle;
 import com.senon.lib_common.bean.ProjectArticle;
+import com.senon.lib_common.utils.BaseEvent;
 import com.senon.lib_common.utils.LogUtils;
 import com.senon.module_home.R;
 import com.senon.module_home.adapter.HomeMainAdapter;
 import com.senon.module_home.contract.HomeMainFragmentCon;
 import com.senon.module_home.presenter.HomeMainFragmentPre;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +38,8 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
     private LRecyclerView lrv;
     private TextView home_homefragment_title_tv;
     private List<Banner> banners = new ArrayList<>();
-    private HomeArticle articles;
-    private ProjectArticle projects;
+    private HomeArticle article;
+    private ProjectArticle project;
     private final int articlePage = 0;//首页文章页码
     private final int projectPage = 1;//首页最新项目
     private HomeMainAdapter adapter;
@@ -74,6 +79,8 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         //第一次可见时，自动加载页面
         LogUtils.e("-----> 子fragment进行初始化操作");
 
+        //注册eventbus
+        EventBus.getDefault().register(this);
         //初始化adapter 设置适配器
         initAdapter();
         //请求网络数据
@@ -168,8 +175,8 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         }
         data.getData().setDatas(list);
 
-        articles = data.getData();
-        adapter.setArticleDatas(articles.getDatas());
+        article = data.getData();
+        adapter.setArticleDatas(article.getDatas());
         refreshData();
 
     }
@@ -186,8 +193,8 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         }
         data.getData().setDatas(list);
 
-        projects = data.getData();
-        adapter.setProjectDatas(projects.getDatas());
+        project = data.getData();
+        adapter.setProjectDatas(project.getDatas());
         refreshData();
     }
 
@@ -206,9 +213,35 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
+
     //完成数据加载
     private void refreshData(){
         lrv.refreshComplete(0);
         mLRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
+    public void onEventReceived(BaseEvent event) {
+        if (event.getCode() == 101) {
+            int id = event.getId();
+            boolean isCollect = event.isCollect();
+            for (HomeArticle.DatasBean bean : article.getDatas()) {
+                if(bean.getId() == id){
+                    bean.setCollect(isCollect);
+                    return;
+                }
+            }
+            for (ProjectArticle.DatasBean bean : project.getDatas()) {
+                if(bean.getId() == id){
+                    bean.setCollect(isCollect);
+                    return;
+                }
+            }
+        }
     }
 }

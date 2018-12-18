@@ -18,6 +18,10 @@
                     android:scheme="router" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.HomeArticleActivity"></activity>
+        <activity android:name=".activity.HomeProjectActivity"></activity>
+
     </application>
 
 </manifest>

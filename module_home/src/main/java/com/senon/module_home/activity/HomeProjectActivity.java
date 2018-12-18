@@ -2,10 +2,11 @@ package com.senon.module_home.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bumptech.glide.Glide;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
@@ -22,49 +23,45 @@ import com.senon.lib_common.bean.ProjectArticle;
 import com.senon.lib_common.utils.BaseEvent;
 import com.senon.lib_common.utils.StatusBarUtils;
 import com.senon.module_home.R;
-import com.senon.module_home.contract.HomeArticleActivityCon;
-import com.senon.module_home.presenter.HomeArticleActivityPre;
+import com.senon.module_home.contract.HomeProjectActivityCon;
+import com.senon.module_home.presenter.HomeProjectActivityPre;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import retrofit2.http.HEAD;
 
 /**
- * 最新博文列表页
+ * 最新项目列表页
  */
 
-@Route(path = ConstantArouter.PATH_HOME_HOMEARTICLEACTIVITY)
-public class HomeArticleActivity extends BaseActivity<HomeArticleActivityCon.View,HomeArticleActivityCon.Presenter> implements
-        HomeArticleActivityCon.View {
+@Route(path = ConstantArouter.PATH_HOME_HOMEPROJECTACTIVITY)
+public class HomeProjectActivity extends BaseActivity<HomeProjectActivityCon.View,HomeProjectActivityCon.Presenter> implements
+        HomeProjectActivityCon.View {
 
     private LRecyclerView lrv;
     private TextView toolbar_title_tv;
     private boolean isLoadMore = false;//是否加载更多
     private boolean isDownRefesh = false;//是否下拉刷新
-    private int currentPage = 0;//当前页数
-    private RecyclerAdapter<HomeArticle.DatasBean> adapter;
-    private HomeArticle articles;
-    private ArrayList<HomeArticle.DatasBean> mData = new ArrayList<>();//原始数据
-    private ArrayList<HomeArticle.DatasBean> tempData = new ArrayList<>();//间接数据
+    private int currentPage = 1;//当前页数
+    private RecyclerAdapter<ProjectArticle.DatasBean> adapter;
+    private ProjectArticle projects;
+    private ArrayList<ProjectArticle.DatasBean> mData = new ArrayList<>();//原始数据
+    private ArrayList<ProjectArticle.DatasBean> tempData = new ArrayList<>();//间接数据
     private LRecyclerViewAdapter mLRecyclerViewAdapter;//Lrecyclerview的包装适配器
 
     @Override
     public int getLayoutId() {
         StatusBarUtils.with(this).init();
-        return R.layout.home_activity_home_article;
+        return R.layout.home_activity_home_project;
     }
     @Override
-    public HomeArticleActivityCon.Presenter createPresenter() {
-        return new HomeArticleActivityPre(this);
+    public HomeProjectActivityCon.Presenter createPresenter() {
+        return new HomeProjectActivityPre(this);
     }
     @Override
-    public HomeArticleActivityCon.View createView() {
+    public HomeProjectActivityCon.View createView() {
         return this;
     }
 
@@ -75,7 +72,7 @@ public class HomeArticleActivity extends BaseActivity<HomeArticleActivityCon.Vie
 
         lrv = findViewById(R.id.lrv);
         toolbar_title_tv = ((TextView)findViewById(R.id.toolbar_title_tv));
-        toolbar_title_tv.setText("最新博文");
+        toolbar_title_tv.setText("最新项目");
         toolbar_title_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,15 +95,17 @@ public class HomeArticleActivity extends BaseActivity<HomeArticleActivityCon.Vie
         lrv.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader); //设置下拉刷新Progress的样式
         lrv.setArrowImageView(R.mipmap.news_renovate);  //设置下拉刷新箭头
         lrv.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        adapter = new RecyclerAdapter<HomeArticle.DatasBean>(this, mData,R.layout.home_adapter_homemain_fragment_article) {
+        adapter = new RecyclerAdapter<ProjectArticle.DatasBean>(this, mData,R.layout.home_adapter_homemain_fragment_project) {
             @Override
-            public void convert(final RecycleHolder helper, final HomeArticle.DatasBean data, final int position) {
-                helper.setText(R.id.type_tv,data.getSuperChapterName() + "/" + data.getChapterName());
-                helper.setText(R.id.content_tv,data.getTitle());
+            public void convert(final RecycleHolder helper, final ProjectArticle.DatasBean data, final int position) {
+                helper.setImageBitmap(R.id.content_igv,null);
+                Glide.with(HomeProjectActivity.this).load(data.getEnvelopePic()).into((ImageView) helper.findView(R.id.content_igv));
+                helper.setText(R.id.content_tv,data.getDesc());
+                helper.setText(R.id.title_tv,data.getTitle());
                 helper.setText(R.id.user_tv,data.getAuthor());
                 helper.setText(R.id.time_tv,data.getNiceDate());
-                helper.setVisible(R.id.new_tv,data.isFresh());
                 helper.setVisible(R.id.top_layout,false);
+                helper.setVisible(R.id.home_placeholder_tv,position == mData.size()-1);
 
                 helper.setOnClickListener(R.id.content_lay, new View.OnClickListener() {
                     @Override
@@ -147,7 +146,7 @@ public class HomeArticleActivity extends BaseActivity<HomeArticleActivityCon.Vie
 
     private void getFirstPageData() {
         isDownRefesh = true;
-        currentPage = 0;
+        currentPage = 1;
         getOrderList();
     }
 
@@ -166,8 +165,8 @@ public class HomeArticleActivity extends BaseActivity<HomeArticleActivityCon.Vie
     }
     
     @Override
-    public void getDataResult(BaseResponse<HomeArticle> data) {
-        articles = data.getData();
+    public void getDataResult(BaseResponse<ProjectArticle> data) {
+        projects = data.getData();
 
         tempData.clear();
         tempData.addAll(data.getData().getDatas());
@@ -189,7 +188,7 @@ public class HomeArticleActivity extends BaseActivity<HomeArticleActivityCon.Vie
         if (event.getCode() == 101) {
             int id = event.getId();
             boolean isCollect = event.isCollect();
-            for (HomeArticle.DatasBean bean : mData) {
+            for (ProjectArticle.DatasBean bean : mData) {
                 if(bean.getId() == id){
                     bean.setCollect(isCollect);
 
@@ -205,4 +204,5 @@ public class HomeArticleActivity extends BaseActivity<HomeArticleActivityCon.Vie
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
 }

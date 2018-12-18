@@ -17,7 +17,7 @@
 
     <RelativeLayout
         android:background="@drawable/art_shape_white_con30"
-        android:id="@+id/relativelay"
+        android:id="@+id/content_lay"
         android:layout_marginTop="@dimen/mm15"
         android:layout_below="@+id/author_tv"
         android:layout_marginLeft="@dimen/mm20"
@@ -63,17 +63,17 @@
             android:layout_below="@+id/content_tv"
             android:id="@+id/time_tv"
             android:layout_marginTop="@dimen/mm7"
-            android:layout_marginRight="@dimen/mm20"
+            android:layout_marginRight="@dimen/mm30"
             android:textColor="@color/common_black_999"
             android:text="时间"
-            android:textSize="@dimen/mm26"
+            android:textSize="@dimen/mm24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </RelativeLayout>
 
     <View
-        android:layout_below="@+id/relativelay"
+        android:layout_below="@+id/content_lay"
         android:id="@+id/art_placeholder_tv"
         android:layout_width="match_parent"
         android:layout_height="@dimen/mm50"/>

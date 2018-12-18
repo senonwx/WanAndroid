@@ -64,4 +64,15 @@ public interface BaseApi {
     @GET("wxarticle/list/{id}/{page}/json")
     Observable<BaseResponse<WXarticle>> getWXarticleList(@Path("id") int id, @Path("page") int page);
 
+    //收藏站内文章
+    @POST("lg/collect/{id}/json")
+    Observable<BaseResponse> getCollect(@Path("id") int id);
+    //取消收藏-->文章列表
+    @POST("lg/uncollect_originId/{originId}/json")
+    Observable<BaseResponse> getUncollectOriginId(@Path("originId") int id);
+    //取消收藏-->我的收藏页面
+    @POST("lg/uncollect/{id}/json")
+    Observable<BaseResponse> getUncollect(@Path("id") int id);
+
+
 }

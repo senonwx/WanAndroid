@@ -45,7 +45,7 @@ public class ToastUtil {
         if (context instanceof Activity || context instanceof FragmentActivity)
             context = context.getApplicationContext();
         if (mToast != null && isSingleton) {
-            mToast.setText(msg);
+            toastTv.setText(msg);
         } else {
             synchronized (lock) {
 //                mToast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);

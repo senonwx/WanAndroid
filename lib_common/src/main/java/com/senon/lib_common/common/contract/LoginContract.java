@@ -1,4 +1,4 @@
-package com.senon.lib_common.common.login;
+package com.senon.lib_common.common.contract;
 
 
 import com.senon.lib_common.base.BasePresenter;

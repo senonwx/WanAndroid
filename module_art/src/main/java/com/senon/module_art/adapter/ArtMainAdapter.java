@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
+import com.senon.lib_common.ConstantArouter;
 import com.senon.lib_common.adapter.RecycleHolder;
 import com.senon.lib_common.adapter.RecyclerAdapter;
 import com.senon.lib_common.bean.Banner;
@@ -131,6 +134,17 @@ public class ArtMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((OneViewHolder) holder).author_tv.setVisibility(position == 0 ? View.VISIBLE : View.GONE);
             ((OneViewHolder) holder).art_placeholder_tv.setVisibility(position == articles.size()-1 ? View.VISIBLE : View.GONE);
             ((OneViewHolder) holder).author_tv.setText(data.getAuthor());
+            ((OneViewHolder) holder).content_lay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ARouter.getInstance().build(ConstantArouter.PATH_COMMON_WEBVIEWCTIVITY)
+                            .withInt("id",data.getId())
+                            .withString("url",data.getLink())
+                            .withString("title",data.getTitle())
+                            .withBoolean("isCollection",data.isCollect())
+                            .navigation();
+                }
+            });
 
         }
     }
@@ -171,12 +185,14 @@ public class ArtMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     //最新博文
     class OneViewHolder extends RecyclerView.ViewHolder {
+        private RelativeLayout content_lay;
         private TextView author_tv;
         private TextView type_tv, content_tv, user_tv, time_tv;
         private View art_placeholder_tv;
 
         public OneViewHolder(View itemView) {
             super(itemView);
+            content_lay = itemView.findViewById(R.id.content_lay);
             author_tv = itemView.findViewById(R.id.author_tv);
             type_tv = itemView.findViewById(R.id.type_tv);
             content_tv = itemView.findViewById(R.id.content_tv);

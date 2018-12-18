@@ -39,7 +39,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/relativelay"
+        android:id="@+id/content_lay"
         android:background="@drawable/home_shape_white_con30"
         android:layout_marginTop="@dimen/mm15"
         android:layout_marginLeft="@dimen/mm20"
@@ -51,7 +51,7 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardview"
-            android:layout_width="@dimen/mm250"
+            android:layout_width="@dimen/mm200"
             android:layout_height="@dimen/mm220"
             app:cardCornerRadius="@dimen/mm8"
             app:cardElevation="0px">
@@ -107,7 +107,7 @@
             android:layout_marginBottom="@dimen/mm5"
             android:id="@+id/time_tv"
             android:layout_marginTop="@dimen/mm10"
-            android:layout_marginRight="@dimen/mm20"
+            android:layout_marginRight="@dimen/mm30"
             android:textColor="@color/common_black_999"
             android:text="时间"
             android:textSize="@dimen/mm26"
@@ -117,7 +117,7 @@
     </RelativeLayout>
 
     <View
-        android:layout_below="@+id/relativelay"
+        android:layout_below="@+id/content_lay"
         android:id="@+id/home_placeholder_tv"
         android:layout_width="match_parent"
         android:layout_height="@dimen/mm50"/>
