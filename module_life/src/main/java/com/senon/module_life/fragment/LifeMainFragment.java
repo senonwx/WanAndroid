@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.recyclerview.ProgressStyle;
+import com.senon.lib_common.ConstantArouter;
 import com.senon.lib_common.adapter.RecycleHolder;
 import com.senon.lib_common.adapter.RecyclerAdapter;
 import com.senon.lib_common.base.BaseLazyFragment;
@@ -172,7 +174,10 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
                 flowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener(){
                     @Override
                     public boolean onTagClick(View view, int position, FlowLayout parent){
-                        ToastUtil.initToast("点击了 "+item.getChildren().get(position).getName());
+                        ARouter.getInstance().build(ConstantArouter.PATH_LIFE_KNOWLEDGESYSTEMACTIVITY)
+                                .withString("title",item.getChildren().get(position).getName())
+                                .withInt("cid",item.getChildren().get(position).getId())
+                                .navigation();
                         return true;
                     }
                 });

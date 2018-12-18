@@ -1,5 +1,7 @@
 package com.senon.xfhmoudel;
 
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -22,6 +24,7 @@ import java.util.List;
 public class FragmentHomeActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
+    private TabLayout tabs;
     private FragmentManager fragmentManager;//声明fragment管理
     private List<Fragment> fragmentList = new ArrayList<>();
 
@@ -40,8 +43,12 @@ public class FragmentHomeActivity extends AppCompatActivity {
         fragmentList.add(new TalentMainFragment());
 
         fragmentManager = getSupportFragmentManager();
-        viewPager.setAdapter(new MyFragmentPagerAdapter(fragmentManager));
+        FragmentPagerAdapter pagerAdapter = new MyFragmentPagerAdapter(fragmentManager);
+        viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(fragmentList.size());
+
+        tabs.setupWithViewPager(viewPager);//将TabLayout和ViewPager关联起来。
+        tabs.setTabsFromPagerAdapter(pagerAdapter);//给Tabs设置适配器
     }
 
     //FragmentPagerAdapter
@@ -56,6 +63,12 @@ public class FragmentHomeActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             return fragmentList.size();
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return super.getPageTitle(position);
         }
     }
 }

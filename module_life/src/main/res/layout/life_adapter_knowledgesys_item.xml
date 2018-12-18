@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/top_layout"
+        android:layout_marginTop="@dimen/mm40"
+        android:paddingLeft="@dimen/mm20"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mm80">
+        <TextView
+            android:background="@drawable/shape_gradient"
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/mm5"
+            android:layout_height="@dimen/mm40" />
+        <TextView
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/mm20"
+            android:textColor="@color/color_232323"
+            android:text="最新博文"
+            android:textSize="@dimen/mm40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/more_tv"
+            android:layout_marginRight="@dimen/mm20"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/mm20"
+            android:textColor="@color/common_black_999"
+            android:text="查看全部"
+            android:textSize="@dimen/mm28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/content_lay"
+        android:layout_marginTop="@dimen/mm15"
+        android:layout_below="@+id/top_layout"
+        android:background="@drawable/life_shape_white_con30"
+        android:layout_marginLeft="@dimen/mm20"
+        android:layout_marginRight="@dimen/mm20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/content_tv"
+            android:singleLine="true"
+            android:layout_marginTop="@dimen/mm15"
+            android:layout_marginLeft="@dimen/mm20"
+            android:layout_marginRight="@dimen/mm20"
+            android:textColor="@color/color_232323"
+            android:text="标题"
+            android:textSize="@dimen/mm32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_below="@+id/content_tv"
+            android:id="@+id/user_tv"
+            android:layout_marginTop="@dimen/mm7"
+            android:layout_marginLeft="@dimen/mm20"
+            android:layout_marginRight="@dimen/mm30"
+            android:layout_marginBottom="@dimen/mm15"
+            android:textColor="@color/common_black_999"
+            android:text="姓名"
+            android:textSize="@dimen/mm24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_toRightOf="@+id/user_tv"
+            android:layout_below="@+id/content_tv"
+            android:id="@+id/time_tv"
+            android:layout_marginTop="@dimen/mm7"
+            android:layout_marginRight="@dimen/mm30"
+            android:textColor="@color/common_black_999"
+            android:text="时间"
+            android:textSize="@dimen/mm24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:padding="@dimen/mm5"
+            android:layout_below="@+id/content_tv"
+            android:layout_alignParentRight="true"
+            android:id="@+id/collection_tv"
+            android:layout_marginRight="@dimen/mm25"
+            android:textColor="@color/common_black_999"
+            android:text="收藏"
+            android:textSize="@dimen/mm26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</RelativeLayout>

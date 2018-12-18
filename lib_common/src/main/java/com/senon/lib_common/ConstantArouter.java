@@ -17,14 +17,20 @@ public class ConstantArouter {
     /**
      * home
      */
-    public static final String PATH_HOME_MAINACTIVITY = "/app/MainActivity";
-    public static final String PATH_HOME_HOMEARTICLEACTIVITY = "/app/HomeArticleActivity";
-    public static final String PATH_HOME_HOMEPROJECTACTIVITY = "/app/HomeProjectActivity";
+    public static final String PATH_HOME_MAINACTIVITY = "/home/MainActivity";
+    public static final String PATH_HOME_HOMEARTICLEACTIVITY = "/home/HomeArticleActivity";
+    public static final String PATH_HOME_HOMEPROJECTACTIVITY = "/home/HomeProjectActivity";
+
+    /**
+     * life
+     */
+    public static final String PATH_LIFE_KNOWLEDGESYSTEMACTIVITY = "/life/KnowledgeSystemActivity";
 
     /**
      * common
      */
     public static final String PATH_COMMON_REGISTERACTIVITY = "/lib_common/CommonRegisterActivity";
     public static final String PATH_COMMON_WEBVIEWCTIVITY = "/lib_common/CommonWebviewActivity";
+
 
 }

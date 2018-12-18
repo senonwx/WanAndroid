@@ -3,12 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
+        android:layout_above="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.TabLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mm100"
+        android:background="#fff"
+        app:tabIndicatorColor="#F00"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="#F00"
+        app:tabTextColor="#1d1c1d" />
+
 
 </RelativeLayout>

@@ -2,16 +2,15 @@ package com.senon.lib_common.api;
 
 import com.senon.lib_common.bean.Banner;
 import com.senon.lib_common.bean.HomeArticle;
+import com.senon.lib_common.bean.KnowledgeSysArticle;
 import com.senon.lib_common.bean.KnowledgeSystem;
 import com.senon.lib_common.bean.Login;
 import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.bean.ProjectArticle;
 import com.senon.lib_common.bean.WXarticle;
 import com.senon.lib_common.bean.WXchapters;
-
 import java.util.List;
 import java.util.Map;
-
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
@@ -56,6 +55,9 @@ public interface BaseApi {
     //体系数据
     @GET("tree/json")
     Observable<BaseResponse<List<KnowledgeSystem>>> getKnowledgeList();
+    //知识体系下的文章
+    @GET("article/list/{page}/json")
+    Observable<BaseResponse<KnowledgeSysArticle>> getKnowledgeArticle(@Path("page") int page, @Query("cid") int cid);
 
     //获取公众号列表
     @GET("wxarticle/chapters/json")

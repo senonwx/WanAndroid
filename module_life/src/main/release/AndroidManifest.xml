@@ -17,6 +17,9 @@
                     android:scheme="router" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.KnowledgeSystemActivity"></activity>
+
     </application>
 
 </manifest>
