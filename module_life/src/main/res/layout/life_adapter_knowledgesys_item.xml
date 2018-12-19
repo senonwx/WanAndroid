@@ -50,7 +50,7 @@
         <TextView
             android:id="@+id/content_tv"
             android:singleLine="true"
-            android:layout_marginTop="@dimen/mm15"
+            android:layout_marginTop="@dimen/mm20"
             android:layout_marginLeft="@dimen/mm20"
             android:layout_marginRight="@dimen/mm20"
             android:textColor="@color/color_232323"
@@ -61,7 +61,7 @@
         <TextView
             android:layout_below="@+id/content_tv"
             android:id="@+id/user_tv"
-            android:layout_marginTop="@dimen/mm7"
+            android:layout_marginTop="@dimen/mm10"
             android:layout_marginLeft="@dimen/mm20"
             android:layout_marginRight="@dimen/mm30"
             android:layout_marginBottom="@dimen/mm15"
@@ -74,7 +74,7 @@
             android:layout_toRightOf="@+id/user_tv"
             android:layout_below="@+id/content_tv"
             android:id="@+id/time_tv"
-            android:layout_marginTop="@dimen/mm7"
+            android:layout_marginTop="@dimen/mm10"
             android:layout_marginRight="@dimen/mm30"
             android:textColor="@color/common_black_999"
             android:text="时间"

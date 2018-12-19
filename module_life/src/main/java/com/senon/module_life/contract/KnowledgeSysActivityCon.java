@@ -12,12 +12,16 @@ public interface KnowledgeSysActivityCon {
 
         void getDataResult(BaseResponse<KnowledgeSysArticle> data);
 
+        void getCollectResult(int id,boolean isCollect);
+
     }
 
     abstract class Presenter extends BasePresenter<View> {
 
         public abstract void getData(int cid,int page,boolean isDialog, boolean cancelable);
 
+        public abstract void getCollect(int id ,boolean isDialog, boolean cancelable);
 
+        public abstract void getUnollect(int id, boolean isDialog, boolean cancelable);
     }
 }

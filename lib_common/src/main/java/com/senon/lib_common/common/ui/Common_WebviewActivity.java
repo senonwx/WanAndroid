@@ -19,6 +19,7 @@ import com.senon.lib_common.base.BaseActivity;
 import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.common.contract.WebviewContract;
 import com.senon.lib_common.common.presenter.WebviewPresenter;
+import com.senon.lib_common.utils.BaseEvent;
 import com.senon.lib_common.utils.StatusBarUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -157,8 +158,12 @@ public class Common_WebviewActivity extends BaseActivity<WebviewContract.View, W
     }
 
     @Override
-    public void getDataResult(BaseResponse data) {
-        
+    public void getCollectResult(int id,boolean isCollect) {
+        BaseEvent event = new BaseEvent();
+        event.setCode(101);
+        event.setId(id);
+        event.setCollect(isCollect);
+        EventBus.getDefault().post(event);
     }
 
 }

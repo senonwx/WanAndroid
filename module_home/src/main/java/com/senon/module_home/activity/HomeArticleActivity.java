@@ -1,6 +1,7 @@
 package com.senon.module_home.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -102,9 +103,10 @@ public class HomeArticleActivity extends BaseActivity<HomeArticleActivityCon.Vie
             @Override
             public void convert(final RecycleHolder helper, final HomeArticle.DatasBean data, final int position) {
                 helper.setText(R.id.type_tv,data.getSuperChapterName() + "/" + data.getChapterName());
-                helper.setText(R.id.content_tv,data.getTitle());
+                helper.setText(R.id.content_tv, Html.fromHtml(data.getTitle()).toString());
                 helper.setText(R.id.user_tv,data.getAuthor());
                 helper.setText(R.id.time_tv,data.getNiceDate());
+                helper.setText(R.id.collection_tv,data.isCollect() ? "已收藏":"收藏");
                 helper.setVisible(R.id.new_tv,data.isFresh());
                 helper.setVisible(R.id.top_layout,false);
 
@@ -117,6 +119,20 @@ public class HomeArticleActivity extends BaseActivity<HomeArticleActivityCon.Vie
                                 .withString("title",data.getTitle())
                                 .withBoolean("isCollection",data.isCollect())
                                 .navigation();
+                    }
+                });
+                helper.setOnClickListener(R.id.collection_tv, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(data.isCollect()){//已收藏
+                            helper.setText(R.id.collection_tv,"收藏");
+                            data.setCollect(!data.isCollect());
+                            getPresenter().getUnollect(data.getId(),false,true);
+                        }else{
+                            helper.setText(R.id.collection_tv,"已收藏");
+                            data.setCollect(!data.isCollect());
+                            getPresenter().getCollect(data.getId(),false,true);
+                        }
                     }
                 });
             }
@@ -182,6 +198,15 @@ public class HomeArticleActivity extends BaseActivity<HomeArticleActivityCon.Vie
             mData.addAll(tempData);
             refreshData();
         }
+    }
+
+    @Override
+    public void getCollectResult(int id, boolean isCollect) {
+        BaseEvent event = new BaseEvent();
+        event.setCode(101);
+        event.setId(id);
+        event.setCollect(isCollect);
+        EventBus.getDefault().post(event);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行

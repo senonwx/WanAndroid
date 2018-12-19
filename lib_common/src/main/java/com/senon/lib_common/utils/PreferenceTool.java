@@ -17,6 +17,10 @@ public class PreferenceTool {
     private static SharedPreferences pref;
 
 
+    public static void init(Context context) {
+        pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        editor = pref.edit();
+    }
 
     public static void clear() {
         if (editor == null) return;
@@ -65,10 +69,7 @@ public class PreferenceTool {
         return pref != null ? pref.getAll() : null;
     }
 
-    public static void init(Context context) {
-        pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        editor = pref.edit();
-    }
+
 
     public static void putFloat(String key, float value) {
         if (editor == null) return;

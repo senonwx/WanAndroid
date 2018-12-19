@@ -1,6 +1,7 @@
 package com.senon.module_home.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -100,8 +101,8 @@ public class HomeProjectActivity extends BaseActivity<HomeProjectActivityCon.Vie
             public void convert(final RecycleHolder helper, final ProjectArticle.DatasBean data, final int position) {
                 helper.setImageBitmap(R.id.content_igv,null);
                 Glide.with(HomeProjectActivity.this).load(data.getEnvelopePic()).into((ImageView) helper.findView(R.id.content_igv));
-                helper.setText(R.id.content_tv,data.getDesc());
-                helper.setText(R.id.title_tv,data.getTitle());
+                helper.setText(R.id.content_tv,Html.fromHtml(data.getTitle()).toString());
+                helper.setText(R.id.title_tv, Html.fromHtml(data.getTitle()).toString());
                 helper.setText(R.id.user_tv,data.getAuthor());
                 helper.setText(R.id.time_tv,data.getNiceDate());
                 helper.setVisible(R.id.top_layout,false);

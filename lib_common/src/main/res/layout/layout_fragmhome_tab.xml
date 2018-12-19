@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:layout_marginTop="@dimen/mm8"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tab_item_igv"
+            android:layout_width="@dimen/mm47"
+            android:layout_height="@dimen/mm47"
+            android:src="@mipmap/ic_tabbar_discoverhl" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tab_item_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tab_item_igv"
+            android:text="标题"
+            android:textSize="@dimen/mm22" />
+    </RelativeLayout>
+
+</RelativeLayout>

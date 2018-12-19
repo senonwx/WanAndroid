@@ -46,4 +46,49 @@ public class KnowledgeSysActivityPre extends KnowledgeSysActivityCon.Presenter{
                 });
     }
 
+    @Override
+    public void getCollect(final int id, boolean isDialog, boolean cancelable) {
+        ServerUtils.getCommonApi().getCollect(id)
+                .retryWhen(new RetryWithDelay(3,2))
+                .compose(RxUtils.<BaseResponse>bindToLifecycle(getView()))
+                .compose(RxUtils.<BaseResponse>getSchedulerTransformer())
+                .subscribe(new RequestCallback<BaseResponse>(context, RxErrorHandler.getInstance(),isDialog,cancelable) {
+                    @Override
+                    public void onNext(BaseResponse baseResponse) {
+                        super.onNext(baseResponse);
+                        if(baseResponse.getCode() == 0){
+                            getView().getCollectResult(id,true);
+                        }else{
+                            ToastUtil.initToast(baseResponse.getMsg());
+                        }
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+                });
+    }
+
+    @Override
+    public void getUnollect(final int id, boolean isDialog, boolean cancelable) {
+        ServerUtils.getCommonApi().getUncollectOriginId(id)
+                .retryWhen(new RetryWithDelay(3,2))
+                .compose(RxUtils.<BaseResponse>bindToLifecycle(getView()))
+                .compose(RxUtils.<BaseResponse>getSchedulerTransformer())
+                .subscribe(new RequestCallback<BaseResponse>(context, RxErrorHandler.getInstance(),isDialog,cancelable) {
+                    @Override
+                    public void onNext(BaseResponse baseResponse) {
+                        super.onNext(baseResponse);
+                        if(baseResponse.getCode() == 0){
+                            getView().getCollectResult(id,false);
+                        }else{
+                            ToastUtil.initToast(baseResponse.getMsg());
+                        }
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+                });
+    }
 }

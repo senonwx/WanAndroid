@@ -16,7 +16,7 @@ public interface WebviewContract {
     //方法命名以 请求方法+Result  命名
     interface View extends BaseViewImp {
 
-        void getDataResult(BaseResponse data);
+        void getCollectResult(int id,boolean isCollect);
 
 
     }
@@ -24,7 +24,7 @@ public interface WebviewContract {
     //方法命名以 get+方法  命名
     abstract class Presenter extends BasePresenter<View> {
 
-        public abstract void getCollect(int id, boolean isDialog, boolean cancelable);
+        public abstract void getCollect(int id ,boolean isDialog, boolean cancelable);
 
         public abstract void getUnollect(int id, boolean isDialog, boolean cancelable);
 

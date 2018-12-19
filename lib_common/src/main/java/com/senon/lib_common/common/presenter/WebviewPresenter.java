@@ -23,17 +23,17 @@ public class WebviewPresenter extends WebviewContract.Presenter {
     }
 
     @Override
-    public void getCollect(int id, boolean isDialog, boolean cancelable) {
+    public void getCollect(final int id, boolean isDialog, boolean cancelable) {
         ServerUtils.getCommonApi().getCollect(id)
                 .retryWhen(new RetryWithDelay(3,2))
                 .compose(RxUtils.<BaseResponse>bindToLifecycle(getView()))
                 .compose(RxUtils.<BaseResponse>getSchedulerTransformer())
-                .subscribe(new RequestCallback<BaseResponse>(context, RxErrorHandler.getInstance(),true) {
+                .subscribe(new RequestCallback<BaseResponse>(context, RxErrorHandler.getInstance(),isDialog,cancelable) {
                     @Override
                     public void onNext(BaseResponse baseResponse) {
                         super.onNext(baseResponse);
                         if(baseResponse.getCode() == 0){
-                            getView().getDataResult(baseResponse);
+                            getView().getCollectResult(id,true);
                         }else{
                             ToastUtil.initToast(baseResponse.getMsg());
                         }
@@ -46,17 +46,17 @@ public class WebviewPresenter extends WebviewContract.Presenter {
     }
 
     @Override
-    public void getUnollect(int id, boolean isDialog, boolean cancelable) {
+    public void getUnollect(final int id, boolean isDialog, boolean cancelable) {
         ServerUtils.getCommonApi().getUncollectOriginId(id)
                 .retryWhen(new RetryWithDelay(3,2))
                 .compose(RxUtils.<BaseResponse>bindToLifecycle(getView()))
                 .compose(RxUtils.<BaseResponse>getSchedulerTransformer())
-                .subscribe(new RequestCallback<BaseResponse>(context, RxErrorHandler.getInstance(),true) {
+                .subscribe(new RequestCallback<BaseResponse>(context, RxErrorHandler.getInstance(),isDialog,cancelable) {
                     @Override
                     public void onNext(BaseResponse baseResponse) {
                         super.onNext(baseResponse);
                         if(baseResponse.getCode() == 0){
-                            getView().getDataResult(baseResponse);
+                            getView().getCollectResult(id,false);
                         }else{
                             ToastUtil.initToast(baseResponse.getMsg());
                         }

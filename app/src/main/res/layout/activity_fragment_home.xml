@@ -7,20 +7,26 @@
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
-        android:layout_above="@+id/tabs"
+        android:layout_above="@+id/line_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <View
+        android:background="@color/color_232323"
+        android:layout_above="@+id/tabs"
+        android:id="@+id/line_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mm1"/>
     <android.support.design.widget.TabLayout
         android:layout_alignParentBottom="true"
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/mm100"
+        android:layout_height="@dimen/mm90"
         android:background="#fff"
-        app:tabIndicatorColor="#F00"
         app:tabMode="scrollable"
-        app:tabSelectedTextColor="#F00"
-        app:tabTextColor="#1d1c1d" />
-
+        app:tabIndicatorColor="#00000000"
+        app:tabMaxWidth="@dimen/mm187"
+        app:tabMinWidth="@dimen/mm187"
+        />
 
 </RelativeLayout>

@@ -103,6 +103,7 @@ public class KnowledgeSystemActivity extends BaseActivity<KnowledgeSysActivityCo
                 helper.setText(R.id.content_tv, Html.fromHtml(data.getTitle()).toString());
                 helper.setText(R.id.user_tv,data.getAuthor());
                 helper.setText(R.id.time_tv,data.getNiceDate());
+                helper.setText(R.id.collection_tv,data.isCollect() ? "已收藏":"收藏");
                 helper.setVisible(R.id.top_layout,false);
 
                 helper.setOnClickListener(R.id.content_lay, new View.OnClickListener() {
@@ -114,6 +115,20 @@ public class KnowledgeSystemActivity extends BaseActivity<KnowledgeSysActivityCo
                                 .withString("title",data.getTitle())
                                 .withBoolean("isCollection",data.isCollect())
                                 .navigation();
+                    }
+                });
+                helper.setOnClickListener(R.id.collection_tv, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(data.isCollect()){//已收藏
+                            helper.setText(R.id.collection_tv,"收藏");
+                            data.setCollect(!data.isCollect());
+                            getPresenter().getUnollect(data.getId(),false,true);
+                        }else{
+                            helper.setText(R.id.collection_tv,"已收藏");
+                            data.setCollect(!data.isCollect());
+                            getPresenter().getCollect(data.getId(),false,true);
+                        }
                     }
                 });
             }
@@ -195,6 +210,15 @@ public class KnowledgeSystemActivity extends BaseActivity<KnowledgeSysActivityCo
                 }
             }
         }
+    }
+
+    @Override
+    public void getCollectResult(int id, boolean isCollect) {
+        BaseEvent event = new BaseEvent();
+        event.setCode(101);
+        event.setId(id);
+        event.setCollect(isCollect);
+        EventBus.getDefault().post(event);
     }
 
     @Override

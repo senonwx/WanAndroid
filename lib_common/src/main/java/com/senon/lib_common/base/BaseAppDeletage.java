@@ -1,6 +1,7 @@
 package com.senon.lib_common.base;
 
 import android.app.Application;
+import com.senon.lib_common.net.cookies.PersistentCookieStore;
 import com.senon.lib_common.utils.ConstantUtils;
 import com.senon.lib_common.utils.LogUtils;
 import com.senon.lib_common.utils.PreferenceTool;
@@ -21,6 +22,7 @@ public class BaseAppDeletage {
         ConstantUtils.init(mApplication);    //全局Utils
         initLog();                          //Log日志
         PreferenceTool.init(mApplication);   //Preference参数
+        PersistentCookieStore.init(mApplication);   //Cookies持久化Preference参数
         ToastUtil.init(mApplication);       //吐司初始化
         initAutoSizeUnits();                 //配置全局 布局适配单位mm
     }

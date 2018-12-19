@@ -2,6 +2,7 @@ package com.senon.lib_common.net;
 
 import com.senon.lib_common.AppConfig;
 import com.senon.lib_common.api.BaseApi;
+import com.senon.lib_common.net.cookies.CookiesManager;
 import com.senon.lib_common.utils.ConstantUtils;
 
 import java.security.cert.CertificateException;
@@ -60,6 +61,7 @@ public class ServerUtils {
 //                    .addInterceptor(RequestInterceptor.getInstance())//网络请求 统一拦截
                     .addInterceptor(getLogInterceptor())
                     .sslSocketFactory(getSSLSocketFactory())
+                    .cookieJar(new CookiesManager())
                     .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 
 
