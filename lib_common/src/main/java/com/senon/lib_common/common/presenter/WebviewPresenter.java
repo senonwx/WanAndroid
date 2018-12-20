@@ -35,6 +35,8 @@ public class WebviewPresenter extends WebviewContract.Presenter {
                         if(baseResponse.getCode() == 0){
                             getView().getCollectResult(id,true);
                         }else{
+                            getView().getCollFailResult(id);
+
                             ToastUtil.initToast(baseResponse.getMsg());
                         }
                     }
@@ -58,6 +60,8 @@ public class WebviewPresenter extends WebviewContract.Presenter {
                         if(baseResponse.getCode() == 0){
                             getView().getCollectResult(id,false);
                         }else{
+                            getView().getCollFailResult(id);
+
                             ToastUtil.initToast(baseResponse.getMsg());
                         }
                     }

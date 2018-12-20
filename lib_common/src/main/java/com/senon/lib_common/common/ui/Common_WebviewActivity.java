@@ -12,8 +12,10 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.senon.lib_common.ComUtil;
 import com.senon.lib_common.ConstantArouter;
+import com.senon.lib_common.ConstantLoginArouter;
 import com.senon.lib_common.R;
 import com.senon.lib_common.base.BaseActivity;
 import com.senon.lib_common.base.BaseResponse;
@@ -79,7 +81,7 @@ public class Common_WebviewActivity extends BaseActivity<WebviewContract.View, W
         collection_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isCollection = !isCollection;//该表状态
+                isCollection = !isCollection;//该为相反状态
                 collection_tv.setText(isCollection ? "已收藏":"收藏");
                 if(isCollection){
                     getPresenter().getCollect(id,false,true);
@@ -166,4 +168,13 @@ public class Common_WebviewActivity extends BaseActivity<WebviewContract.View, W
         EventBus.getDefault().post(event);
     }
 
+    @Override
+    public void getCollFailResult(int id) {
+        if(this.id == id){
+            isCollection = !isCollection;
+            collection_tv.setText(isCollection ? "已收藏":"收藏");
+        }
+        ARouter.getInstance().build(ConstantLoginArouter.PATH_COMMON_LOGINACTIVITY)
+                .navigation();
+    }
 }

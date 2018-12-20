@@ -26,6 +26,8 @@ public class PersistentCookieStore {
 
     private static final String LOG_TAG = "PersistentCookieStore";
     private static final String COOKIE_PREFS = "Cookies_Prefs";
+    private static final String NAME = "user_name";
+    private static final String PASSWORD = "user_password";
     private final Map<String, ConcurrentHashMap<String, Cookie>> cookies;
     private final SharedPreferences cookiePrefs;
     private static PersistentCookieStore cookieStore;
@@ -80,7 +82,7 @@ public class PersistentCookieStore {
             }
         }
 
-        //讲cookies持久化到本地
+        //将cookies持久化到本地
         SharedPreferences.Editor prefsWriter = cookiePrefs.edit();
         prefsWriter.putString(url.host(), TextUtils.join(",", cookies.get(url.host()).keySet()));//将key值存储用以查询
         prefsWriter.putString(name, encodeCookie(new OkHttpCookies(cookie)));
@@ -100,6 +102,29 @@ public class PersistentCookieStore {
         prefsWriter.clear();
         prefsWriter.apply();
         cookies.clear();
+    }
+
+    public void saveUserInfo(String username,String password){
+        //将userinfo持久化到本地
+        SharedPreferences.Editor prefsWriter = cookiePrefs.edit();
+        prefsWriter.putString(NAME,username);
+        prefsWriter.putString(PASSWORD,password);
+        prefsWriter.apply();
+    }
+
+    public boolean isLogin(){
+        if(cookiePrefs.getString(NAME,null) != null &&
+                cookiePrefs.getString(PASSWORD,null) != null){
+            return true;
+        }
+        return false;
+    }
+    public String getUsername(){
+        String name = cookiePrefs.getString(NAME,null);
+        if(cookiePrefs.getString(NAME,null) != null){
+            return name;
+        }
+        return "未知用户";
     }
 
     boolean remove(HttpUrl url, Cookie cookie) {

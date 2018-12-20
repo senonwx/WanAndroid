@@ -60,6 +60,7 @@ public class HomeArticleActivityPre extends HomeArticleActivityCon.Presenter{
                         if(baseResponse.getCode() == 0){
                             getView().getCollectResult(id,true);
                         }else{
+                            getView().getCollFailResult(id);
                             ToastUtil.initToast(baseResponse.getMsg());
                         }
                     }
@@ -83,6 +84,8 @@ public class HomeArticleActivityPre extends HomeArticleActivityCon.Presenter{
                         if(baseResponse.getCode() == 0){
                             getView().getCollectResult(id,false);
                         }else{
+                            getView().getCollFailResult(id);
+
                             ToastUtil.initToast(baseResponse.getMsg());
                         }
                     }

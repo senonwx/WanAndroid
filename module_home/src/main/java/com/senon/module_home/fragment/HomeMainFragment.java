@@ -227,7 +227,10 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
 
     @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
     public void onEventReceived(BaseEvent event) {
-        if (event.getCode() == 101) {
+        int code = event.getCode();
+        if(code == 1){//退出登录  刷新列表
+            getFirstData();
+        }else if (code == 101) {
             int id = event.getId();
             boolean isCollect = event.isCollect();
             for (HomeArticle.DatasBean bean : article.getDatas()) {

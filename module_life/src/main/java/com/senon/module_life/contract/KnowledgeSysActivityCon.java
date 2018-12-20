@@ -14,6 +14,8 @@ public interface KnowledgeSysActivityCon {
 
         void getCollectResult(int id,boolean isCollect);
 
+        void getCollFailResult(int id);
+
     }
 
     abstract class Presenter extends BasePresenter<View> {

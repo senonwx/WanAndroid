@@ -82,6 +82,8 @@ project.ext {
 
             "bannerview"                  : "com.github.pinguo-zhouwei:MZBannerView:v2.0.2",
             "flowlayout"                  : "com.hyman:flowlayout-lib:1.1.2",
+            "circleimageview"             : "de.hdodenhof:circleimageview:2.2.0",
+
 
     ]
 }

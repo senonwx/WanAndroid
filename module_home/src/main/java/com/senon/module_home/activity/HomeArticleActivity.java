@@ -14,6 +14,7 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.recyclerview.ProgressStyle;
 import com.senon.lib_common.ComUtil;
 import com.senon.lib_common.ConstantArouter;
+import com.senon.lib_common.ConstantLoginArouter;
 import com.senon.lib_common.adapter.RecycleHolder;
 import com.senon.lib_common.adapter.RecyclerAdapter;
 import com.senon.lib_common.base.BaseActivity;
@@ -207,6 +208,21 @@ public class HomeArticleActivity extends BaseActivity<HomeArticleActivityCon.Vie
         event.setId(id);
         event.setCollect(isCollect);
         EventBus.getDefault().post(event);
+    }
+
+    @Override
+    public void getCollFailResult(int id) {
+        for (HomeArticle.DatasBean bean : mData) {
+            if(bean.getId() == id){
+                bean.setCollect(!bean.isCollect());
+
+                mLRecyclerViewAdapter.notifyDataSetChanged();
+                break;
+            }
+        }
+
+        ARouter.getInstance().build(ConstantLoginArouter.PATH_COMMON_LOGINACTIVITY)
+                .navigation();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行

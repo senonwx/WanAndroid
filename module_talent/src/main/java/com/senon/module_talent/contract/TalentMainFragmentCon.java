@@ -13,13 +13,13 @@ public interface TalentMainFragmentCon {
 
     interface View extends BaseViewImp {
 
-        void result(BaseResponse data);
+        void getLogoutResult(BaseResponse data);
 
     }
 
     abstract class Presenter extends BasePresenter<View> {
 
-        public abstract void getData(HashMap<String, String> map, boolean isDialog, boolean cancelable);
+        public abstract void getLogout(boolean isDialog, boolean cancelable);
 
     }
 }

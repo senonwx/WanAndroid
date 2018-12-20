@@ -17,6 +17,7 @@ import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.bean.Login;
 import com.senon.lib_common.common.contract.LoginContract;
 import com.senon.lib_common.common.presenter.LoginPresenter;
+import com.senon.lib_common.net.cookies.PersistentCookieStore;
 import com.senon.lib_common.utils.ToastUtil;
 
 /**
@@ -68,7 +69,9 @@ public class Common_RegisterActivity extends BaseActivity<LoginContract.View, Lo
     public void getRegisterResult(BaseResponse<Login> data) {
         //登录成功时
         //保存参数
-
+        PersistentCookieStore.getCookieStore().saveUserInfo(
+                data.getData().getUsername(),
+                password_edt.getText().toString().trim());
 
         //跳转到目标页
         ARouter.getInstance().build(targetUrl).navigation();

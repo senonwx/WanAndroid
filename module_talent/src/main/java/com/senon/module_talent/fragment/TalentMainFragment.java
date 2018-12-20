@@ -1,13 +1,22 @@
 package com.senon.module_talent.fragment;
 
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.senon.lib_common.ConstantLoginArouter;
 import com.senon.lib_common.base.BaseLazyFragment;
 import com.senon.lib_common.base.BaseResponse;
+import com.senon.lib_common.net.cookies.CookiesManager;
+import com.senon.lib_common.net.cookies.PersistentCookieStore;
+import com.senon.lib_common.utils.BaseEvent;
 import com.senon.lib_common.utils.LogUtils;
 import com.senon.module_talent.R;
 import com.senon.module_talent.contract.TalentMainFragmentCon;
 import com.senon.module_talent.presenter.TalentMainFragmentPre;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * talent mian fragment
@@ -15,7 +24,9 @@ import com.senon.module_talent.presenter.TalentMainFragmentPre;
 public class TalentMainFragment extends BaseLazyFragment<TalentMainFragmentCon.View, TalentMainFragmentCon.Presenter> implements
         TalentMainFragmentCon.View {
 
-    private TextView title_tv;
+
+    private RelativeLayout collect_lay,login_lay,about_lay;
+    private TextView username_tv,login_tv;
 
     @Override
     public int getLayoutId() {
@@ -31,7 +42,12 @@ public class TalentMainFragment extends BaseLazyFragment<TalentMainFragmentCon.V
     }
     @Override
     public void init(View rootView) {
-        title_tv = rootView.findViewById(R.id.title_tv);
+        collect_lay = rootView.findViewById(R.id.collect_lay);
+        login_lay = rootView.findViewById(R.id.login_lay);
+        about_lay = rootView.findViewById(R.id.about_lay);
+        username_tv = rootView.findViewById(R.id.username_tv);
+        login_tv = rootView.findViewById(R.id.login_tv);
+
     }
 
     @Override
@@ -40,7 +56,7 @@ public class TalentMainFragment extends BaseLazyFragment<TalentMainFragmentCon.V
         //第一次可见时，自动加载页面
         LogUtils.e("-----> 子fragment进行初始化操作");
 
-        title_tv.setText("文采");
+        getLoginInfo();
     }
 
     @Override
@@ -49,11 +65,48 @@ public class TalentMainFragment extends BaseLazyFragment<TalentMainFragmentCon.V
         //之后每次可见的操作
         LogUtils.e("-----> 子fragment每次可见时的操作");
 
+        getLoginInfo();
+
+    }
+
+    private void getLoginInfo(){
+        if(PersistentCookieStore.getCookieStore().isLogin()){//已经登录过了
+            username_tv.setText(PersistentCookieStore.getCookieStore().getUsername());
+            login_tv.setText("退出");
+            login_lay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CookiesManager.clearAllCookies();//清空缓存
+                    getPresenter().getLogout(false,true);
+
+                    sendMsgForLog(1);//退出需要发送eventbus
+                }
+            });
+
+        }else{
+            username_tv.setText("游客");
+            login_tv.setText("登录");
+            login_lay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ARouter.getInstance().build(ConstantLoginArouter.PATH_COMMON_LOGINACTIVITY)
+                            .navigation();
+                }
+            });
+
+        }
+    }
+
+    private void sendMsgForLog(int code){
+        BaseEvent event = new BaseEvent();
+        event.setCode(code);
+        EventBus.getDefault().post(event);
     }
 
     @Override
-    public void result(BaseResponse data) {
-
+    public void getLogoutResult(BaseResponse data) {
+        CookiesManager.clearAllCookies();//清空缓存
+        getLoginInfo();
     }
 
 

@@ -4,28 +4,151 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/toolbar_lay"
-        layout="@layout/layout_fragment_comtoolbar"/>
 
-    <RelativeLayout
-        android:layout_below="@+id/toolbar_lay"
+    <ImageView
+        android:id="@+id/bg_igv"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/talent_mainfragmbg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mm400" />
+    <TextView
+        android:layout_alignBottom="@+id/bg_igv"
+        android:textColor="@color/common_white"
+        android:layout_toRightOf="@+id/talent_igv"
+        android:layout_marginLeft="@dimen/mm30"
+        android:layout_marginBottom="@dimen/mm20"
+        android:text="游客"
+        android:gravity="center"
+        android:textSize="@dimen/mm34"
+        android:id="@+id/username_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:id="@+id/view1"
+        android:layout_below="@+id/bg_igv"
         android:background="@color/common_white"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/mm120"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_marginTop="@dimen/mm320"
+        android:layout_marginLeft="@dimen/mm30"
+        android:id="@+id/talent_igv"
+        android:layout_width="@dimen/mm160"
+        android:layout_height="@dimen/mm160"
+        android:src="@mipmap/talent_conan"
+        app:civ_border_width="@dimen/mm2"
+        app:civ_border_color="@color/common_white"/>
+
+    <LinearLayout
+        android:layout_below="@+id/view1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <com.github.jdsjlzx.recyclerview.LRecyclerView
-            android:id="@+id/talent_lrv"
+        <RelativeLayout
+            android:id="@+id/collect_lay"
+            android:background="@color/common_white"
+            android:layout_marginTop="@dimen/mm30"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="@dimen/mm90">
+            <ImageView
+                android:src="@mipmap/talent_ic_collect"
+                android:layout_centerVertical="true"
+                android:id="@+id/collect_igv"
+                android:layout_marginLeft="@dimen/mm30"
+                android:layout_width="@dimen/mm45"
+                android:layout_height="@dimen/mm50" />
+            <TextView
+                android:textColor="@color/dark"
+                android:layout_toRightOf="@+id/collect_igv"
+                android:layout_marginLeft="@dimen/mm30"
+                android:text="收藏"
+                android:gravity="center"
+                android:textSize="@dimen/mm30"
+                android:id="@+id/collect_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/mm30"
+                android:src="@mipmap/ic_right"
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/mm30"
+                android:layout_height="@dimen/mm30" />
+            <View
+                android:layout_alignParentBottom="true"
+                android:background="@color/split_d"
+                android:layout_marginLeft="@dimen/mm30"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/mm1"/>
+        </RelativeLayout>
 
-        <ImageView
-            android:visibility="gone"
-            android:layout_centerInParent="true"
-            android:id="@+id/empty_igv"
-            android:layout_width="@dimen/mm350"
-            android:layout_height="@dimen/mm350" />
+        <RelativeLayout
+            android:id="@+id/login_lay"
+            android:background="@color/common_white"
+            android:layout_below="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mm90">
+            <ImageView
+                android:src="@mipmap/talent_ic_login"
+                android:layout_centerVertical="true"
+                android:id="@+id/login_igv"
+                android:layout_marginLeft="@dimen/mm30"
+                android:layout_width="@dimen/mm45"
+                android:layout_height="@dimen/mm50" />
+            <TextView
+                android:textColor="@color/dark"
+                android:layout_toRightOf="@+id/login_igv"
+                android:layout_marginLeft="@dimen/mm30"
+                android:text="登录"
+                android:gravity="center"
+                android:textSize="@dimen/mm30"
+                android:id="@+id/login_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/mm30"
+                android:src="@mipmap/ic_right"
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/mm30"
+                android:layout_height="@dimen/mm30" />
+        </RelativeLayout>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/about_lay"
+            android:background="@color/common_white"
+            android:layout_marginTop="@dimen/mm30"
+            android:layout_below="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mm90">
+            <ImageView
+                android:src="@mipmap/talent_ic_about"
+                android:layout_centerVertical="true"
+                android:id="@+id/about_igv"
+                android:layout_marginLeft="@dimen/mm30"
+                android:layout_width="@dimen/mm45"
+                android:layout_height="@dimen/mm50" />
+            <TextView
+                android:textColor="@color/dark"
+                android:layout_toRightOf="@+id/about_igv"
+                android:layout_marginLeft="@dimen/mm30"
+                android:text="关于"
+                android:gravity="center"
+                android:textSize="@dimen/mm30"
+                android:id="@+id/about_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/mm30"
+                android:src="@mipmap/ic_right"
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/mm30"
+                android:layout_height="@dimen/mm30" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
 
 </RelativeLayout>

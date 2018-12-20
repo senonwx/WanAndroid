@@ -7,11 +7,11 @@ public class BaseEvent<T> {
 
     /**
      * -1:退出登录时通知Mainactivity finish
-     * 0：AutoLoginService 自动登录成功    刷新秀生活界面点赞功能 / 通知龙门阵模块登录腾讯IM
-     * 1：AutoLoginService 自动登录失效
+     * 0：登录成功   刷新所有主界面数据列表
+     * 1：退出成功   。。。
      *
      * 101:文章收藏/取消收藏  （HomeMainFragment、ArtMainFragment、HomeArticleActivity、HomeProjectActivity）
-     *
+     * 102:文章收藏/取消收藏失败 。。。
      *
      *
      *

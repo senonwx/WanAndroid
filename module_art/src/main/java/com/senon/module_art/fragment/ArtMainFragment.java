@@ -225,7 +225,10 @@ public class ArtMainFragment extends BaseLazyFragment<ArtMainFragmentCon.View, A
 
     @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
     public void onEventReceived(BaseEvent event) {
-        if (event.getCode() == 101) {
+        int code = event.getCode();
+        if(code == 1){//退出登录  刷新列表
+            getWXarticleChapters();
+        }else if (code == 101) {
             int id = event.getId();
             boolean isCollect = event.isCollect();
             for (WXarticle.DatasBean bean : articles.getDatas()) {

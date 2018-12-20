@@ -17,6 +17,8 @@ import com.senon.lib_common.ComUtil;
 import com.senon.lib_common.bean.Login;
 import com.senon.lib_common.common.contract.LoginContract;
 import com.senon.lib_common.common.presenter.LoginPresenter;
+import com.senon.lib_common.net.cookies.PersistentCookieStore;
+import com.senon.lib_common.utils.StatusBarUtils;
 import com.senon.lib_common.utils.ToastUtil;
 
 /**
@@ -34,6 +36,7 @@ public class Common_LoginActivity extends BaseActivity<LoginContract.View, Login
 
     @Override
     public int getLayoutId() {
+        StatusBarUtils.with(this).init();
         return R.layout.activity_common__login;
     }
 
@@ -49,10 +52,7 @@ public class Common_LoginActivity extends BaseActivity<LoginContract.View, Login
 
     @Override
     public void init() {
-        if (targetUrl == null) {
-            //默认跳转到MainActivity
-            targetUrl = ConstantLoginArouter.PATH_APP_MAINACTIVITY;
-        }
+
         account_edt = findViewById(R.id.account_edt);
         password_edt = findViewById(R.id.password_edt);
         register_tv = findViewById(R.id.register_tv);
@@ -65,10 +65,15 @@ public class Common_LoginActivity extends BaseActivity<LoginContract.View, Login
     public void getLoginResult(BaseResponse<Login> data) {
         //登录成功时
         //保存参数
+        PersistentCookieStore.getCookieStore().saveUserInfo(
+                data.getData().getUsername(),
+                password_edt.getText().toString().trim());
 
+        if(targetUrl != null){
+            //跳转到目标页
+            ARouter.getInstance().build(targetUrl).navigation();
+        }
 
-        //跳转到目标页
-        ARouter.getInstance().build(targetUrl).navigation();
         finish();
     }
 

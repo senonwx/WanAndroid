@@ -18,6 +18,7 @@ public interface WebviewContract {
 
         void getCollectResult(int id,boolean isCollect);
 
+        void getCollFailResult(int id);
 
     }
 

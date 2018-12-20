@@ -55,5 +55,6 @@ dependencies {
     }
     api rootProject.ext.dependencies["glide"]
     api rootProject.ext.dependencies["eventbus"]
+    api rootProject.ext.dependencies["circleimageview"]
 
 }

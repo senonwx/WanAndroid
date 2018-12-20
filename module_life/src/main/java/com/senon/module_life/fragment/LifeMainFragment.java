@@ -20,6 +20,7 @@ import com.senon.lib_common.base.BaseLazyFragment;
 import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.bean.Banner;
 import com.senon.lib_common.bean.KnowledgeSystem;
+import com.senon.lib_common.utils.BaseEvent;
 import com.senon.lib_common.utils.LogUtils;
 import com.senon.lib_common.utils.ToastUtil;
 import com.senon.module_life.R;
@@ -28,6 +29,10 @@ import com.senon.module_life.presenter.LifeMainFragmentPre;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -104,6 +109,8 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
         //第一次可见时，自动加载页面
         LogUtils.e("-----> 子fragment进行初始化操作");
 
+        //注册eventbus
+        EventBus.getDefault().register(this);
         //初始化adapter 设置适配器
         initAdapter();
         //添加滑动位置监听
@@ -140,7 +147,6 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
                 }
             }
         });
-
 
     }
 
@@ -213,5 +219,17 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
         lrv.refreshComplete(0);
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventReceived(BaseEvent event) {
+        int code = event.getCode();
+        if(code == 1){//退出登录  刷新列表
+            getFirstData();
+        }
+    }
 }

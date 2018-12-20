@@ -24,18 +24,18 @@ public class TalentMainFragmentPre extends TalentMainFragmentCon.Presenter{
     }
 
     @Override
-    public void getData(HashMap<String, String> map, boolean isDialog, boolean cancelable) {
-        ServerUtils.getCommonApi().login(map)
+    public void getLogout( boolean isDialog, boolean cancelable) {
+        ServerUtils.getCommonApi().logout()
                 .retryWhen(new RetryWithDelay(3,2))
-                .compose(RxUtils.<BaseResponse<Login>>bindToLifecycle(getView()))
-                .compose(RxUtils.<BaseResponse<Login>>getSchedulerTransformer())
-                .subscribe(new RequestCallback<BaseResponse<Login>>(context, RxErrorHandler.getInstance(),true) {
+                .compose(RxUtils.<BaseResponse>bindToLifecycle(getView()))
+                .compose(RxUtils.<BaseResponse>getSchedulerTransformer())
+                .subscribe(new RequestCallback<BaseResponse>(context, RxErrorHandler.getInstance(),true) {
                     @Override
-                    public void onNext(BaseResponse<Login> baseResponse) {
+                    public void onNext(BaseResponse baseResponse) {
                         super.onNext(baseResponse);
-                        BaseResponse<Login> response = baseResponse;
+                        BaseResponse response = baseResponse;
                         if(response.getCode()==0){
-//                            getView().resultLogin(response);
+                            getView().getLogoutResult(response);
                         }else{
                             ToastUtil.initToast(response.getMsg());
                         }
