@@ -1,5 +1,7 @@
 package com.senon.xfhmoudel;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,10 +14,11 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.senon.lib_common.ComUtil;
 import com.senon.lib_common.ConstantArouter;
@@ -39,6 +42,7 @@ public class FragmentHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         StatusBarUtils.with(this).init();
         setContentView(R.layout.activity_fragment_home);
         ComUtil.changeStatusBarTextColor(this,true);
@@ -88,7 +92,6 @@ public class FragmentHomeActivity extends AppCompatActivity {
         });
 
     }
-
 
     private String[] titles = {"首页","体系","公众号","我的"};
     private int[] colors = {R.color.login_bg_end_1,R.color.tablayout_tv_gray};

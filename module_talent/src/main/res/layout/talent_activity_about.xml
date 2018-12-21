@@ -6,7 +6,15 @@
     android:layout_height="match_parent"
     >
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
     <LinearLayout
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="@dimen/mm30"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -18,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/mm30"
-            android:drawablePadding="@dimen/mm8"
+            android:layout_marginBottom="@dimen/mm30"
             android:drawableTop="@mipmap/ic_logo"
             android:gravity="center"
             android:text="@string/talent_wanandroid"
@@ -27,13 +35,13 @@
             android:textSize="@dimen/mm36" />
 
         <TextView
+            android:padding="@dimen/mm50"
             android:id="@+id/content_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/mm30"
             android:textSize="@dimen/mm30"
             tools:text="@string/talent_about_content"
-            android:textColor="@color/transport" />
+            android:textColor="@color/deep_black" />
     </LinearLayout>
 
 

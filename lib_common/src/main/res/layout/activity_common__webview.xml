@@ -9,7 +9,7 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/layout_toolbar"
-        android:layout_height="@dimen/mm90"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent" />
 
     <WebView

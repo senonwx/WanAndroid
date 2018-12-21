@@ -4,7 +4,13 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mm40" />
+
     <RelativeLayout
+        android:layout_below="@+id/placeholder"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     tools:context="com.senon.module_home.activity.HomeArticleActivity">
 
+
     <include
         android:id="@+id/toolbar"
         layout="@layout/layout_toolbar"
-        android:layout_height="@dimen/mm90"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent" />
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView

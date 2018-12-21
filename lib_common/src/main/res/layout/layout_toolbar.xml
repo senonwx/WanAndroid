@@ -4,36 +4,43 @@
     android:background="@color/common_white"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:paddingLeft="@dimen/mm10"
-        android:paddingRight="@dimen/mm10"
-        android:paddingTop="@dimen/mm5"
-        android:paddingBottom="@dimen/mm5"
-        android:layout_marginLeft="@dimen/mm20"
-        android:id="@+id/toolbar_back_igv"
-        android:layout_width="@dimen/mm55"
-        android:layout_height="@dimen/mm45"
-        android:layout_centerVertical="true"
-        android:src="@mipmap/back_black" />
-    <TextView
-        android:singleLine="true"
-        android:textColor="@color/color_232323"
-        android:textSize="@dimen/mm34"
-        android:text="标题"
-        android:gravity="center"
-        android:id="@+id/toolbar_title_tv"
-        android:layout_marginLeft="@dimen/mm115"
-        android:layout_width="@dimen/mm500"
-        android:layout_height="match_parent" />
+    <RelativeLayout
+        android:layout_marginTop="@dimen/mm40"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mm90">
+        <ImageView
+            android:paddingLeft="@dimen/mm10"
+            android:paddingRight="@dimen/mm10"
+            android:paddingTop="@dimen/mm5"
+            android:paddingBottom="@dimen/mm5"
+            android:layout_marginLeft="@dimen/mm20"
+            android:id="@+id/toolbar_back_igv"
+            android:layout_width="@dimen/mm45"
+            android:layout_height="@dimen/mm40"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/back_black" />
 
-    <TextView
-        android:textSize="@dimen/mm30"
-        android:padding="@dimen/mm7"
-        android:id="@+id/collection_tv"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/mm25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:singleLine="true"
+            android:textColor="@color/color_232323"
+            android:textSize="@dimen/mm34"
+            android:text="标题"
+            android:gravity="center"
+            android:id="@+id/toolbar_title_tv"
+            android:layout_marginLeft="@dimen/mm115"
+            android:layout_width="@dimen/mm500"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:textSize="@dimen/mm30"
+            android:padding="@dimen/mm7"
+            android:id="@+id/collection_tv"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/mm25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
 
 </RelativeLayout>

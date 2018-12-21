@@ -71,12 +71,31 @@ public class Common_WebviewActivity extends BaseActivity<WebviewContract.View, W
         collection_tv = findViewById(R.id.collection_tv);
         toolbar_title_tv = findViewById(R.id.toolbar_title_tv);
 
+
         initClickListener();
         initWebView();
     }
 
     private void initClickListener() {
         toolbar_title_tv.setText(title);
+        toolbar_title_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                webView.scrollTo(0,0);
+            }
+        });
+        findViewById(R.id.toolbar_back_igv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        if(id == 0){//id为空 则不设置收藏按钮
+            collection_tv.setVisibility(View.GONE);
+            return;
+        }
+
         collection_tv.setText(isCollection ? "已收藏":"收藏");
         collection_tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,18 +109,7 @@ public class Common_WebviewActivity extends BaseActivity<WebviewContract.View, W
                 }
             }
         });
-        toolbar_title_tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                webView.scrollTo(0,0);
-            }
-        });
-        findViewById(R.id.toolbar_back_igv).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
     }
 
     private void initWebView() {

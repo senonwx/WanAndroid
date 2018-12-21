@@ -104,7 +104,10 @@ public class HomeMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((HeaderViewHolder) holder).banner.setBannerPageClickListener(new MZBannerView.BannerPageClickListener() {
                     @Override
                     public void onPageClick(View view, int position) {
-                        ToastUtil.initToast("click page:"+position);
+                        ARouter.getInstance().build(ConstantArouter.PATH_COMMON_WEBVIEWCTIVITY)
+                                .withString("url",banners.get(position).getUrl())
+                                .withString("title",banners.get(position).getTitle())
+                                .navigation();
                     }
                 });
                 // 设置数据
