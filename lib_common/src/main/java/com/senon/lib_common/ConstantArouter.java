@@ -15,14 +15,14 @@ public class ConstantArouter {
 
 
     /**
-     * home
+     * home 主页
      */
     public static final String PATH_HOME_MAINACTIVITY = "/home/MainActivity";
     public static final String PATH_HOME_HOMEARTICLEACTIVITY = "/home/HomeArticleActivity";
     public static final String PATH_HOME_HOMEPROJECTACTIVITY = "/home/HomeProjectActivity";
 
     /**
-     * life
+     * life 知识体系
      */
     public static final String PATH_LIFE_KNOWLEDGESYSTEMACTIVITY = "/life/KnowledgeSystemActivity";
 
@@ -31,6 +31,12 @@ public class ConstantArouter {
      */
     public static final String PATH_COMMON_REGISTERACTIVITY = "/lib_common/CommonRegisterActivity";
     public static final String PATH_COMMON_WEBVIEWCTIVITY = "/lib_common/CommonWebviewActivity";
+
+    /**
+     * talent 个人中心
+     */
+    public static final String PATH_TALENT_COLLECTIONACTIVITY = "/talent/CollectionActivity";
+    public static final String PATH_TALENT_ABOUTACTIVITY = "/talent/AboutActivity";
 
 
 }

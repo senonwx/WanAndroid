@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toA(View view){
-//        Toast.makeText(this,"toA",Toast.LENGTH_SHORT).show();
         // 1. 应用内简单的跳转(通过URL跳转在'进阶用法'中)
 //        ARouter.getInstance().build(ConstantLoginArouter.PATH_FIRST_MAINACTIVITY).navigation();
 
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toB(View view){
-//        Toast.makeText(this,"toB",Toast.LENGTH_SHORT).show();
         ARouter.getInstance().build(ConstantArouter.PATH_APP_FRAGMENTHOMEACTIVITY)
                 .navigation();
     }

@@ -1,6 +1,7 @@
 package com.senon.lib_common.api;
 
 import com.senon.lib_common.bean.Banner;
+import com.senon.lib_common.bean.CollectionArticle;
 import com.senon.lib_common.bean.HomeArticle;
 import com.senon.lib_common.bean.KnowledgeSysArticle;
 import com.senon.lib_common.bean.KnowledgeSystem;
@@ -70,11 +71,13 @@ public interface BaseApi {
     @POST("lg/collect/{id}/json")
     Observable<BaseResponse> getCollect(@Path("id") int id);
     //取消收藏-->文章列表
-    @POST("lg/uncollect_originId/{originId}/json")
-    Observable<BaseResponse> getUncollectOriginId(@Path("originId") int id);
+    @POST("lg/uncollect_originId/{id}/json")
+    Observable<BaseResponse> getUncollectOriginId(@Path("id") int id);
     //取消收藏-->我的收藏页面
     @POST("lg/uncollect/{id}/json")
-    Observable<BaseResponse> getUncollect(@Path("id") int id);
+    Observable<BaseResponse> getUncollect(@Path("id") int id,@Query("originId") int originId);
 
-
+    //收藏文章列表
+    @GET("lg/collect/list/{page}/json")
+    Observable<BaseResponse<CollectionArticle>> getCollectList(@Path("page") int page);
 }

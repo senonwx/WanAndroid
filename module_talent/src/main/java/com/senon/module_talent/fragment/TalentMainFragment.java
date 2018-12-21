@@ -5,6 +5,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.senon.lib_common.ConstantArouter;
 import com.senon.lib_common.ConstantLoginArouter;
 import com.senon.lib_common.base.BaseLazyFragment;
 import com.senon.lib_common.base.BaseResponse;
@@ -48,6 +49,25 @@ public class TalentMainFragment extends BaseLazyFragment<TalentMainFragmentCon.V
         username_tv = rootView.findViewById(R.id.username_tv);
         login_tv = rootView.findViewById(R.id.login_tv);
 
+        collect_lay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(PersistentCookieStore.getCookieStore().isLogin()) {//已经登录过了
+                    ARouter.getInstance().build(ConstantArouter.PATH_TALENT_COLLECTIONACTIVITY)
+                            .navigation();
+                }else{
+                    ARouter.getInstance().build(ConstantLoginArouter.PATH_COMMON_LOGINACTIVITY)
+                            .navigation();
+                }
+            }
+        });
+        about_lay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ARouter.getInstance().build(ConstantArouter.PATH_TALENT_ABOUTACTIVITY)
+                        .navigation();
+            }
+        });
     }
 
     @Override

@@ -192,6 +192,9 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
         };
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
         lrv.setAdapter(mLRecyclerViewAdapter);
+        //设置底部加载颜色
+        lrv.setFooterViewColor(R.color.color_blue, R.color.text_gray, R.color.elegant_bg);
+        lrv.setHeaderViewColor(R.color.color_blue, R.color.text_gray, R.color.elegant_bg);
         lrv.setLoadMoreEnabled(false);
         lrv.setOnRefreshListener(new OnRefreshListener() {
             @Override

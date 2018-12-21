@@ -9,7 +9,7 @@
     >
 
     <TextView
-        android:padding="@dimen/mm5"
+        android:padding="@dimen/mm20"
         android:onClick="toA"
         android:background="#e4dada"
         android:textSize="@dimen/mm30"
@@ -20,10 +20,10 @@
         android:gravity="center"
         android:textSize="@dimen/mm36"
         android:onClick="toB"
-        android:layout_marginTop="@dimen/mm20"
+        android:layout_marginTop="@dimen/mm50"
         android:background="#e4dada"
         android:padding="@dimen/mm20"
-        android:text="to b跳转到下一个2页面"
-        android:layout_width="@dimen/mm700"
+        android:text="不登录直接进入"
+        android:layout_width="@dimen/mm500"
         android:layout_height="@dimen/mm200" />
 </LinearLayout>

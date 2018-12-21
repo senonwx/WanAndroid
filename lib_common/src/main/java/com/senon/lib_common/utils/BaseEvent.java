@@ -22,6 +22,8 @@ public class BaseEvent<T> {
     private T data;
     private boolean isCollect;
     private int id;
+    private boolean ingored;
+
 
     public int getCode() {
         return code;
@@ -62,4 +64,14 @@ public class BaseEvent<T> {
     public void setId(int id) {
         this.id = id;
     }
+
+    public boolean isIngored() {
+        return ingored;
+    }
+
+    public void setIngored(boolean ingored) {
+        this.ingored = ingored;
+    }
+
+
 }

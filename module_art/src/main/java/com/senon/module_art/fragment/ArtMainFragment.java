@@ -134,6 +134,9 @@ public class ArtMainFragment extends BaseLazyFragment<ArtMainFragmentCon.View, A
         lrv.setArrowImageView(R.mipmap.news_renovate);  //设置下拉刷新箭头
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
         lrv.setAdapter(mLRecyclerViewAdapter);
+        //设置底部加载颜色
+        lrv.setFooterViewColor(R.color.color_blue, R.color.text_gray, R.color.elegant_bg);
+        lrv.setHeaderViewColor(R.color.color_blue, R.color.text_gray, R.color.elegant_bg);
         lrv.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -156,6 +159,7 @@ public class ArtMainFragment extends BaseLazyFragment<ArtMainFragmentCon.View, A
             public void onItemClick(View view, int position) {
             }
         });
+
         lrv.forceToRefresh();
     }
 
