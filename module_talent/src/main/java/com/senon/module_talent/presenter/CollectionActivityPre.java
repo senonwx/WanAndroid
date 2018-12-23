@@ -1,6 +1,9 @@
 package com.senon.module_talent.presenter;
 
 import android.content.Context;
+
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.senon.lib_common.ConstantLoginArouter;
 import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.bean.CollectionArticle;
 import com.senon.lib_common.net.ServerUtils;
@@ -32,11 +35,8 @@ public class CollectionActivityPre extends CollectionActivityCon.Presenter{
                     @Override
                     public void onNext(BaseResponse<CollectionArticle> baseResponse) {
                         super.onNext(baseResponse);
-                        if(baseResponse.getCode() == 0){
-                            getView().getDataResult(baseResponse);
-                        }else{
-                            ToastUtil.initToast(baseResponse.getMsg());
-                        }
+
+                        getView().getDataResult(baseResponse);
                     }
                     @Override
                     public void onError(Throwable e) {

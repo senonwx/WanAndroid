@@ -29,7 +29,7 @@ public class TalentMainFragmentPre extends TalentMainFragmentCon.Presenter{
                 .retryWhen(new RetryWithDelay(3,2))
                 .compose(RxUtils.<BaseResponse>bindToLifecycle(getView()))
                 .compose(RxUtils.<BaseResponse>getSchedulerTransformer())
-                .subscribe(new RequestCallback<BaseResponse>(context, RxErrorHandler.getInstance(),true) {
+                .subscribe(new RequestCallback<BaseResponse>(context, RxErrorHandler.getInstance(),isDialog,cancelable) {
                     @Override
                     public void onNext(BaseResponse baseResponse) {
                         super.onNext(baseResponse);

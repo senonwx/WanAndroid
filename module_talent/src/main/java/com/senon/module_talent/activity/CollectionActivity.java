@@ -14,6 +14,7 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.recyclerview.ProgressStyle;
 import com.senon.lib_common.ComUtil;
 import com.senon.lib_common.ConstantArouter;
+import com.senon.lib_common.ConstantLoginArouter;
 import com.senon.lib_common.adapter.RecycleHolder;
 import com.senon.lib_common.adapter.RecyclerAdapter;
 import com.senon.lib_common.base.BaseActivity;
@@ -21,6 +22,7 @@ import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.bean.CollectionArticle;
 import com.senon.lib_common.utils.BaseEvent;
 import com.senon.lib_common.utils.StatusBarUtils;
+import com.senon.lib_common.utils.ToastUtil;
 import com.senon.module_talent.R;
 import com.senon.module_talent.contract.CollectionActivityCon;
 import com.senon.module_talent.presenter.CollectionActivityPre;
@@ -167,27 +169,37 @@ public class CollectionActivity extends BaseActivity<CollectionActivityCon.View,
     
     @Override
     public void getDataResult(BaseResponse<CollectionArticle> data) {
-        article = data.getData();
+        if(data.getCode() == 0){
+            article = data.getData();
 
-        tempData.clear();
-        tempData.addAll(data.getData().getDatas());
-        if (tempData.size() == 0 && mData.size() > 0 && isLoadMore) {//最后一页时
-            lrv.setNoMore(true);
-            isLoadMore = false;
-        } else if (isDownRefesh) {//下拉刷新时
-            mData.clear();
-            mData.addAll(tempData);
+            tempData.clear();
+            tempData.addAll(data.getData().getDatas());
+            if (tempData.size() == 0 && mData.size() > 0 && isLoadMore) {//最后一页时
+                lrv.setNoMore(true);
+                isLoadMore = false;
+            } else if (isDownRefesh) {//下拉刷新时
+                mData.clear();
+                mData.addAll(tempData);
+                refreshData();
+            } else {//加载更多时
+                mData.addAll(tempData);
+                refreshData();
+            }
+        }else{
+            ToastUtil.initToast(data.getMsg());
             refreshData();
-        } else {//加载更多时
-            mData.addAll(tempData);
-            refreshData();
+            ARouter.getInstance().build(ConstantLoginArouter.PATH_COMMON_LOGINACTIVITY)
+                    .navigation();
         }
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
     public void onEventReceived(BaseEvent event) {
         if (event.getCode() == 101 && !event.isIngored()) {
             lrv.smoothScrollToPosition(0);
+            lrv.forceToRefresh();
+        }else if(event.getCode() == 0){
             lrv.forceToRefresh();
         }
     }

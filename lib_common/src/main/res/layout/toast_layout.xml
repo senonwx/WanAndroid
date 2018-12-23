@@ -8,8 +8,8 @@
     <TextView
         android:paddingRight="@dimen/mm40"
         android:paddingLeft="@dimen/mm40"
-        android:paddingBottom="@dimen/mm52"
-        android:paddingTop="@dimen/mm52"
+        android:paddingBottom="@dimen/mm20"
+        android:paddingTop="@dimen/mm20"
         android:text="toast"
         android:id="@+id/message"
         android:layout_width="wrap_content"

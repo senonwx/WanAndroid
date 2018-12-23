@@ -6,6 +6,7 @@ def stethoVersion = "1.5.0"
 def butterKnifeVersion = "8.5.1"
 def daggerVersion = "2.8"
 def routerVersion = "0.2.3"
+def htextviewVersion = "0.1.6"
 
 project.ext {
     android = [
@@ -84,6 +85,9 @@ project.ext {
             "flowlayout"                  : "com.hyman:flowlayout-lib:1.1.2",
             "circleimageview"             : "de.hdodenhof:circleimageview:2.2.0",
 
+            //好看的字体动画
+            "htextview-base"              : "com.hanks:htextview-base:${htextviewVersion}",
+            "htextview-fall"              : "com.hanks:htextview-fall:${htextviewVersion}",
 
     ]
 }

@@ -10,7 +10,7 @@ public class ConstantArouter {
     /**
      * App
      */
-    public static final String PATH_APP_MAINACTIVITY = "/app/MainActivity";
+    public static final String PATH_APP_SPLASHACTIVITY = "/app/SplashActivity";
     public static final String PATH_APP_FRAGMENTHOMEACTIVITY = "/app/FragmentHomeActivity";
 
 

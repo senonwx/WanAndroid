@@ -97,7 +97,7 @@ public class TalentMainFragment extends BaseLazyFragment<TalentMainFragmentCon.V
                 @Override
                 public void onClick(View v) {
                     CookiesManager.clearAllCookies();//清空缓存
-                    getPresenter().getLogout(false,true);
+                    getPresenter().getLogout(true,true);
 
                     sendMsgForLog(1);//退出需要发送eventbus
                 }

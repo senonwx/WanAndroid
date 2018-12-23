@@ -30,7 +30,7 @@ public class LoginPresenter extends LoginContract.Presenter {
                 .retryWhen(new RetryWithDelay(3,2))
                 .compose(RxUtils.<BaseResponse<Login>>bindToLifecycle(getView()))
                 .compose(RxUtils.<BaseResponse<Login>>getSchedulerTransformer())
-                .subscribe(new RequestCallback<BaseResponse<Login>>(context, RxErrorHandler.getInstance(),true) {
+                .subscribe(new RequestCallback<BaseResponse<Login>>(context, RxErrorHandler.getInstance(),isDialog,cancelable) {
                     @Override
                     public void onNext(BaseResponse<Login> baseResponse) {
                         super.onNext(baseResponse);
@@ -53,7 +53,7 @@ public class LoginPresenter extends LoginContract.Presenter {
                 .retryWhen(new RetryWithDelay(3,2))
                 .compose(RxUtils.<BaseResponse<Login>>bindToLifecycle(getView()))
                 .compose(RxUtils.<BaseResponse<Login>>getSchedulerTransformer())
-                .subscribe(new RequestCallback<BaseResponse<Login>>(context, RxErrorHandler.getInstance(),true) {
+                .subscribe(new RequestCallback<BaseResponse<Login>>(context, RxErrorHandler.getInstance(),isDialog,cancelable) {
                     @Override
                     public void onNext(BaseResponse<Login> baseResponse) {
                         super.onNext(baseResponse);

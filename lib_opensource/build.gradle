@@ -57,4 +57,7 @@ dependencies {
     api rootProject.ext.dependencies["eventbus"]
     api rootProject.ext.dependencies["circleimageview"]
 
+    api rootProject.ext.dependencies["htextview-base"]
+    api rootProject.ext.dependencies["htextview-fall"]
+
 }

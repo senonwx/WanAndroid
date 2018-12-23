@@ -18,8 +18,13 @@ import com.senon.lib_common.bean.Login;
 import com.senon.lib_common.common.contract.LoginContract;
 import com.senon.lib_common.common.presenter.LoginPresenter;
 import com.senon.lib_common.net.cookies.PersistentCookieStore;
+import com.senon.lib_common.utils.BaseEvent;
 import com.senon.lib_common.utils.StatusBarUtils;
 import com.senon.lib_common.utils.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * 所有模块统一登录页面
@@ -52,6 +57,7 @@ public class Common_LoginActivity extends BaseActivity<LoginContract.View, Login
 
     @Override
     public void init() {
+        EventBus.getDefault().register(this);
 
         account_edt = findViewById(R.id.account_edt);
         password_edt = findViewById(R.id.password_edt);
@@ -100,15 +106,30 @@ public class Common_LoginActivity extends BaseActivity<LoginContract.View, Login
                     , true, true);
         }else if(id == R.id.visitor_tv){
             // 跳转到目标页
-            ARouter.getInstance().build(targetUrl).navigation();
+            if(targetUrl != null){
+                //跳转到目标页
+                ARouter.getInstance().build(targetUrl).navigation();
+            }
             finish();
         }else if(id == R.id.register_tv){
             //跳转到注册页 同意用arouter跳转，便于以后移动模块的改动
             ARouter.getInstance().build(ConstantArouter.PATH_COMMON_REGISTERACTIVITY)
                     .withString("targetUrl",targetUrl)
                     .navigation();
-        }
 
+        }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
+    public void onEventReceived(BaseEvent event) {
+        if(event.getCode() == 0){
+            finish();
+        }
+    }
 }

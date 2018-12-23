@@ -18,7 +18,11 @@ import com.senon.lib_common.bean.Login;
 import com.senon.lib_common.common.contract.LoginContract;
 import com.senon.lib_common.common.presenter.LoginPresenter;
 import com.senon.lib_common.net.cookies.PersistentCookieStore;
+import com.senon.lib_common.utils.BaseEvent;
+import com.senon.lib_common.utils.StatusBarUtils;
 import com.senon.lib_common.utils.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 所有模块统一注册页面
@@ -34,6 +38,7 @@ public class Common_RegisterActivity extends BaseActivity<LoginContract.View, Lo
 
     @Override
     public int getLayoutId() {
+        StatusBarUtils.with(this).init();
         return R.layout.activity_common__register;
     }
 
@@ -74,7 +79,14 @@ public class Common_RegisterActivity extends BaseActivity<LoginContract.View, Lo
                 password_edt.getText().toString().trim());
 
         //跳转到目标页
-        ARouter.getInstance().build(targetUrl).navigation();
+        if(targetUrl != null){
+            ARouter.getInstance().build(targetUrl).navigation();
+        }
+
+        BaseEvent event = new BaseEvent();
+        event.setCode(0);
+        EventBus.getDefault().post(event);
+
         finish();
     }
 

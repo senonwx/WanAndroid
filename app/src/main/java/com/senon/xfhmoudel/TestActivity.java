@@ -3,7 +3,7 @@ package com.senon.xfhmoudel;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.senon.lib_common.ComUtil;
@@ -15,13 +15,13 @@ import com.senon.lib_common.utils.StatusBarUtils;
  * app 模块主页面
  */
 @Route(path = ConstantLoginArouter.PATH_APP_MAINACTIVITY)
-public class MainActivity extends AppCompatActivity {
+public class TestActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtils.with(this).init();
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_test);
         ComUtil.changeStatusBarTextColor(this,true);
 
     }
