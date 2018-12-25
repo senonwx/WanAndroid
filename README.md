@@ -35,7 +35,7 @@ app完全采用<a href="http://www.wanandroid.com/blog/show/2">玩安卓开放ap
 <a href="https://github.com/pedant/sweet-alert-dialog">Sweetalertdialog</a><br/>
 
 # APK下载
-<img src="https://github.com/senonwx/WanAndroid/blob/master/screenshot/download.png"><img/><br/>
+<img src="https://github.com/senonwx/WanAndroid/blob/master/screenshot/qrcode.png"><img/><br/>
 
 # Thanks
 感谢所有开源框架。项目用于学习交流，如果你觉得本项目挺好，感谢大家star哦！
