@@ -8,7 +8,7 @@
             \t\t\t\t首页：包含Banner、最新博文、最新项目
             <br/>\t\t\t\t体系：一级、二级全部博文
             <br/>\t\t\t\t公众号：所有公众号及公众号博文
-            <br/>\t\t\t\t个人中心：登录、退出、收藏
+            <br/>\t\t\t\t个人中心：登录、退出、收藏、清除缓存
             <br/><br/><br/>
         <h2>项目源码</h2>
         <p>\t\t本软件为开源软件，地址<a href="https://github.com/senonwx/WanAndroid" target="_blank">GitHub</a>，如有交流，请提<b>issue。</b>测试账号：12341234，密码123456。</p>
