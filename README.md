@@ -13,7 +13,7 @@ app采用<a href="http://www.wanandroid.com/blog/show/2">玩安卓开放api</a>
 体系:一级二级下面全部博文<br/>
 公众号:所有公众号列表<br/>
 公众号：某公众号下所有博文<br/>
-个人中心：登录、退出、收藏<br/>
+个人中心：登录、退出、收藏、清除缓存<br/>
 
 # 屏幕截图
 <img src="https://github.com/senonwx/WanAndroid/blob/master/screenshot/main2.png"><img/><br/>
@@ -35,6 +35,7 @@ app采用<a href="http://www.wanandroid.com/blog/show/2">玩安卓开放api</a>
 <a href="https://github.com/hdodenhof/CircleImageView">CircleImageView</a><br/>
 <a href="https://github.com/jdsjlzx/LRecyclerView">LRecyclerView</a><br/>
 <a href="https://github.com/pedant/sweet-alert-dialog">Sweetalertdialog</a><br/>
+<a href="https://github.com/JsonChao/Awesome-WanAndroid">Awesome-WanAndroid</a><br/>
 
 # APK下载
 <img src="https://github.com/senonwx/WanAndroid/blob/master/screenshot/qrcode.png"><img/><br/>
