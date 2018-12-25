@@ -56,6 +56,19 @@ public class TalentMainFragment extends BaseLazyFragment<TalentMainFragmentCon.V
         login_tv = rootView.findViewById(R.id.login_tv);
         cache_tv = rootView.findViewById(R.id.cache_tv);
 
+    }
+
+    @Override
+    public void onFragmentFirst() {
+        super.onFragmentFirst();
+        //第一次可见时，自动加载页面
+        LogUtils.e("-----> 子fragment进行初始化操作");
+
+        getLoginInfo();
+        initViewListener();
+    }
+
+    private void initViewListener() {
         cacheFile = new File(AppConfig.PATH_CACHE);
         cache_tv.setText(ACache.getCacheSize(cacheFile));
 
@@ -85,15 +98,6 @@ public class TalentMainFragment extends BaseLazyFragment<TalentMainFragmentCon.V
                 cache_tv.setText(ACache.getCacheSize(cacheFile));
             }
         });
-    }
-
-    @Override
-    public void onFragmentFirst() {
-        super.onFragmentFirst();
-        //第一次可见时，自动加载页面
-        LogUtils.e("-----> 子fragment进行初始化操作");
-
-        getLoginInfo();
     }
 
     @Override
