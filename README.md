@@ -1,11 +1,11 @@
 # WanAndroid
 玩安卓http://www.wanandroid.com/ 客户端模块化设计app，包含MVP+Retrofit+Rxjava+Rxlifecycle+Glide+Eventbus+ARouter.
 构建一个平面化、简而美的玩安卓app客户端。<br/><br/>
-如果不清楚如何将Android工程模块化，请看<a href="https://blog.csdn.net/qq_37173653/article/details/84592893">
+如果不清楚如何将Android工程模块化，请看<a href="https://blog.csdn.net/qq_37173653/article/details/84592893">Android模块化使用</a>
 
 
 # API
-app完全采用<a href="http://www.wanandroid.com/blog/show/2">玩安卓开放api</a>  
+app采用<a href="http://www.wanandroid.com/blog/show/2">玩安卓开放api</a>  
 
 # 主要功能
 首页:Banner<br/>
