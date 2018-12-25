@@ -119,11 +119,17 @@ public class Common_WebviewActivity extends BaseActivity<WebviewContract.View, W
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setTextZoom(100);
-        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+
+        webSettings.setAppCacheEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setDatabaseEnabled(true);
+        if (ComUtil.isNetworkConnected()) {
+            webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        } else {
+            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        }
 
         webView.loadUrl(url);
-//        webView.addJavascriptInterface(javaScript, "Android");
-
         webView.setWebViewClient(new WebViewClient() {
             //实现点击webView页面的链接
             @Override

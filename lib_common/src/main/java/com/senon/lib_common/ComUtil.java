@@ -2,12 +2,15 @@ package com.senon.lib_common;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.EditText;
+
+import com.senon.lib_common.utils.ConstantUtils;
 import com.senon.lib_common.utils.MD5Utils;
 import com.senon.lib_common.utils.ToastUtil;
 import java.text.SimpleDateFormat;
@@ -55,20 +58,6 @@ public class ComUtil {
         return true;
     }
 
-    /**
-     * 充值金额时输入是否合理
-     * @param str
-     * @return
-     */
-    public static boolean payRecharge(String str) {
-        Pattern pattern = Pattern.compile("^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){1,2})?$");
-        Matcher matcher = pattern.matcher(str);
-        if (!matcher.matches()) {
-            return false;
-        }
-        return true;
-    }
-
     //long型时间转换为字符串时间类型
     public static String longToString(Object longTime, String timeFormat) {
         SimpleDateFormat formatter = new SimpleDateFormat(timeFormat == null ? "yyyy-MM-dd" : timeFormat);
@@ -79,6 +68,14 @@ public class ComUtil {
             return formatter.format(Long.valueOf((String) longTime));
         }
         return "时间获取错误";
+    }
+
+    //检查是否有可用网络
+    public static boolean isNetworkConnected() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) ConstantUtils.getAPPContext().
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert connectivityManager != null;
+        return connectivityManager.getActiveNetworkInfo() != null;
     }
 
     // 屏幕宽度（像素）
@@ -120,30 +117,6 @@ public class ComUtil {
             return map;
         }
         return null;
-    }
-
-    /**
-     * 初始化数据格式
-     */
-    public static void judgePwdFormat(final EditText editText, final int maxCount, final String msg){
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(editText.getText().toString().length() > maxCount){
-                    ToastUtil.initToast(msg);
-                    int selectionEnd = editText.getSelectionEnd();
-                    s.delete(selectionEnd - 1, selectionEnd);
-                    editText.setText(s);
-                    editText.setSelection(editText.getText().length());
-                }
-            }
-        });
     }
 
 

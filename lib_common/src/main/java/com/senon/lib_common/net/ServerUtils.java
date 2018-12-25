@@ -1,17 +1,26 @@
 package com.senon.lib_common.net;
 
 import com.senon.lib_common.AppConfig;
+import com.senon.lib_common.ComUtil;
 import com.senon.lib_common.api.BaseApi;
 import com.senon.lib_common.net.cookies.CookiesManager;
 import com.senon.lib_common.utils.ConstantUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.cert.CertificateException;
 import java.util.concurrent.TimeUnit;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
+import okhttp3.Cache;
+import okhttp3.CacheControl;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -24,7 +33,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class ServerUtils {
     private static final int TIME_OUT = 5 * 1000;//链接超时时间
     private static BaseApi mBaseApi;
-
+    private static File cacheFile = new File(AppConfig.PATH_CACHE);
+    private static Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
 
     public static BaseApi getCommonApi() {
         try {
@@ -53,14 +63,49 @@ public class ServerUtils {
         return retrofit.create(serviceClass);
     }
 
+    private static Interceptor cacheInterceptor = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request request = chain.request();
+            if (!ComUtil.isNetworkConnected()) {
+                request = request.newBuilder()
+                        .cacheControl(CacheControl.FORCE_CACHE)
+                        .build();
+            }
+            Response response = chain.proceed(request);
+            if (ComUtil.isNetworkConnected()) {
+                int maxAge = 0;
+                // 有网络时, 不缓存, 最大保存时长为0
+                response.newBuilder()
+                        .header("Cache-Control", "public, max-age=" + maxAge)
+                        .removeHeader("Pragma")
+                        .build();
+            } else {
+                // 无网络时，设置超时为1周
+                int maxStale = 60 * 60 * 24 * 7;
+                response.newBuilder()
+                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                        .removeHeader("Pragma")
+                        .build();
+            }
+            return response;
+        }
+    };
+
     private static OkHttpClient.Builder httpClient =
             new OkHttpClient.Builder()
+                    //设置超时
                     .readTimeout(TIME_OUT, TimeUnit.SECONDS)
                     .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
                     .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
 //                    .addInterceptor(RequestInterceptor.getInstance())//网络请求 统一拦截
                     .addInterceptor(getLogInterceptor())
                     .sslSocketFactory(getSSLSocketFactory())
+                    //设置缓存
+                    .addNetworkInterceptor(cacheInterceptor)
+                    .addInterceptor(cacheInterceptor)
+                    .cache(cache)
+                    //设置cookies
                     .cookieJar(new CookiesManager())
                     .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 

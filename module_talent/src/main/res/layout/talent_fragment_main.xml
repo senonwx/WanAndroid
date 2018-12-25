@@ -146,7 +146,58 @@
                 android:layout_centerVertical="true"
                 android:layout_width="@dimen/mm22"
                 android:layout_height="@dimen/mm26" />
+            <View
+                android:layout_alignParentBottom="true"
+                android:background="@color/split_d"
+                android:layout_marginLeft="@dimen/mm30"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/mm1"/>
         </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/cache_lay"
+            android:background="@color/common_white"
+            android:layout_below="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mm90">
+            <ImageView
+                android:src="@mipmap/talent_ic_cache"
+                android:layout_centerVertical="true"
+                android:id="@+id/cache_igv"
+                android:layout_marginLeft="@dimen/mm30"
+                android:layout_width="@dimen/mm45"
+                android:layout_height="@dimen/mm50" />
+            <TextView
+                android:textColor="@color/dark"
+                android:layout_toRightOf="@+id/cache_igv"
+                android:layout_marginLeft="@dimen/mm30"
+                android:text="清除缓存"
+                android:gravity="center"
+                android:textSize="@dimen/mm30"
+                android:id="@+id/cache_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/right_igv"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/mm30"
+                android:src="@mipmap/ic_right"
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/mm22"
+                android:layout_height="@dimen/mm26" />
+            <TextView
+                android:textColor="@color/dark"
+                android:layout_toLeftOf="@+id/right_igv"
+                android:layout_marginRight="@dimen/mm20"
+                android:text=""
+                android:gravity="center"
+                android:textSize="@dimen/mm30"
+                android:id="@+id/cache_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+
     </LinearLayout>
 
 
