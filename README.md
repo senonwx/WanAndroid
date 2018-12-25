@@ -3,7 +3,7 @@
 构建一个简而美、平面化的玩安卓app客户端。
 
 # API
-app完全采用玩安卓开放api <a href="http://www.wanandroid.com/blog/show/2">玩安卓</a>  
+app完全采用玩安卓开放api <a href="http://www.wanandroid.com/blog/show/2">玩安卓开放api</a>  
 
 # 主要功能
 首页:Banner<br/>
@@ -23,6 +23,7 @@ app完全采用玩安卓开放api <a href="http://www.wanandroid.com/blog/show/2
 <a href="https://github.com/ReactiveX/RxAndroid">RxAndroid</a><br/>
 <a href="https://github.com/square/retrofit">Retrofit</a><br/>
 <a href="https://github.com/square/okhttp">Okhttp</a><br/>
+<a href="https://github.com/alibaba/ARouter">ARouter</a><br/>
 <a href="https://github.com/bumptech/glide">Glide</a><br/>
 <a href="https://github.com/greenrobot/EventBus">EventBus</a><br/>
 <a href="https://github.com/hongyangAndroid/FlowLayout">FlowLayout</a><br/>
@@ -32,6 +33,7 @@ app完全采用玩安卓开放api <a href="http://www.wanandroid.com/blog/show/2
 <a href="https://github.com/hdodenhof/CircleImageView">CircleImageView</a><br/>
 <a href="https://github.com/jdsjlzx/LRecyclerView">LRecyclerView</a><br/>
 <a href="https://github.com/pedant/sweet-alert-dialog">Sweetalertdialog</a><br/>
+
 
 # Thanks
 感谢所有开源框架。项目用于学习交流，如果你觉得本项目挺好，感谢大家star哦！
