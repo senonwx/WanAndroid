@@ -1,6 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'senon'
+            keyPassword '123456'
+            storeFile file('../senon.jks')
+            storePassword '123456'
+        }
+    }
+
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
     defaultConfig {
@@ -25,6 +34,18 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+    }
+    aaptOptions {
+        cruncherEnabled = false
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
