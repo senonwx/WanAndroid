@@ -34,7 +34,8 @@ public class ComUtil {
                         View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             } else {
                 //恢复状态栏白色字体
-                ((Activity)context).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+                ((Activity)context).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
             }
         }
     }

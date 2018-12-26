@@ -1,5 +1,5 @@
 <resources>
-    <string name="talent_app_name">module_talent</string>
+    <string name="talent_app_name">玩安卓_我的</string>
 
     <string name="talent_about_content"><![CDATA[
         <h2>网站内容</h2>
@@ -15,5 +15,6 @@
     ]]></string>
 
     <string name="talent_wanandroid">WanAndroid </string>
+
 
 </resources>

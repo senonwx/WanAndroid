@@ -10,6 +10,7 @@ import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.recyclerview.ProgressStyle;
+import com.senon.lib_common.ComUtil;
 import com.senon.lib_common.base.BaseLazyFragment;
 import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.bean.Banner;
@@ -130,6 +131,9 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         lrv.setArrowImageView(R.mipmap.news_renovate);  //设置下拉刷新箭头
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
         lrv.setAdapter(mLRecyclerViewAdapter);
+        //设置加载颜色
+        lrv.setFooterViewColor(R.color.color_blue, R.color.text_gray, R.color.elegant_bg);
+        lrv.setHeaderViewColor(R.color.color_blue, R.color.text_gray, R.color.elegant_bg);
         lrv.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -153,6 +157,7 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         super.onFragmentVisble();
         //之后每次可见的操作
         LogUtils.e("-----> 子fragment每次可见时的操作");
+
     }
 
     @Override

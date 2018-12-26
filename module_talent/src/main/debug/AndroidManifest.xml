@@ -3,18 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.senon.module_talent">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 
     <application
         android:name=".App_Talent"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_logo"
+        android:label="@string/talent_app_name"
+        android:roundIcon="@mipmap/talent_ic_launcher_round"
         android:supportsRtl="true"
-        tools:replace="android:icon"
-        android:theme="@style/talent_AppTheme">
+        tools:replace="android:icon,label"
+        android:theme="@style/TranslucentTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

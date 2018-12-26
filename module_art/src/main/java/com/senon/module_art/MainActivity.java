@@ -15,7 +15,9 @@ import com.senon.lib_common.utils.LogUtils;
 import com.senon.lib_common.utils.StatusBarUtils;
 import com.senon.module_art.fragment.ArtMainFragment;
 
-
+/**
+ * 公众号 art fragment
+ */
 @Route(path = ConstantLoginArouter.PATH_ART_MAINACTIVITY)
 public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;

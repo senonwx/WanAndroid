@@ -4,7 +4,6 @@ import android.graphics.Paint;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -21,7 +20,6 @@ import com.senon.lib_common.net.cookies.PersistentCookieStore;
 import com.senon.lib_common.utils.BaseEvent;
 import com.senon.lib_common.utils.StatusBarUtils;
 import com.senon.lib_common.utils.ToastUtil;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -79,6 +77,10 @@ public class Common_LoginActivity extends BaseActivity<LoginContract.View, Login
             //跳转到目标页
             ARouter.getInstance().build(targetUrl).navigation();
         }
+
+        BaseEvent event = new BaseEvent();
+        event.setCode(0);
+        EventBus.getDefault().post(event);
 
         finish();
     }

@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.senon.lib_common.AppConfig;
+import com.senon.lib_common.ComUtil;
 import com.senon.lib_common.ConstantArouter;
 import com.senon.lib_common.ConstantLoginArouter;
 import com.senon.lib_common.base.BaseLazyFragment;

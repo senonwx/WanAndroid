@@ -10,6 +10,7 @@ import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.recyclerview.ProgressStyle;
+import com.senon.lib_common.ComUtil;
 import com.senon.lib_common.base.BaseLazyFragment;
 import com.senon.lib_common.base.BaseResponse;
 import com.senon.lib_common.bean.Banner;
@@ -132,6 +133,7 @@ public class ArtMainFragment extends BaseLazyFragment<ArtMainFragmentCon.View, A
         lrv.setLayoutManager(layoutManager);
         lrv.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader); //设置下拉刷新Progress的样式
         lrv.setArrowImageView(R.mipmap.news_renovate);  //设置下拉刷新箭头
+        lrv.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
         lrv.setAdapter(mLRecyclerViewAdapter);
         //设置底部加载颜色
@@ -183,6 +185,7 @@ public class ArtMainFragment extends BaseLazyFragment<ArtMainFragmentCon.View, A
         super.onFragmentVisble();
         //之后每次可见的操作
         LogUtils.e("-----> 子fragment每次可见时的操作");
+
     }
 
 
