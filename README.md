@@ -21,9 +21,9 @@ app采用<a href="http://www.wanandroid.com/blog/show/2">玩安卓开放api</a>
 <img src="https://github.com/senonwx/WanAndroid/blob/master/screenshot/main3.png"><img/><br/></br>
 
 # 子模块打包
-工程采用的是模块化，如果想要单独跑或者打包各个子模块，那么请将gradle.properties改为</br>
-isBuildModule=true</br>
-如果需要整体打包app，则</br>
+工程采用的是模块化，如果想要单独跑或者打包各个子模块，那么请将gradle.properties改为</br></br>
+isBuildModule=true</br></br>
+如果需要整体打包app，则</br></br>
 isBuildModule=false</br>
 
 # 三方轮子
