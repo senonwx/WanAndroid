@@ -18,7 +18,13 @@ app采用<a href="http://www.wanandroid.com/blog/show/2">玩安卓开放api</a>
 # 屏幕截图
 <img src="https://github.com/senonwx/WanAndroid/blob/master/screenshot/main2.png"><img/><br/>
 <img src="https://github.com/senonwx/WanAndroid/blob/master/screenshot/main.png"><img/><br/>
-<img src="https://github.com/senonwx/WanAndroid/blob/master/screenshot/main3.png"><img/><br/>
+<img src="https://github.com/senonwx/WanAndroid/blob/master/screenshot/main3.png"><img/><br/></br>
+
+# 子模块打包
+工程采用的是模块化，如果想要单独跑或者打包各个子模块，那么请将gradle.properties改为</br>
+isBuildModule=true</br>
+如果需要整体打包app，则</br>
+isBuildModule=false</br>
 
 # 三方轮子
 <a href="https://github.com/ReactiveX/RxJava">Rxjava</a> <br/>
@@ -39,6 +45,14 @@ app采用<a href="http://www.wanandroid.com/blog/show/2">玩安卓开放api</a>
 
 # APK下载
 <img src="https://github.com/senonwx/WanAndroid/blob/master/screenshot/qrcode.png"><img/><br/>
+
+# 版本
+
+<h3>V 1.0.1</h3>
+1.修复各模块清单文件合并问题
+
+<h3>V 1.0.0</h3>
+1.第一版
 
 # Thanks
 感谢以上所有开源框架。项目用于学习交流，如果你觉得本项目好，谢谢star哦！
