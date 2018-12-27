@@ -45,6 +45,7 @@ isBuildModule=false</br>
 
 # APK下载
 <img src="https://github.com/senonwx/WanAndroid/blob/master/screenshot/qrcode.png"><img/><br/>
+因为图方便，apk资源是放在leancloud上的，微信扫码下载不了，用手机浏览器扫码可下载。
 
 # 版本
 
