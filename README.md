@@ -21,9 +21,9 @@ app采用<a href="http://www.wanandroid.com/blog/show/2">玩安卓开放api</a>
 <img src="https://github.com/senonwx/WanAndroid/blob/master/screenshot/main3.png"><img/><br/></br>
 
 # 子模块打包
-工程采用的是模块化，如果想要单独跑或者打包各个子模块，那么请将gradle.properties改为</br></br>
+工程采用的是模块化，如果想要单独跑或者打包各个子模块，那么请将gradle.properties改为</br>
 isBuildModule=true</br></br>
-如果需要整体打包app，则</br></br>
+如果需要整体打包app，则</br>
 isBuildModule=false</br>
 
 # 三方轮子
@@ -45,6 +45,7 @@ isBuildModule=false</br>
 
 # APK下载
 <img src="https://github.com/senonwx/WanAndroid/blob/master/screenshot/qrcode.png"><img/><br/>
+因为图方便，apk资源是放在leancloud上的，微信扫码下载不了，用手机浏览器扫码可下载。
 
 # 版本
 
