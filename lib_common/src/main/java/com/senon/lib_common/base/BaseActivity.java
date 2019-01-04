@@ -1,5 +1,6 @@
 package com.senon.lib_common.base;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -23,6 +24,7 @@ public abstract class BaseActivity<V extends BaseViewImp,P extends BasePresenter
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(getLayoutId());
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // 禁止所有的activity横屏
         ARouter.getInstance().inject(this);
         if(presenter == null){
             presenter = createPresenter();

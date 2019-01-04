@@ -204,8 +204,7 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventReceived(BaseEvent event) {
-        int code = event.getCode();
-        if(code == 1){//退出登录  刷新列表
+        if(event.getCode() == 1){//退出登录  刷新列表
             getFirstData();
         }
     }
