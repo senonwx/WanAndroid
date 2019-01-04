@@ -5,7 +5,7 @@
 
 
 # API
-app采用<a href="http://www.wanandroid.com/blog/show/2"  target="view_window">玩安卓开放api</a>  
+app采用<a href="http://www.wanandroid.com/blog/show/2">玩安卓开放api</a>  
 
 # 主要功能
 首页:Banner<br/>
