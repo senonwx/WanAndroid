@@ -32,7 +32,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  */
 public class ServerUtils {
     private static final int TIME_OUT = 5 * 1000;//链接超时时间
-    private static BaseApi mBaseApi;
+    private volatile static BaseApi mBaseApi;
     private static File cacheFile = new File(AppConfig.PATH_CACHE);
     private static Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
 
