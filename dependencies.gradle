@@ -80,6 +80,7 @@ project.ext {
             "lrecyclerview"               : "com.github.jdsjlzx:LRecyclerView:1.4.3",
             "glide"                       : "com.github.bumptech.glide:glide:3.7.0",
             "eventbus"                    : "org.greenrobot:eventbus:3.1.1",
+            "smartrefreshlayout"          : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-20",
 
             "bannerview"                  : "com.github.pinguo-zhouwei:MZBannerView:v2.0.2",
             "flowlayout"                  : "com.hyman:flowlayout-lib:1.1.2",

@@ -10,6 +10,8 @@ import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.recyclerview.ProgressStyle;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.senon.lib_common.ComUtil;
 import com.senon.lib_common.base.BaseLazyFragment;
 import com.senon.lib_common.base.BaseResponse;
@@ -36,7 +38,8 @@ import java.util.List;
 public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View, HomeMainFragmentCon.Presenter> implements
         HomeMainFragmentCon.View {
 
-    private LRecyclerView lrv;
+    private RecyclerView lrv;
+    private SmartRefreshLayout home_refreshLayout;
     private TextView home_homefragment_title_tv;
     private List<Banner> banners = new ArrayList<>();
     private HomeArticle article;
@@ -44,7 +47,6 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
     private final int articlePage = 0;//首页文章页码
     private final int projectPage = 1;//首页最新项目
     private HomeMainAdapter adapter;
-    private LRecyclerViewAdapter mLRecyclerViewAdapter;//Lrecyclerview的包装适配器
     private LinearLayoutManager layoutManager;
 
 
@@ -63,6 +65,7 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
     @Override
     public void init(View rootView) {
         lrv = rootView.findViewById(R.id.home_homefragment_lrv);
+        home_refreshLayout = rootView.findViewById(R.id.home_refreshLayout);
         home_homefragment_title_tv = rootView.findViewById(R.id.home_homefragment_title_tv);
         home_homefragment_title_tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +87,7 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         EventBus.getDefault().register(this);
         //初始化adapter 设置适配器
         initAdapter();
-        //请求网络数据
-        getFirstData();
+
         //添加滑动位置监听
         addLrvListener();
 
@@ -127,20 +129,17 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
         adapter = new HomeMainAdapter(mContext);
         layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         lrv.setLayoutManager(layoutManager);
-        lrv.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader); //设置下拉刷新Progress的样式
-        lrv.setArrowImageView(R.mipmap.news_renovate);  //设置下拉刷新箭头
-        mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
-        lrv.setAdapter(mLRecyclerViewAdapter);
-        //设置加载颜色
-        lrv.setFooterViewColor(R.color.color_blue, R.color.text_gray, R.color.elegant_bg);
-        lrv.setHeaderViewColor(R.color.color_blue, R.color.text_gray, R.color.elegant_bg);
-        lrv.setOnRefreshListener(new OnRefreshListener() {
+        lrv.setAdapter(adapter);
+
+        home_refreshLayout.setOnRefreshListener(new com.scwang.smartrefresh.layout.listener.OnRefreshListener() {
             @Override
-            public void onRefresh() {
+            public void onRefresh(RefreshLayout refreshlayout) {
                 getFirstData();
             }
         });
-        lrv.setLoadMoreEnabled(false);
+
+        home_refreshLayout.setEnableLoadMore(false);
+        home_refreshLayout.autoRefresh(100);
     }
 
     private void getFirstData(){
@@ -226,8 +225,8 @@ public class HomeMainFragment extends BaseLazyFragment<HomeMainFragmentCon.View,
 
     //完成数据加载
     private void refreshData(){
-        lrv.refreshComplete(0);
-        mLRecyclerViewAdapter.notifyDataSetChanged();
+        home_refreshLayout.finishRefresh();
+        adapter.notifyDataChanged();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行

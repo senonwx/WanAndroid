@@ -7,22 +7,15 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bumptech.glide.Glide;
-import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.senon.lib_common.ConstantArouter;
 import com.senon.lib_common.adapter.RecycleHolder;
 import com.senon.lib_common.adapter.RecyclerAdapter;
-import com.senon.lib_common.bean.Banner;
-import com.senon.lib_common.bean.HomeArticle;
-import com.senon.lib_common.bean.ProjectArticle;
 import com.senon.lib_common.bean.WXarticle;
 import com.senon.lib_common.bean.WXchapters;
-import com.senon.lib_common.utils.ToastUtil;
 import com.senon.module_art.R;
 import com.senon.module_art.fragment.ArtMainFragment;
 

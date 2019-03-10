@@ -4,12 +4,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.recyclerview.ProgressStyle;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.senon.lib_common.ComUtil;
 import com.senon.lib_common.base.BaseLazyFragment;
 import com.senon.lib_common.base.BaseResponse;
@@ -25,11 +26,9 @@ import com.senon.module_art.R;
 import com.senon.module_art.adapter.ArtMainAdapter;
 import com.senon.module_art.contract.ArtMainFragmentCon;
 import com.senon.module_art.presenter.ArtMainFragmentPre;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,14 +40,14 @@ public class ArtMainFragment extends BaseLazyFragment<ArtMainFragmentCon.View, A
 
     public final static int ID = -1;
     private final static int PAGE = 1;
-    private LRecyclerView lrv;
+    private RecyclerView lrv;
+    private SmartRefreshLayout home_refreshLayout;
     private TextView home_homefragment_title_tv;
     private List<WXchapters> chapters = new ArrayList<>();
     private WXarticle articles;
     private int page = PAGE;//公众号页码
     private int id = ID;//公众号id
     private ArtMainAdapter adapter;
-    private LRecyclerViewAdapter mLRecyclerViewAdapter;//Lrecyclerview的包装适配器
     private LinearLayoutManager layoutManager;
 
 
@@ -67,6 +66,7 @@ public class ArtMainFragment extends BaseLazyFragment<ArtMainFragmentCon.View, A
     @Override
     public void init(View rootView) {
         lrv = rootView.findViewById(R.id.home_homefragment_lrv);
+        home_refreshLayout = rootView.findViewById(R.id.home_refreshLayout);
         home_homefragment_title_tv = rootView.findViewById(R.id.home_homefragment_title_tv);
         home_homefragment_title_tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,8 +88,7 @@ public class ArtMainFragment extends BaseLazyFragment<ArtMainFragmentCon.View, A
 
         //初始化adapter 设置适配器
         initAdapter();
-        //请求网络数据
-        getWXarticleChapters();
+
         //添加滑动位置监听
         addLrvListener();
 
@@ -131,38 +130,34 @@ public class ArtMainFragment extends BaseLazyFragment<ArtMainFragmentCon.View, A
         adapter = new ArtMainAdapter(mContext);
         layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         lrv.setLayoutManager(layoutManager);
-        lrv.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader); //设置下拉刷新Progress的样式
-        lrv.setArrowImageView(R.mipmap.news_renovate);  //设置下拉刷新箭头
-        lrv.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
-        lrv.setAdapter(mLRecyclerViewAdapter);
-        //设置底部加载颜色
-        lrv.setFooterViewColor(R.color.color_blue, R.color.text_gray, R.color.elegant_bg);
-        lrv.setHeaderViewColor(R.color.color_blue, R.color.text_gray, R.color.elegant_bg);
-        lrv.setOnRefreshListener(new OnRefreshListener() {
+        lrv.setAdapter(adapter);
+
+        home_refreshLayout.setOnRefreshListener(new com.scwang.smartrefresh.layout.listener.OnRefreshListener() {
             @Override
-            public void onRefresh() {
+            public void onRefresh(RefreshLayout refreshlayout) {
                 getWXarticleChapters();
             }
         });
-        lrv.setOnLoadMoreListener(new OnLoadMoreListener() {
+        home_refreshLayout.setOnLoadMoreListener(new com.scwang.smartrefresh.layout.listener.OnLoadMoreListener() {
             @Override
-            public void onLoadMore() {
+            public void onLoadMore(RefreshLayout refreshlayout) {
                 getWXarticleList(id,++page);
             }
         });
+
         adapter.setOnItemClickListener(new ArtMainAdapter.OnItemClickListener() {
             @Override
             public void onHeadItemClick(View view, int position,int mId) {
                 id = mId;
-                lrv.forceToRefresh();
+                page = PAGE;//初始化页码为第一页
+                getWXarticleList(id,page);
             }
             @Override
             public void onItemClick(View view, int position) {
             }
         });
 
-        lrv.forceToRefresh();
+        home_refreshLayout.autoRefresh(100);
     }
 
     //获取公众号列表
@@ -177,9 +172,11 @@ public class ArtMainFragment extends BaseLazyFragment<ArtMainFragmentCon.View, A
 
     //完成数据加载
     private void refreshData(){
-        lrv.refreshComplete(page);
-        mLRecyclerViewAdapter.notifyDataSetChanged();
+        home_refreshLayout.finishRefresh();
+        home_refreshLayout.finishLoadMore();
+        adapter.notifyDataChanged();
     }
+
     @Override
     public void onFragmentVisble() {
         super.onFragmentVisble();
@@ -241,7 +238,7 @@ public class ArtMainFragment extends BaseLazyFragment<ArtMainFragmentCon.View, A
                 if(bean.getId() == id){
                     bean.setCollect(isCollect);
 
-                    mLRecyclerViewAdapter.notifyDataSetChanged();
+                    adapter.notifyDataChanged();
                     return;
                 }
             }

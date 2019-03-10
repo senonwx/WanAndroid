@@ -13,6 +13,8 @@ import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.recyclerview.ProgressStyle;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.senon.lib_common.ConstantArouter;
 import com.senon.lib_common.adapter.RecycleHolder;
 import com.senon.lib_common.adapter.RecyclerAdapter;
@@ -44,10 +46,10 @@ import java.util.List;
 public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View, LifeMainFragmentCon.Presenter> implements
         LifeMainFragmentCon.View {
 
-    private LRecyclerView lrv;
+    private RecyclerView lrv;
+    private SmartRefreshLayout life_refreshLayout;
     private TextView life_homefragment_title_tv;
     private List<KnowledgeSystem> knowledges = new ArrayList<>();
-    private LRecyclerViewAdapter mLRecyclerViewAdapter;//Lrecyclerview的包装适配器
     private LinearLayoutManager layoutManager;
     private RecyclerAdapter<KnowledgeSystem> adapter;
 
@@ -66,6 +68,7 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
     @Override
     public void init(View rootView) {
         lrv = rootView.findViewById(R.id.life_homefragment_lrv);
+        life_refreshLayout = rootView.findViewById(R.id.life_refreshLayout);
         life_homefragment_title_tv = rootView.findViewById(R.id.life_homefragment_title_tv);
         life_homefragment_title_tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,9 +134,6 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
     private void initAdapter() {
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         lrv.setLayoutManager(layoutManager);
-        lrv.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader); //设置下拉刷新Progress的样式
-        lrv.setArrowImageView(R.mipmap.news_renovate);  //设置下拉刷新箭头
-        lrv.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
         adapter = new RecyclerAdapter<KnowledgeSystem>(getContext(), knowledges, R.layout.life_adapter_lifemain_fragment) {
             @Override
             public void convert(final RecycleHolder helper, final KnowledgeSystem item, final int position) {
@@ -164,19 +164,16 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
 
             }
         };
-        mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
-        lrv.setAdapter(mLRecyclerViewAdapter);
-        //设置底部加载颜色
-        lrv.setFooterViewColor(R.color.color_blue, R.color.text_gray, R.color.elegant_bg);
-        lrv.setHeaderViewColor(R.color.color_blue, R.color.text_gray, R.color.elegant_bg);
-        lrv.setLoadMoreEnabled(false);
-        lrv.setOnRefreshListener(new OnRefreshListener() {
+        lrv.setAdapter(adapter);
+
+        life_refreshLayout.setOnRefreshListener(new com.scwang.smartrefresh.layout.listener.OnRefreshListener() {
             @Override
-            public void onRefresh() {
+            public void onRefresh(RefreshLayout refreshlayout) {
                 getFirstData();
             }
         });
-        lrv.forceToRefresh();
+        life_refreshLayout.setEnableLoadMore(false);
+        life_refreshLayout.autoRefresh(100);
     }
 
     @Override
@@ -192,8 +189,8 @@ public class LifeMainFragment extends BaseLazyFragment<LifeMainFragmentCon.View,
         knowledges.clear();
         knowledges.addAll(data.getData());
 
-        mLRecyclerViewAdapter.notifyDataSetChanged();
-        lrv.refreshComplete(0);
+        adapter.notifyDataSetChanged();
+        life_refreshLayout.finishRefresh();
     }
 
     @Override

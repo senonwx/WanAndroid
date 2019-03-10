@@ -53,6 +53,8 @@ dependencies {
     api (rootProject.ext.dependencies["lrecyclerview"]) {
         exclude group: 'com.android.support'
     }
+    api rootProject.ext.dependencies["smartrefreshlayout"]
+
     api rootProject.ext.dependencies["glide"]
     api rootProject.ext.dependencies["eventbus"]
     api rootProject.ext.dependencies["circleimageview"]

@@ -2,6 +2,8 @@ package com.senon.lib_common.utils;
 
 import com.senon.lib_common.base.BaseViewImp;
 import com.trello.rxlifecycle2.LifecycleTransformer;
+import com.trello.rxlifecycle2.android.ActivityEvent;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 import io.reactivex.Observable;
@@ -23,6 +25,22 @@ public class RxUtils {
             return ((RxFragment) view).bindToLifecycle();
         } else {
             throw new IllegalArgumentException("view isn't activity or fragment");
+        }
+    }
+
+    public static <T> LifecycleTransformer<T> bindActivityUntilEvent(BaseViewImp view,ActivityEvent event) {
+        if (view instanceof RxAppCompatActivity) {
+            return ((RxAppCompatActivity) view).bindUntilEvent(event);
+        } else {
+            throw new IllegalArgumentException("view isn't activity");
+        }
+    }
+
+    public static <T> LifecycleTransformer<T> bindFragmentUntilEvent(BaseViewImp view,FragmentEvent event) {
+        if (view instanceof RxFragment) {
+            return ((RxFragment) view).bindUntilEvent(event);
+        } else {
+            throw new IllegalArgumentException("view isn't fragment");
         }
     }
 

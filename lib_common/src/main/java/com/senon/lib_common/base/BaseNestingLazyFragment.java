@@ -145,8 +145,9 @@ public abstract class BaseNestingLazyFragment<V extends BaseViewImp, P extends B
             if (mIsFirstVisible) {//可见又是第一次
                 mIsFirstVisible = false;//改变首次可见的状态
                 onFragmentFirst();
-            }//可见但不是第一次
-            onFragmentVisble();
+            }else {//可见但不是第一次
+                onFragmentVisble();
+            }
             //可见状态的时候内层 fragment 生命周期晚于外层 所以在 onFragmentResume 后分发
             dispatchChildFragmentVisibleState(true);
         } else {//不可见

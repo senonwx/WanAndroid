@@ -5,7 +5,6 @@ import com.senon.lib_common.ComUtil;
 import com.senon.lib_common.api.BaseApi;
 import com.senon.lib_common.net.cookies.CookiesManager;
 import com.senon.lib_common.utils.ConstantUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.security.cert.CertificateException;
@@ -14,7 +13,6 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
@@ -32,7 +30,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  */
 public class ServerUtils {
     private static final int TIME_OUT = 5 * 1000;//链接超时时间
-    private static BaseApi mBaseApi;
+    private volatile static BaseApi mBaseApi;
     private static File cacheFile = new File(AppConfig.PATH_CACHE);
     private static Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
 
