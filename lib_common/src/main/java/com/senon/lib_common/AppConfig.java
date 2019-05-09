@@ -8,7 +8,7 @@ import com.senon.lib_common.utils.ConstantUtils;
 public class AppConfig {
 
 
-    public static final String BASE_URL = "http://www.wanandroid.com/";
+    public static final String BASE_URL = "https://www.wanandroid.com/";
 
     public static final String PATH_DATA = ConstantUtils.getAPPContext().getCacheDir().getAbsolutePath()+"/"+"data";
 
